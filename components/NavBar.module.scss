@@ -5,4 +5,8 @@
   margin: var(--outer-margin);
   z-index: var(--z-navbar);
   cursor: pointer;
+
+  &.close {
+    transform: rotate(-45deg);
+  }
 }

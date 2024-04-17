@@ -1,6 +1,7 @@
 import s from './page.module.scss';
 import ProjectPage from '@app/projects/[project]/page';
 import { Suspense } from 'react';
+import { Modal } from '@components/Modal';
 
 export default function Page({ params }: { params: { project: string } }) {
 

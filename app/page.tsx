@@ -3,7 +3,7 @@ import s from './page.module.scss'
 import { apiQuery } from 'next-dato-utils/api';
 import { DraftMode } from 'next-dato-utils/components';
 import { OverviewDocument } from '../graphql';
-import Overview from './Overview';
+import Overview from './components/Overview';
 
 export default async function Start() {
 

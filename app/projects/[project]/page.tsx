@@ -21,7 +21,7 @@ export default async function Page({ params, modal }: { params: { project: strin
   return (
     <>
       <article className={s.project}>
-        <h1>{project.title}</h1>
+        {!modal && <h1>{project.title}</h1>}
         {project.gallery.map((block, index) =>
           <Block key={index} data={block} components={Blocks} />
         )}

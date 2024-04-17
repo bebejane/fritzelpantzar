@@ -9,19 +9,19 @@ import Footer from '@components/Footer';
 
 export type LayoutProps = {
   children: React.ReactNode
+  modal?: React.ReactNode
 }
 
 export const dynamic = 'force-static'
 
-export default async function RootLayout({ children }: LayoutProps) {
+export default async function RootLayout({ children, modal }: LayoutProps) {
 
   return (
     <html lang={'sv'}>
       <body id="root">
         <NavBar />
-
         {children}
-
+        {modal}
         <Footer />
       </body>
     </html>
