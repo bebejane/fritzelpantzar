@@ -16,7 +16,7 @@ export type LayoutProps = {
 export const dynamic = 'force-static'
 
 export default async function RootLayout({ children, modal }: LayoutProps) {
-  console.log('render layout')
+
   return (
     <html lang={'sv'}>
       <body id="root">
