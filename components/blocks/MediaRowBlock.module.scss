@@ -2,28 +2,27 @@
   display: flex;
   justify-content: space-between;
 
+  &:not(:first-of-type) {
+    padding: var(--outer-margin);
+    padding-bottom: 0;
+  }
+
   figure {
     width: 100%;
 
     .single {
       width: 100%;
-      height: 100vh;
+      height: auto;
 
       img {
         width: 100%;
-        height: 100vh !important;
-        object-fit: cover;
+        height: auto;
+        //object-fit: cover;
       }
-
-
     }
 
-    .multi {
-      height: 50vh;
+    &.multi {
+      width: calc(50% - (var(--outer-margin) / 2));
     }
   }
-}
-
-.double {
-  width: calc(50% - (var(--gutter-small) / 2));
 }

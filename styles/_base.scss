@@ -2,9 +2,10 @@
 	--black: #161616;
 	--white: #ffffff;
 	--red: #bf0000;
-	--blue: #0026FF;
+	--blue: #0026ff;
 
 	--outer-margin: 2rem;
+
 	--about-width: 40vw;
 
 	--z-modal: 100;
@@ -14,9 +15,8 @@
 
 	--z-logo: 1000;
 
-
-
-	@include mq($until: desktop) {}
+	@include mq($until: desktop) {
+	}
 }
 
 body {
@@ -43,10 +43,7 @@ main {
 	&.slided {
 		transform: translateX(calc(-1 * var(--about-width)));
 	}
-
 }
-
-
 
 p a {
 	text-decoration: underline !important;
@@ -58,7 +55,8 @@ button {
 	border: 0;
 
 	@include mq($from: desktop) {
-		&:hover {}
+		&:hover {
+		}
 	}
 
 	&[disabled] {
@@ -95,7 +93,8 @@ select {
 	font-family: $nav-font;
 	background-color: var(--background);
 
-	&:focus {}
+	&:focus {
+	}
 
 	&::placeholder {
 		color: var(--orange);
