@@ -16,7 +16,7 @@ export default function Overview({ overview }: Props) {
   const [title, setTitle] = useState<string | null>(null)
 
   return (
-    <div className={s.overview}>
+    <div className={s.overview} >
       <h1 className={cn(!isHome && s.active)}>{title}</h1>
       <div className={s.leftColumn}>
         {overview.leftColumn.map((block, index) =>
@@ -32,6 +32,7 @@ export default function Overview({ overview }: Props) {
           </div>
         )}
       </div>
+      <div className={cn(s.fade, !isHome && s.active)} />
     </div>
   )
 }

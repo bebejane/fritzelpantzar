@@ -1,6 +1,7 @@
 'use server'
 
 import s from './page.module.scss';
+import cn from 'classnames';
 import { AllProjectsDocument, ProjectDocument } from "@graphql";
 import { apiQuery, } from "next-dato-utils/api";
 import { DraftMode } from "next-dato-utils/components";
@@ -20,7 +21,7 @@ export default async function Page({ params, modal }: { params: { project: strin
 
   return (
     <>
-      <article className={s.project}>
+      <article className={cn(s.project, modal && s.modal)}>
         {!modal && <h1>{project.title}</h1>}
         {project.gallery.map((block, index) =>
           <Block key={index} data={block} components={Blocks} />

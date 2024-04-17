@@ -5,6 +5,7 @@
 	--blue: #0026FF;
 
 	--outer-margin: 2rem;
+	--about-width: 40vw;
 
 	--z-modal: 100;
 	--z-title: 200;
@@ -37,8 +38,14 @@ html {
 main {
 	position: relative;
 	min-height: 100vh;
+	transition: transform 0.3s ease-in-out;
+
+	&.slided {
+		transform: translateX(calc(-1 * var(--about-width)));
+	}
 
 }
+
 
 
 p a {

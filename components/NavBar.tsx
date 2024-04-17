@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import React, { useEffect } from "react";
 import s from './NavBar.module.scss'
 import cn from 'classnames'
 import { useRouter, usePathname } from 'next/navigation'

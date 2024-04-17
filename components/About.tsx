@@ -17,6 +17,10 @@ export default function About({ }: Props) {
   const pathname = usePathname();
   const [title, setTitle] = useState<string | null>(null)
 
+  useEffect(() => {
+    document.querySelector('main').classList.toggle('slided', showAbout)
+  }, [showAbout])
+
   return (
     <div className={cn(s.about, showAbout && s.open)} >
       <div className={s.content}>
