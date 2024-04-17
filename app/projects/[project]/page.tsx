@@ -8,7 +8,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from "next";
 import { Block } from 'next-dato-utils/components';
-import * as Blocks from '@components/blocks';;
+import * as Blocks from '@components/blocks';
 
 export default async function Page({ params, modal }: { params: { project: string }, modal: boolean }) {
 
