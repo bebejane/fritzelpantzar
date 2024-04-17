@@ -50,11 +50,30 @@
     }
   }
 
+  a {
+    >div {
+      background-color: var(--blue) !important;
+    }
+
+
+    img {
+      transition: opacity 0.3s ease-out;
+      opacity: 0.3 !important;
+    }
+  }
+
   &.ready {
 
     .leftColumn,
     .rightColumn {
       overflow-y: scroll;
+    }
+
+    a {
+
+      img {
+        opacity: 1 !important;
+      }
     }
   }
 
