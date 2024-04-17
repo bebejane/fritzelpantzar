@@ -1,0 +1,37 @@
+.projects {
+  list-style: none;
+  background-color: var(--white);
+  width: 50%;
+  height: 100vh;
+  overflow-y: hidden;
+
+  >li {
+    padding: var(--outer-margin);
+  }
+
+  a {
+    >div {
+      background-color: var(--blue) !important;
+    }
+
+    img {
+      transition: opacity 0.3s ease-out;
+      opacity: 0.3 !important;
+    }
+  }
+
+  &.ready {
+    overflow-y: scroll;
+
+    a {
+
+      img {
+        opacity: 1 !important;
+      }
+    }
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
