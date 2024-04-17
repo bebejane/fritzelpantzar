@@ -20,7 +20,7 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
   return (
     <html lang={'sv'}>
       <body id="root">
-        {modal}
+        <div>{modal}</div>
         <main>
           {children}
         </main>

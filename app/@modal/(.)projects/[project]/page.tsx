@@ -1,5 +1,5 @@
 import s from './page.module.scss';
-import ProjectPage from '@app/projects/[project]/page';
+import ProjectPage from '../../../projects/[project]/page';
 import { Suspense } from 'react';
 
 export default async function Page({ params }: { params: { project: string } }) {
