@@ -20,10 +20,11 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
   return (
     <html lang={'sv'}>
       <body id="root">
-        <NavBar />
+        {modal}
         <main>
           {children}
         </main>
+        <NavBar />
         <About />
         <Footer />
 

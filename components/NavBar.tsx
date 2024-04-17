@@ -12,7 +12,7 @@ export type Props = {
 
 export default function NavBar({ }: Props) {
 
-  const [showAbout, setShowAbout] = useStore(state => [state.showAbout, state.setShowAbout],)
+  const [showAbout, setShowAbout] = useStore(state => [state.showAbout, state.setShowAbout])
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname === '/';
