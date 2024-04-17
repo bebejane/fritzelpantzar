@@ -12,13 +12,12 @@ export type Props = {
 
 export default function Overview({ overview }: Props) {
 
-  const pathname = usePathname();
+  const isHome = usePathname() === '/';
   const [title, setTitle] = useState<string | null>(null)
 
-
   return (
-    <div className={s.overview} >
-      <h1 className={cn(pathname !== '/' && s.active)}>{title}</h1>
+    <div className={s.overview}>
+      <h1 className={cn(!isHome && s.active)}>{title}</h1>
       <div className={s.leftColumn}>
         {overview.leftColumn.map((block, index) =>
           <div key={index} onMouseEnter={() => setTitle(block.project.title)} >

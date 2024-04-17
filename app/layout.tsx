@@ -6,6 +6,7 @@ import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import React from 'react';
 import NavBar from '@components/NavBar';
 import Footer from '@components/Footer';
+import About from '../components/About';
 
 export type LayoutProps = {
   children: React.ReactNode
@@ -20,9 +21,12 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
     <html lang={'sv'}>
       <body id="root">
         <NavBar />
-        {children}
-        {modal}
+        <main>
+          {children}
+        </main>
+        <About />
         <Footer />
+        {modal}
       </body>
     </html>
   );

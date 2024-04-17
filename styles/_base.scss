@@ -8,8 +8,11 @@
 
 	--z-modal: 100;
 	--z-title: 200;
+	--z-about: 250;
 	--z-navbar: 300;
+
 	--z-logo: 1000;
+
 
 
 	@include mq($until: desktop) {}
