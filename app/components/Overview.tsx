@@ -6,6 +6,7 @@ import { Block } from 'next-dato-utils/components';
 import * as Blocks from '@components/blocks'; import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useScrollInfo } from 'next-dato-utils/hooks';
+import ProjectList from './ProjectList';
 
 export type Props = {
   overview: OverviewQuery['overview'];
@@ -26,20 +27,18 @@ export default function Overview({ overview }: Props) {
   return (
     <div className={cn(s.overview, isReady && s.ready)} onMouseLeave={() => isHome && setTitle(null)} >
       <h1 className={cn(!isHome && isReady && s.active)}>{title}</h1>
-      <div className={s.leftColumn}>
-        {overview.leftColumn.map((block, index) =>
-          <div key={index} onMouseEnter={() => setTitle(block.project.title)} >
-            <Block data={block} components={Blocks} />
-          </div>
-        )}
-      </div>
-      <div className={s.rightColumn}>
-        {overview.rightColumn.map((block, index) =>
-          <div key={index} onMouseEnter={() => setTitle(block.project.title)} >
-            <Block data={block} components={Blocks} />
-          </div>
-        )}
-      </div>
+      <ProjectList
+        postition='left'
+        items={overview.leftColumn}
+        onHover={(title) => setTitle(title)}
+        active={isReady}
+      />
+      <ProjectList
+        postition='right'
+        items={overview.rightColumn}
+        onHover={(title) => setTitle(title)}
+        active={isReady}
+      />
       <div className={cn(s.fade, !isHome && s.active)} />
     </div>
   )
