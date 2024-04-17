@@ -8,14 +8,9 @@ export type Props = {
 
 export default function NavBar({ }: Props) {
 
-
-
   return (
-    <>
-      <nav className={s.navbar}>
-        navbar
-      </nav>
-    </>
+    <nav className={s.navbar}>
+    </nav>
   );
 }
 

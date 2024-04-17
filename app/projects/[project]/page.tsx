@@ -1,11 +1,14 @@
 'use server'
 
+import s from './page.module.scss';
 import { AllProjectsDocument, ProjectDocument } from "@graphql";
 import { apiQuery, } from "next-dato-utils/api";
 import { DraftMode } from "next-dato-utils/components";
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from "next";
+import { Block } from 'next-dato-utils/components';
+import * as Blocks from '@components/blocks';;
 
 export default async function Page({ params }: { params: { project: string } }) {
 
@@ -17,8 +20,12 @@ export default async function Page({ params }: { params: { project: string } }) 
 
   return (
     <>
-      {project.title}
-
+      <article className={s.project}>
+        <h1>{project.title}</h1>
+        {project.gallery.map((block, index) =>
+          <Block key={index} data={block} components={Blocks} />
+        )}
+      </article>
       <DraftMode url={draftUrl} tag={project.id} />
     </>
   );

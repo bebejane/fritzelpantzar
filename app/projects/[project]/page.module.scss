@@ -1,0 +1,10 @@
+.project {
+  h1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: var(--blue);
+    margin: var(--outer-margin);
+    z-index: var(--z-title);
+  }
+}

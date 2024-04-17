@@ -17,9 +17,12 @@ fragment ProjectFragment on ProjectRecord {
 	id
 	title
 	gallery {
-		id
-		mediaAsset {
-			...MediaFragment
+		__typename
+		... on MediaRowBlockRecord {
+			id
+			mediaAsset {
+				...MediaFragment
+			}
 		}
 	}
 	slug
