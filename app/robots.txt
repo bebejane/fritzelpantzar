@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /medlem
+
+# Allow all crawlers
+User-agent: *
+Allow: /

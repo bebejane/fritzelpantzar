@@ -1,0 +1,46 @@
+html,
+body,
+h1,
+h2,
+h3,
+p,
+nav,
+ul {
+  font-size: 15px;
+  font-weight: normal;
+  line-height: var(--line-height);
+
+  @include mq($from: tablet) {
+    font-size: 16px;
+  }
+
+  @include mq($from: wide) {
+    font-size: 18px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $body-font;
+  font-weight: normal;
+}
+
+h2 {
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+
+p {
+  line-height: var(--line-height);
+
+  strong {
+    font-family: $headline-font;
+  }
+}
+
+strong {
+  font-weight: normal;
+}

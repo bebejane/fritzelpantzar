@@ -1,0 +1,29 @@
+query Overview {
+	overview {
+		id
+		leftColumn {
+			__typename
+			... on SelectedProjectBlockRecord {
+				id
+				image {
+					...ImageFragment
+				}
+				project {
+					...ProjectFragment
+				}
+			}
+		}
+		rightColumn {
+			__typename
+			... on SelectedProjectBlockRecord {
+				id
+				image {
+					...ImageFragment
+				}
+				project {
+					...ProjectFragment
+				}
+			}
+		}
+	}
+}

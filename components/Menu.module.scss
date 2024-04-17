@@ -1,0 +1,42 @@
+.menu {
+
+  overflow-x: hidden;
+  position: sticky;
+  top: var(--top-margin);
+  align-self: flex-start;
+  max-width: calc(var(--grid-unit) + var(--gutter));
+  min-height: calc(100vh - var(--top-margin));
+  transition: var(--column-transition);
+
+  @include mq($until: desktop) {
+    display: none;
+  }
+
+  ul {
+    transition: var(--column-transition);
+    min-width: calc((var(--grid-unit) * 1) + var(--gutter));
+
+    li {
+      white-space: nowrap;
+
+      &.selected,
+      &:hover {
+        &:before {
+          content: "• ";
+        }
+      }
+    }
+  }
+
+  &.active {
+    max-width: calc((var(--grid-unit) * 2) + (2 * var(--gutter)));
+
+    ul {
+      min-width: calc((var(--grid-unit) * 2) + (2 * var(--gutter)));
+    }
+  }
+
+  &.inactive {
+    max-width: 0;
+  }
+}

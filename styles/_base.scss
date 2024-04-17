@@ -1,0 +1,123 @@
+:root {
+	--black: #161616;
+	--white: #ffffff;
+	--red: #bf0000;
+	--blue: #0026FF;
+
+	--z-navbar: 1000;
+	--z-logo: 2000;
+
+	@include mq($until: desktop) {}
+}
+
+body {
+	width: 100%;
+	font-size: 100%;
+	line-height: 1em;
+	color: var(--foreground);
+	background-color: var(--background);
+	font-family: $body-font;
+	-webkit-font-smoothing: antialiased;
+	font-feature-settings: "liga", "kern";
+}
+
+html {
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+
+main {
+	min-height: 100vh;
+}
+
+
+p a {
+	text-decoration: underline !important;
+	text-decoration-thickness: 1px !important;
+	text-underline-offset: 0.2em;
+}
+
+button {
+	border: 0;
+
+	@include mq($from: desktop) {
+		&:hover {}
+	}
+
+	&[disabled] {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+}
+
+a {
+	text-decoration: none;
+	color: var(--foreground);
+	transition: color 0.3s ease-in-out;
+
+	@include mq($from: desktop) {
+		&:hover {
+			color: var(--orange);
+			border-color: var(--black) !important;
+		}
+	}
+
+	&:active {
+		color: var(--orange);
+	}
+}
+
+input,
+textarea,
+select {
+	width: 100%;
+	border: 1px solid var(--black);
+	margin-bottom: 1rem;
+	padding: 0.5em;
+	padding-left: 0.75em;
+	font-family: $nav-font;
+	background-color: var(--background);
+
+	&:focus {}
+
+	&::placeholder {
+		color: var(--orange);
+	}
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+	background-repeat: no-repeat;
+	background-position-x: calc(100% - 1em);
+	background-position-y: center;
+	color: var(--black);
+}
+
+::-webkit-scrollbar {
+	-webkit-appearance: none;
+	background: var(--beige-light);
+}
+
+::-webkit-scrollbar:vertical {
+	width: 1px;
+}
+
+::-webkit-scrollbar:horizontal {
+	height: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--black);
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+figure div {
+	max-width: none !important;
+}

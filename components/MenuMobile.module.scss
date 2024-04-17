@@ -1,0 +1,57 @@
+.menuMobile {
+  width: 100%;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  padding-top: var(--gutter);
+  padding-bottom: var(--gutter);
+
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  background-color: var(--white);
+
+  @include mq($from: desktop) {
+    display: none;
+  }
+
+  h2 {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      display: inline-block;
+      transition: transform 0.2s ease-out;
+
+      &.open {
+        transform: rotate(90deg);
+
+      }
+    }
+  }
+
+  ul {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-in-out;
+
+    &.show {
+      max-height: 1000px;
+    }
+
+    list-style: none;
+    padding-bottom: 0.5rem;
+
+    li {
+      white-space: nowrap;
+      padding-top: 0.8rem;
+
+      &.selected,
+      &:hover {
+        &:before {
+          content: "• ";
+        }
+      }
+    }
+  }
+}

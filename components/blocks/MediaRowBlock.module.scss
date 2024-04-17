@@ -1,0 +1,8 @@
+.mediaRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.double {
+  width: calc(50% - (var(--gutter-small) / 2));
+}

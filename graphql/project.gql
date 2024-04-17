@@ -1,0 +1,26 @@
+query AllProjects($first: IntType = 100, $skip: IntType = 0) {
+	allProjects(first: $first, skip: $skip) {
+		...ProjectFragment
+	}
+	_allProjectsMeta {
+		count
+	}
+}
+
+query Project($slug: String!) {
+	project(filter: { slug: { eq: $slug } }) {
+		...ProjectFragment
+	}
+}
+
+fragment ProjectFragment on ProjectRecord {
+	id
+	title
+	gallery {
+		id
+		mediaAsset {
+			...MediaFragment
+		}
+	}
+	slug
+}
