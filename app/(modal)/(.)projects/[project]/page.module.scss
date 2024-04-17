@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000000;
+  z-index: var(--z-modal);
   background-color: var(--white);
   height: 100vh;
   overflow-y: scroll;

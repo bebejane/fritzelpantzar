@@ -1,7 +1,4 @@
 .article {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
   padding-top: 100vh;
 
   .logo {
@@ -14,12 +11,5 @@
     position: fixed;
     top: 0;
     left: 0;
-  }
-
-  .leftColumn,
-  .rightColumn {
-    width: 50%;
-    height: 100vh;
-    overflow-y: scroll;
   }
 }

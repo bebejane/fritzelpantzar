@@ -12,7 +12,12 @@ export default function MediaRowBlock({ data: { mediaAsset } }: LayoutProps) {
 	return (
 		<section className={s.mediaRow}>
 			{mediaAsset.map((asset, i) => (
-				<Image data={asset.responsiveImage} />
+				<figure key={i}>
+					<Image
+						data={asset.responsiveImage}
+						className={mediaAsset.length > 1 ? s.multi : s.single}
+					/>
+				</figure>
 			))}
 		</section>
 	)
