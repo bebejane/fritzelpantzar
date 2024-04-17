@@ -39,7 +39,7 @@
     background-color: var(--white);
     width: 50%;
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: hidden;
 
     >div {
       padding: var(--outer-margin);
@@ -49,6 +49,15 @@
       display: none;
     }
   }
+
+  &.ready {
+
+    .leftColumn,
+    .rightColumn {
+      overflow-y: scroll;
+    }
+  }
+
 }
 
 .fade {

@@ -13,19 +13,19 @@ export type Props = {
 
 export default function Overview({ overview }: Props) {
 
-  const isHome = usePathname() === '/';
   const [title, setTitle] = useState<string | null>(null)
   const { scrolledPosition, viewportHeight } = useScrollInfo()
+  const isHome = usePathname() === '/';
+  const isReady = scrolledPosition && scrolledPosition >= viewportHeight
 
   useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
       setTitle(null)
-
   }, [scrolledPosition, viewportHeight])
 
   return (
-    <div className={s.overview} onMouseLeave={() => isHome && setTitle(null)} >
-      <h1 className={cn(!isHome && s.active)}>{title}</h1>
+    <div className={cn(s.overview, isReady && s.ready)} onMouseLeave={() => isHome && setTitle(null)} >
+      <h1 className={cn(!isHome && isReady && s.active)}>{title}</h1>
       <div className={s.leftColumn}>
         {overview.leftColumn.map((block, index) =>
           <div key={index} onMouseEnter={() => setTitle(block.project.title)} >
