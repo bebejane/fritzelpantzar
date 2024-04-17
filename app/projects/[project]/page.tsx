@@ -10,7 +10,7 @@ import { Metadata } from "next";
 import { Block } from 'next-dato-utils/components';
 import * as Blocks from '@components/blocks';;
 
-export default async function Page({ params }: { params: { project: string } }) {
+export default async function Page({ params, modal }: { params: { project: string }, modal: boolean }) {
 
   const { project, draftUrl } = await apiQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, {
     variables: { slug: params.project },

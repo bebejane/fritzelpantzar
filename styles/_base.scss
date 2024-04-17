@@ -6,9 +6,11 @@
 
 	--outer-margin: 2rem;
 
-	--z-title: 1000;
-	--z-navbar: 1000;
-	--z-logo: 2000;
+	--z-title: 100;
+	--z-modal: 200;
+	--z-navbar: 300;
+	--z-logo: 1000;
+
 
 	@include mq($until: desktop) {}
 }
@@ -26,11 +28,13 @@ body {
 
 html {
 	box-sizing: border-box;
-	scroll-behavior: smooth;
+	//scroll-behavior: smooth;
 }
 
 main {
+	position: relative;
 	min-height: 100vh;
+
 }
 
 

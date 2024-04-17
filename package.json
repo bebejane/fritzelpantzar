@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "npm run dev:watch",
-		"dev:watch": "next dev --turbo & npm run codegen",
+		"dev:turbo": "next dev --turbo & npm run codegen",
+		"dev:watch": "next dev & npm run codegen",
 		"dev:email": "email dev",
 		"build": "next build",
 		"codegen": "graphql-codegen --watch",
@@ -27,7 +28,7 @@
 		"datocms-structured-text-utils": "^2.1.12",
 		"graphql": "^16.8.1",
 		"hamburger-react": "^2.5.0",
-		"next": "14.3.0-canary.6",
+		"next": "14.3.0-canary.7",
 		"next-dato-utils": "github:bebejane/next-dato-utils",
 		"next-intl": "^3.9.0",
 		"nextjs-google-analytics": "^2.3.3",

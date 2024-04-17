@@ -19,9 +19,9 @@ export default async function RootLayout({ children }: LayoutProps) {
     <html lang={'sv'}>
       <body id="root">
         <NavBar />
-        <main>
-          {children}
-        </main>
+
+        {children}
+
         <Footer />
       </body>
     </html>

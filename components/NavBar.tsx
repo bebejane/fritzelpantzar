@@ -10,6 +10,7 @@ export default function NavBar({ }: Props) {
 
   return (
     <nav className={s.navbar}>
+      <img src="/images/fp.svg" alt="Logo" />
     </nav>
   );
 }
