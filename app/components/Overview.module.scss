@@ -41,6 +41,10 @@
     height: 100vh;
     overflow-y: scroll;
 
+    >div {
+      padding: var(--outer-margin);
+    }
+
     &::-webkit-scrollbar {
       display: none;
     }
