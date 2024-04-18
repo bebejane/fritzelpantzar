@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useScrollInfo } from 'next-dato-utils/hooks';
 import { awaitElement } from 'next-dato-utils/utils';
 import ProjectList from './ProjectList';
+import { useStore } from '../lib/store';
 
 export type Props = {
   overview: OverviewQuery['overview'];
@@ -16,10 +17,11 @@ export default function Overview({ overview }: Props) {
 
   const router = useRouter()
   const pathname = usePathname()
+  const [showAbout] = useStore(state => [state.showAbout])
   const [title, setTitle] = useState<string | null>(null)
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const isHome = usePathname() === '/';
-  const isReady = (scrolledPosition && scrolledPosition >= viewportHeight) ? true : false
+  const isReady = (scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout ? true : false
 
   useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
@@ -49,6 +51,7 @@ export default function Overview({ overview }: Props) {
     return () => document.getElementById('modal')?.removeEventListener('scroll', handleScroll)
 
   }, [pathname])
+
 
   return (
     <div className={cn(s.overview, isReady && s.ready)} onMouseLeave={() => isHome && setTitle(null)} >
