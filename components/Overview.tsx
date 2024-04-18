@@ -2,8 +2,7 @@
 
 import s from './Overview.module.scss'
 import cn from 'classnames'
-import { Block } from 'next-dato-utils/components';
-import * as Blocks from '@components/blocks'; import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useScrollInfo } from 'next-dato-utils/hooks';
 import ProjectList from './ProjectList';
@@ -28,13 +27,13 @@ export default function Overview({ overview }: Props) {
     <div className={cn(s.overview, isReady && s.ready)} onMouseLeave={() => isHome && setTitle(null)} >
       <h1 className={cn(!isHome && isReady && s.active)}>{title}</h1>
       <ProjectList
-        postition='left'
+        position='left'
         items={overview.leftColumn}
         onHover={(title) => setTitle(title)}
         active={isReady}
       />
       <ProjectList
-        postition='right'
+        position='right'
         items={overview.rightColumn}
         onHover={(title) => setTitle(title)}
         active={isReady}

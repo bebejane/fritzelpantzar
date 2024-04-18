@@ -1,14 +1,14 @@
 .project {
   position: relative;
+  background-color: var(--white);
 
   h1 {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     color: var(--blue);
-    margin: var(--outer-margin);
+    margin-top: var(--outer-margin);
     z-index: var(--z-title);
   }
-
-  padding-bottom: 200vh;
 }

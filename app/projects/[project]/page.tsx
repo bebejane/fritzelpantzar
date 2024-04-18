@@ -11,18 +11,23 @@ import { Metadata } from "next";
 import { Block } from 'next-dato-utils/components';
 import * as Blocks from '@components/blocks';
 
-export default async function Page({ params, modal }: { params: { project: string }, modal: boolean }) {
+export type Props = {
+  params: { project: string },
+  modal: boolean
+}
+
+export default async function Page(props: Props) {
 
   const { project, draftUrl } = await apiQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, {
-    variables: { slug: params.project },
+    variables: { slug: props.params.project },
   })
 
   if (!project) return notFound()
 
   return (
     <>
-      <article className={cn(s.project, modal && s.modal)}>
-        {!modal && <h1>{project.title}</h1>}
+      <article className={cn(s.project, props.modal && s.modal)}>
+        {!props.modal && <h1>{project.title}</h1>}
         {project.gallery.map((block, index) =>
           <Block key={index} data={block} components={Blocks} />
         )}
