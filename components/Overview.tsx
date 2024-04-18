@@ -16,7 +16,7 @@ export default function Overview({ overview }: Props) {
   const [title, setTitle] = useState<string | null>(null)
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const isHome = usePathname() === '/';
-  const isReady = scrolledPosition && scrolledPosition >= viewportHeight
+  const isReady = (scrolledPosition && scrolledPosition >= viewportHeight) ? true : false
 
   useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
@@ -25,20 +25,20 @@ export default function Overview({ overview }: Props) {
 
   return (
     <div className={cn(s.overview, isReady && s.ready)} onMouseLeave={() => isHome && setTitle(null)} >
-      <h1 className={cn(!isHome && isReady && s.active)}>{title}</h1>
+      {isReady && <h1 className={cn(!isHome && isReady && s.active)}>{title}</h1>}
       <ProjectList
         position='left'
         items={overview.leftColumn}
         onHover={(title) => setTitle(title)}
-        active={isReady}
+        ready={isReady}
       />
       <ProjectList
         position='right'
         items={overview.rightColumn}
         onHover={(title) => setTitle(title)}
-        active={isReady}
+        ready={isReady}
       />
-      <div className={cn(s.fade, !isHome && s.active)} />
+      <div className={cn(s.overlay, !isHome && s.active)} />
     </div>
   )
 }

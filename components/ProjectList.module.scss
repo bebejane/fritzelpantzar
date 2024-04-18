@@ -10,6 +10,8 @@
   }
 
   a {
+    pointer-events: none;
+
     >div {
       background-color: var(--blue) !important;
     }
@@ -24,6 +26,7 @@
     overflow-y: scroll;
 
     a {
+      pointer-events: all;
 
       img {
         opacity: 1 !important;

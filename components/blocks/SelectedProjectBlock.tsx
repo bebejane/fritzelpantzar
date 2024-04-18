@@ -13,7 +13,7 @@ export default function SelectedProjectBlock({ data: { image, project } }: Layou
 	return (
 		<section className={s.selectedProject}>
 			<Link href={`/projects/${project.slug}`} scroll={false} prefetch={true}>
-				<Image data={image.responsiveImage} />
+				<Image data={image.responsiveImage} fadeInDuration={0} intersectionMargin="0px 0px 100% 0px" />
 			</Link>
 		</section>
 	)

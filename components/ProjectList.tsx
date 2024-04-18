@@ -10,18 +10,19 @@ export type Props = {
   items: OverviewQuery['overview']['leftColumn'] | OverviewQuery['overview']['rightColumn'];
   position: 'left' | 'right'
   onHover: (title: string) => void
-  active: boolean
+  ready: boolean
 }
 
-export default function ProjectList({ items, position, onHover, active = false }: Props) {
+export default function ProjectList({ items, position, onHover, ready = false }: Props) {
 
   const vitems = items.concat(items).concat(items)
   const ref = useRef<HTMLUListElement>(null)
 
   const handleScroll = (e: React.WheelEvent<HTMLUListElement>) => {
     const target = e.target as HTMLUListElement
-    const bottom = (target.scrollTop + target.clientHeight) - ((target.scrollHeight / 3) * 2) > 0
+    const bottom = (target.scrollTop + target.clientHeight) - ((target.scrollHeight / 3) * 2) >= 0
     const top = target.scrollTop < Math.floor(((target.scrollHeight / 3) * 1))
+
     if (bottom)
       target.scrollTop = document.getElementById(`${position}.-1`)!.offsetTop
     //else if (top)
@@ -37,7 +38,7 @@ export default function ProjectList({ items, position, onHover, active = false }
 
 
   return (
-    <ul className={cn(s.projects, active && s.ready)} onScroll={handleScroll} ref={ref}>
+    <ul className={cn(s.projects, ready && s.ready)} onScroll={handleScroll} ref={ref}>
       {vitems.map((block, index) =>
         <li
           id={`${position}.${index - items.length}`}

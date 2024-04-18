@@ -4,8 +4,8 @@
 	--red: #bf0000;
 	--blue: #0026ff;
 
+	--line-height: 1;
 	--outer-margin: 2rem;
-
 	--about-width: 40vw;
 
 	--z-modal: 100;
@@ -133,33 +133,4 @@ select {
 
 figure div {
 	max-width: none !important;
-}
-
-
-.modal {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: var(--z-modal);
-	background-color: var(--white);
-	height: 100vh;
-	overflow-y: scroll;
-	width: 100%;
-
-	animation: fadeUp 0.6s ease-in-out;
-
-	@keyframes fadeUp {
-		0% {
-			opacity: 0;
-		}
-
-		50% {
-			opacity: 0;
-		}
-
-		100% {
-			opacity: 1;
-		}
-	}
-
 }
