@@ -18,9 +18,10 @@ export default function Overview({ overview }: Props) {
   const router = useRouter()
   const pathname = usePathname()
   const [showAbout] = useStore(state => [state.showAbout])
-  const [title, setTitle] = useState<string | null>(null)
   const { scrolledPosition, viewportHeight } = useScrollInfo()
-  const isHome = usePathname() === '/';
+  const [title, setTitle] = useState<string | null>(null)
+
+  const isHome = pathname === '/';
   const isReady = (scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout ? true : false
 
   useEffect(() => {
@@ -32,6 +33,8 @@ export default function Overview({ overview }: Props) {
 
     if (pathname === '/') return
 
+    let modal: HTMLDivElement | null;
+
     const handleScroll = (e: WheelEvent) => {
       const target = e.target as HTMLDivElement
       const bottom = (target.scrollTop + target.clientHeight) > (target.scrollHeight - 100)
@@ -41,21 +44,21 @@ export default function Overview({ overview }: Props) {
       }
     }
 
-    const init = async () => {
-      const modal = await awaitElement<HTMLDivElement>('#modal');
+    (async () => {
+      modal = await awaitElement<HTMLDivElement>('#modal');
       modal?.addEventListener('scroll', handleScroll)
-    }
+    })()
 
-    init()
-
-    return () => document.getElementById('modal')?.removeEventListener('scroll', handleScroll)
+    return () => modal?.removeEventListener('scroll', handleScroll)
 
   }, [pathname])
 
 
   return (
     <div className={cn(s.overview, isReady && s.ready)} onMouseLeave={() => isHome && setTitle(null)} >
-      {isReady && <h1 className={cn(!isHome && isReady && s.active)}>{title}</h1>}
+      {isReady &&
+        <h1 className={cn((!isHome && isReady) && s.active)}>{title}</h1>
+      }
       <ProjectList
         position='left'
         items={overview.leftColumn}
