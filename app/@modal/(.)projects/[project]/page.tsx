@@ -1,16 +1,18 @@
 import s from './page.module.scss';
 import cn from 'classnames'
-import ProjectPage from '../../../projects/[project]/page';
+import ProjectPage from '@app/projects/[project]/page';
 import { Suspense } from 'react';
 
-export default async function Page({ params }: { params: { project: string } }) {
+export default function Page({ params }: { params: { project: string } }) {
 
   return (
-    <Suspense fallback={<div className={s.loading}></div>}>
-      <div className={cn(s.modal, s.show)} key={params?.project}>
-        <ProjectPage params={params} modal={true} />
+    <>
+      <div id="modal" className={cn(s.modal, s.show)} key={params?.project}>
+        <Suspense fallback={<div className={s.loading}></div>}>
+          <ProjectPage params={params} modal={true} />
+        </Suspense>
       </div>
       <div className={s.padding} />
-    </Suspense>
+    </>
   )
 }

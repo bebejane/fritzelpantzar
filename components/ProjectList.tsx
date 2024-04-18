@@ -31,9 +31,7 @@ export default function ProjectList({ items, position, onHover, ready = false }:
   }
 
   useEffect(() => {
-    //if (ref.current)
     ref.current.scrollTop = ref.current.scrollHeight / 3
-    //ref.current.scrollTop = document.getElementById(`${position}.-1`)!.offsetTop
   }, [])
 
 
