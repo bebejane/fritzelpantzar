@@ -13,8 +13,7 @@
     z-index: var(--z-title);
     color: var(--blue);
     pointer-events: none;
-    transition: all 0.3s ease-in;
-
+    transition: all 0.2s ease-in-out;
 
     &.active {
       top: 1rem;

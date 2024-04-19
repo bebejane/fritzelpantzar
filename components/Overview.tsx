@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useScrollInfo } from 'next-dato-utils/hooks';
 import { awaitElement } from 'next-dato-utils/utils';
 import ProjectList from './ProjectList';
+import ProjectListSwiper from './ProjectListSwiper';
 import { useStore } from '../lib/store';
 
 export type Props = {
@@ -20,14 +21,19 @@ export default function Overview({ overview }: Props) {
   const [showAbout] = useStore(state => [state.showAbout])
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [title, setTitle] = useState<string | null>(null)
-
+  const [ready, setReady] = useState(false)
   const isHome = pathname === '/';
-  const isReady = (scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout ? true : false
 
   useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
       setTitle(null)
   }, [scrolledPosition, viewportHeight])
+
+  useEffect(() => {
+    const ready = (scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout ? true : false
+    setReady(ready)
+  }, [scrolledPosition, viewportHeight, showAbout])
+
 
   useEffect(() => {
 
@@ -55,21 +61,21 @@ export default function Overview({ overview }: Props) {
 
 
   return (
-    <div className={cn(s.overview, isReady && s.ready)} onMouseLeave={() => isHome && setTitle(null)} >
-      {isReady &&
-        <h1 className={cn((!isHome && isReady) && s.active)}>{title}</h1>
+    <div className={cn(s.overview, ready && s.ready)} onMouseLeave={() => isHome && setTitle(null)} >
+      {ready &&
+        <h1 className={cn((!isHome && ready) && s.active)}>{title}</h1>
       }
       <ProjectList
         position='left'
         items={overview.leftColumn}
         onHover={(title) => setTitle(title)}
-        ready={isReady}
+        ready={ready}
       />
       <ProjectList
         position='right'
         items={overview.rightColumn}
         onHover={(title) => setTitle(title)}
-        ready={isReady}
+        ready={ready}
       />
       <div className={cn(s.overlay, !isHome && s.active)} />
     </div>

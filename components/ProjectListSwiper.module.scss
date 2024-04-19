@@ -1,0 +1,42 @@
+.projects {
+  list-style: none;
+  background-color: var(--white);
+  width: 50%;
+  height: 100vh;
+  overflow-y: hidden;
+
+  .slide {
+    height: auto;
+    width: 100%;
+    padding: var(--outer-margin);
+  }
+
+  a {
+    pointer-events: none;
+
+    >div {
+      background-color: var(--blue) !important;
+    }
+
+    img {
+      transition: opacity 0.3s ease-out;
+      opacity: 0.3 !important;
+    }
+  }
+
+  &.ready {
+    overflow-y: scroll;
+
+    a {
+      pointer-events: all;
+
+      img {
+        opacity: 1 !important;
+      }
+    }
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
