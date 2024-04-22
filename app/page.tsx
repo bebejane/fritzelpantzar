@@ -15,7 +15,7 @@ export default async function Start() {
     <>
       <article className={s.article}>
         <div className={s.logo}>
-          <img src="/images/logo.svg" alt="Logo" />
+          <img id="logo" src="/images/logo.svg" alt="Logo" />
         </div>
         <Overview overview={overview} />
       </article>

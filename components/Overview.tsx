@@ -40,6 +40,12 @@ export default function Overview({ overview }: Props) {
     setReady(ready)
   }, [scrolledPosition, viewportHeight, showAbout])
 
+  useEffect(() => {
+    document.getElementById('logo').style.opacity = ready ? '0' : '1'
+    return () => {
+      document.getElementById('logo').style.opacity = '1'
+    }
+  }, [ready])
 
   useEffect(() => {
 
@@ -71,8 +77,12 @@ export default function Overview({ overview }: Props) {
 
   return (
     <div
-      className={cn(s.overview, ready && s.ready)} onMouseLeave={() => isHome && setTitle(null)}
-      style={{ filter: endRatio === null ? undefined : `grayscale(${(1 - Math.pow(endRatio || 0, 4))})` }}
+      className={cn(s.overview, ready && s.ready)}
+      style={{
+        filter: endRatio === null ? undefined : `grayscale(${(1 - Math.pow(endRatio || 0, 4))})`,
+        opacity: endRatio === null ? undefined : endRatio
+      }}
+      onMouseLeave={() => isHome && setTitle(null)}
     >
       {ready &&
         <h1 className={cn((!isHome && ready) && s.active)}>{title}</h1>
@@ -89,10 +99,7 @@ export default function Overview({ overview }: Props) {
         onHover={(title) => setTitle(title)}
         ready={ready}
       />
-      <div
-        className={cn(s.overlay, !isHome && s.active)}
-        style={{ opacity: endRatio === null ? undefined : 1 - endRatio }}
-      />
+      {!endRatio && <div className={cn(s.overlay, !isHome && s.active)} />}
     </div>
   )
 }
