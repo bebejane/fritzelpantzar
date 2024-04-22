@@ -8,12 +8,14 @@
   padding-left: calc(var(--outer-margin) / 2);
   padding-right: calc(var(--outer-margin) / 2);
 
-  > li {
+  >li {
     padding: calc(var(--outer-margin) / 2);
   }
+
   &:first-of-type {
     padding-right: 0;
   }
+
   &:not(:first-of-type) {
     padding-left: 0;
   }
@@ -21,7 +23,7 @@
   a {
     pointer-events: none;
 
-    > div {
+    >div {
       //background-color: var(--blue) !important;
     }
 
@@ -48,4 +50,6 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
+  scrollbar-width: none;
 }
