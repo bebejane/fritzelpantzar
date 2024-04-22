@@ -8,6 +8,13 @@
   padding-left: calc(var(--outer-margin) / 2);
   padding-right: calc(var(--outer-margin) / 2);
 
+  @include mq($until: desktop) {
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+    padding: 0;
+  }
+
   >li {
     padding: calc(var(--outer-margin) / 2);
   }
@@ -20,16 +27,13 @@
     padding-left: 0;
   }
 
+
+
   a {
     pointer-events: none;
 
-    >div {
-      //background-color: var(--blue) !important;
-    }
-
     img {
       transition: opacity 1s ease-out;
-      //opacity: 0.3 !important;
       filter: grayscale(1);
     }
   }

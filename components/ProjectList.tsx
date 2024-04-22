@@ -5,6 +5,7 @@ import cn from 'classnames'
 import { Block } from 'next-dato-utils/components';
 import * as Blocks from '@components/blocks';
 import { useEffect, useRef, useState } from 'react';
+import useIsDesktop from '../lib/hooks/useIsDesktop';
 
 export type Props = {
   items: OverviewQuery['overview']['leftColumn'] | OverviewQuery['overview']['rightColumn'];
@@ -20,6 +21,7 @@ export default function ProjectList({ items, position, onHover, ready = false }:
   const oppositeRef = useRef<HTMLUListElement>(null)
   const lastScrollRef = useRef<number>(null)
   const [hover, setHover] = useState(false)
+  const isDesktop = useIsDesktop()
 
   const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
 
@@ -50,18 +52,20 @@ export default function ProjectList({ items, position, onHover, ready = false }:
   }, [])
 
   useEffect(() => {
+    if (!isDesktop) return
+
     ref.current.addEventListener('scroll', handleScroll)
     return () => {
       ref.current.removeEventListener('scroll', handleScroll)
     }
-  }, [hover])
+  }, [hover, isDesktop])
 
   return (
     <ul
       id={`projects-${position}`}
       className={cn(s.projects, ready && s.ready)}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseEnter={() => isDesktop && setHover(true)}
+      onMouseLeave={() => isDesktop && setHover(false)}
       ref={ref}
     >
       {vitems.map((block, index) =>

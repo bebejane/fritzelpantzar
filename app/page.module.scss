@@ -11,5 +11,11 @@
     position: fixed;
     top: 0;
     left: 0;
+
+    img {
+      @include mq($until: desktop) {
+        width: 80%;
+      }
+    }
   }
 }
