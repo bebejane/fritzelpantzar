@@ -23,6 +23,7 @@ export default function Overview({ overview }: Props) {
   const [title, setTitle] = useState<string | null>(null)
   const [ready, setReady] = useState(false)
   const [opacity, setOpacity] = useState<number | null>(null)
+  const [endRatio, setEndRatio] = useState<number | null>(null)
   const isHome = pathname === '/';
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function Overview({ overview }: Props) {
 
   useEffect(() => {
 
-    if (pathname === '/') return setOpacity(null)
+    if (pathname === '/') return setEndRatio(null)
 
     let modal: HTMLDivElement | null;
 
@@ -51,13 +52,12 @@ export default function Overview({ overview }: Props) {
       const bottom = (target.scrollTop + target.clientHeight) > (target.scrollHeight - 100)
       const end = (target.scrollHeight - (target.scrollTop + target.clientHeight + 100)) - viewportHeight
 
-
       if (bottom) {
         setTitle(null)
         router.back()
       }
       if (end < 0)
-        setOpacity(1 - (Math.abs(end) / viewportHeight))
+        setEndRatio(Math.min(1, (Math.abs(end) / viewportHeight)))
     }
 
     (async () => {
@@ -72,7 +72,7 @@ export default function Overview({ overview }: Props) {
   return (
     <div
       className={cn(s.overview, ready && s.ready)} onMouseLeave={() => isHome && setTitle(null)}
-      style={{ filter: opacity === null ? undefined : `grayscale(${opacity})` }}
+      style={{ filter: endRatio === null ? undefined : `grayscale(${(1 - Math.pow(endRatio || 0, 4))})` }}
     >
       {ready &&
         <h1 className={cn((!isHome && ready) && s.active)}>{title}</h1>
@@ -91,7 +91,7 @@ export default function Overview({ overview }: Props) {
       />
       <div
         className={cn(s.overlay, !isHome && s.active)}
-        style={{ opacity: opacity === null ? undefined : opacity }}
+        style={{ opacity: endRatio === null ? undefined : 1 - endRatio }}
       />
     </div>
   )
