@@ -23,29 +23,6 @@ export default function ProjectList({ items, position, onHover, ready = false }:
   const [hover, setHover] = useState(false)
   const isDesktop = useIsDesktop()
 
-  const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
-
-    const target = ref.current
-    const { scrollTop, clientHeight, scrollHeight } = target
-    const top = scrollTop < (scrollHeight / 3)
-    const bottom = (scrollTop) - ((scrollHeight / 3) * 2) >= 0
-
-    if (bottom)
-      target.scrollTop = scrollTop - Math.floor(((scrollHeight / 3)))
-    else if (top) {
-      target.scrollTop = scrollTop + Math.floor(((scrollHeight / 3)))
-    }
-
-    if (!hover) return
-
-    if (lastScrollRef.current === null) {
-      lastScrollRef.current = scrollTop
-    } else {
-      oppositeRef.current.scrollTop = oppositeRef.current.scrollTop - (scrollTop - lastScrollRef.current)
-      lastScrollRef.current = (bottom || top) ? target.scrollTop : scrollTop
-    }
-  }
-
   useEffect(() => {
     oppositeRef.current = document.getElementById(`projects-${position === 'left' ? 'right' : 'left'}`) as HTMLUListElement
     ref.current.scrollTop = (ref.current.scrollHeight / 3)
@@ -53,12 +30,33 @@ export default function ProjectList({ items, position, onHover, ready = false }:
 
   useEffect(() => {
     if (!isDesktop) return
-
     ref.current.addEventListener('scroll', handleScroll)
-    return () => {
-      ref.current.removeEventListener('scroll', handleScroll)
-    }
+    return () => ref.current.removeEventListener('scroll', handleScroll)
   }, [hover, isDesktop])
+
+  const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
+
+    const target = ref.current
+    const { scrollTop, scrollHeight } = target
+    const originalScrollHeight = (scrollHeight / 3)
+    const top = scrollTop < originalScrollHeight
+    const bottom = (scrollTop) - (originalScrollHeight * 2) >= 0
+
+    if (bottom)
+      target.scrollTop = scrollTop - originalScrollHeight
+    else if (top)
+      target.scrollTop = scrollTop + originalScrollHeight
+
+    if (!hover) return
+
+    if (lastScrollRef.current === null)
+      lastScrollRef.current = scrollTop
+    else {
+      oppositeRef.current.scrollTop = oppositeRef.current.scrollTop - (scrollTop - lastScrollRef.current)
+
+      lastScrollRef.current = (bottom || top) ? target.scrollTop : scrollTop
+    }
+  }
 
   return (
     <ul
@@ -72,7 +70,7 @@ export default function ProjectList({ items, position, onHover, ready = false }:
         <li
           id={`${position}.${index - items.length}`}
           key={index}
-          onMouseEnter={() => onHover(block.project.title)}
+          onMouseEnter={() => isDesktop && onHover(block.project.title)}
         >
           <Block data={block} components={Blocks} />
         </li>
