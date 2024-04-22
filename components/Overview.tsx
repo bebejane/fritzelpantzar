@@ -56,10 +56,8 @@ export default function Overview({ overview }: Props) {
         setTitle(null)
         router.back()
       }
-      if (end < 0) {
+      if (end < 0)
         setOpacity(1 - (Math.abs(end) / viewportHeight))
-
-      }
     }
 
     (async () => {
@@ -72,7 +70,10 @@ export default function Overview({ overview }: Props) {
   }, [pathname])
 
   return (
-    <div className={cn(s.overview, ready && s.ready)} onMouseLeave={() => isHome && setTitle(null)} >
+    <div
+      className={cn(s.overview, ready && s.ready)} onMouseLeave={() => isHome && setTitle(null)}
+      style={{ filter: opacity === null ? undefined : `grayscale(${1 - opacity})` }}
+    >
       {ready &&
         <h1 className={cn((!isHome && ready) && s.active)}>{title}</h1>
       }
@@ -88,7 +89,10 @@ export default function Overview({ overview }: Props) {
         onHover={(title) => setTitle(title)}
         ready={ready}
       />
-      <div className={cn(s.overlay, !isHome && s.active)} style={{ opacity: opacity === null ? undefined : opacity }} />
+      <div
+        className={cn(s.overlay, !isHome && s.active)}
+        style={{ opacity: opacity === null ? undefined : opacity }}
+      />
     </div>
   )
 }
