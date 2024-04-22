@@ -18,6 +18,7 @@ ul {
   @include mq($from: wide) {
     font-size: 18px;
   }
+  color: var(--blue);
 }
 
 h1,
