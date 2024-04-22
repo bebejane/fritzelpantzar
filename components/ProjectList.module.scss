@@ -4,21 +4,31 @@
   width: 50%;
   height: 100vh;
   overflow-y: hidden;
+  padding-top: calc(var(--outer-margin) / 2);
+  padding-left: calc(var(--outer-margin) / 2);
+  padding-right: calc(var(--outer-margin) / 2);
 
-  >li {
-    padding: var(--outer-margin);
+  > li {
+    padding: calc(var(--outer-margin) / 2);
+  }
+  &:first-of-type {
+    padding-right: 0;
+  }
+  &:not(:first-of-type) {
+    padding-left: 0;
   }
 
   a {
     pointer-events: none;
 
-    >div {
-      background-color: var(--blue) !important;
+    > div {
+      //background-color: var(--blue) !important;
     }
 
     img {
-      transition: opacity 0.3s ease-out;
-      opacity: 0.3 !important;
+      transition: opacity 1s ease-out;
+      //opacity: 0.3 !important;
+      filter: grayscale(1);
     }
   }
 
@@ -30,6 +40,7 @@
 
       img {
         opacity: 1 !important;
+        filter: grayscale(0);
       }
     }
   }

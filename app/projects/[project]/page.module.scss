@@ -1,6 +1,7 @@
 .project {
   position: relative;
   background-color: var(--white);
+  padding-bottom: calc(5 * var(--outer-margin));
 
   h1 {
     position: fixed;
@@ -11,5 +12,9 @@
     width: 100%;
     color: var(--blue);
     z-index: var(--z-title);
+  }
+
+  section.text {
+    padding: var(--outer-margin);
   }
 }

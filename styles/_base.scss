@@ -1,6 +1,6 @@
 :root {
 	--black: #161616;
-	--white: #ffffff;
+	--white: #fffceb;
 	--red: #bf0000;
 	--blue: #0026ff;
 
@@ -15,7 +15,8 @@
 
 	--z-logo: 1000;
 
-	@include mq($until: desktop) {}
+	@include mq($until: desktop) {
+	}
 }
 
 body {
@@ -54,7 +55,8 @@ button {
 	border: 0;
 
 	@include mq($from: desktop) {
-		&:hover {}
+		&:hover {
+		}
 	}
 
 	&[disabled] {
@@ -91,7 +93,8 @@ select {
 	font-family: $nav-font;
 	background-color: var(--background);
 
-	&:focus {}
+	&:focus {
+	}
 
 	&::placeholder {
 		color: var(--orange);
@@ -110,19 +113,19 @@ select {
 
 ::-webkit-scrollbar {
 	-webkit-appearance: none;
-	background: var(--beige-light);
+	background: var(--white);
 }
 
 ::-webkit-scrollbar:vertical {
-	width: 1px;
+	width: 0px;
 }
 
 ::-webkit-scrollbar:horizontal {
-	height: 1px;
+	height: 0px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--black);
+	background: var(--white);
 }
 
 *,

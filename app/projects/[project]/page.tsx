@@ -31,6 +31,7 @@ export default async function Page(props: Props) {
         {project.gallery.map((block, index) =>
           <Block key={index} data={block} components={Blocks} />
         )}
+        <section className={s.text}>Här kommer det text om projekten</section>
       </article>
       <DraftMode url={draftUrl} tag={project.id} />
     </>
