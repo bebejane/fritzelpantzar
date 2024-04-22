@@ -25,6 +25,10 @@ export default function Overview({ overview }: Props) {
   const isHome = pathname === '/';
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
       setTitle(null)
   }, [scrolledPosition, viewportHeight])
@@ -58,6 +62,8 @@ export default function Overview({ overview }: Props) {
     return () => modal?.removeEventListener('scroll', handleScroll)
 
   }, [pathname])
+
+
 
 
   return (

@@ -16,6 +16,7 @@ export default function SelectedProjectBlock({ data: { image, project } }: Layou
 				<Image
 					data={image.responsiveImage}
 					fadeInDuration={0}
+					usePlaceholder={false}
 					intersectionMargin="0px 0px 2000px 0px"
 				/>
 			</Link>

@@ -21,12 +21,12 @@ export default function ProjectList({ items, position, onHover, ready = false }:
   const lastScrollRef = useRef<number>(null)
   const [hover, setHover] = useState(false)
 
-  const handleScroll = (e: React.WheelEvent<HTMLUListElement>) => {
+  const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
 
     const target = ref.current
     const { scrollTop, clientHeight, scrollHeight } = target
-    const bottom = (scrollTop + clientHeight) - ((scrollHeight / 3) * 2) >= 0
-    const top = scrollTop < Math.floor((scrollHeight / 3))
+    const top = scrollTop < (scrollHeight / 3)
+    const bottom = (scrollTop) - ((scrollHeight / 3) * 2) >= 0
 
     if (bottom)
       target.scrollTop = scrollTop - Math.floor(((scrollHeight / 3)))
@@ -46,8 +46,15 @@ export default function ProjectList({ items, position, onHover, ready = false }:
 
   useEffect(() => {
     oppositeRef.current = document.getElementById(`projects-${position === 'left' ? 'right' : 'left'}`) as HTMLUListElement
-    ref.current.scrollTop = ref.current.scrollHeight / 3
+    ref.current.scrollTop = (ref.current.scrollHeight / 3)
   }, [])
+
+  useEffect(() => {
+    ref.current.addEventListener('scroll', handleScroll)
+    return () => {
+      ref.current.removeEventListener('scroll', handleScroll)
+    }
+  }, [hover])
 
   return (
     <ul
@@ -55,7 +62,6 @@ export default function ProjectList({ items, position, onHover, ready = false }:
       className={cn(s.projects, ready && s.ready)}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onScroll={handleScroll}
       ref={ref}
     >
       {vitems.map((block, index) =>
