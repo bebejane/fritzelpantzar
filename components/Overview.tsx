@@ -72,7 +72,7 @@ export default function Overview({ overview }: Props) {
   return (
     <div
       className={cn(s.overview, ready && s.ready)} onMouseLeave={() => isHome && setTitle(null)}
-      style={{ filter: endRatio === null ? undefined : `grayscale(${(1 - Math.pow(endRatio || 0, 4))})` }}
+    //style={{ filter: endRatio === null ? undefined : `grayscale(${(1 - Math.pow(endRatio || 0, 4))})` }}
     >
       {ready &&
         <h1 className={cn((!isHome && ready) && s.active)}>{title}</h1>
