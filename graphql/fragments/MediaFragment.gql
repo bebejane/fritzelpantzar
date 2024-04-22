@@ -10,7 +10,10 @@ fragment MediaFragment on FileField {
 	title
 	url
 	width
-	responsiveImage {
+	responsiveImage(
+		imgixParams: { w: 2000, auto: format }
+		sizes: "(max-width: 46.24em) 100vw, 50vw"
+	) {
 		alt
 		aspectRatio
 		base64

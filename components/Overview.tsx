@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useScrollInfo } from 'next-dato-utils/hooks';
 import { awaitElement } from 'next-dato-utils/utils';
 import ProjectList from './ProjectList';
-import ProjectListSwiper from './ProjectListSwiper';
+import ProjectListLenis from './ProjectListLenis';
 import { useStore } from '../lib/store';
 
 export type Props = {
