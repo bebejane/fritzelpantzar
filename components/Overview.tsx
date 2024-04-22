@@ -22,6 +22,7 @@ export default function Overview({ overview }: Props) {
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [title, setTitle] = useState<string | null>(null)
   const [ready, setReady] = useState(false)
+  const [opacity, setOpacity] = useState<number | null>(null)
   const isHome = pathname === '/';
 
   useEffect(() => {
@@ -41,16 +42,23 @@ export default function Overview({ overview }: Props) {
 
   useEffect(() => {
 
-    if (pathname === '/') return
+    if (pathname === '/') return setOpacity(null)
 
     let modal: HTMLDivElement | null;
 
     const handleScroll = (e: WheelEvent) => {
       const target = e.target as HTMLDivElement
       const bottom = (target.scrollTop + target.clientHeight) > (target.scrollHeight - 100)
+      const end = (target.scrollHeight - (target.scrollTop + target.clientHeight + 100)) - viewportHeight
+
+
       if (bottom) {
         setTitle(null)
         router.back()
+      }
+      if (end < 0) {
+        setOpacity(1 - (Math.abs(end) / viewportHeight))
+
       }
     }
 
@@ -62,9 +70,6 @@ export default function Overview({ overview }: Props) {
     return () => modal?.removeEventListener('scroll', handleScroll)
 
   }, [pathname])
-
-
-
 
   return (
     <div className={cn(s.overview, ready && s.ready)} onMouseLeave={() => isHome && setTitle(null)} >
@@ -83,7 +88,7 @@ export default function Overview({ overview }: Props) {
         onHover={(title) => setTitle(title)}
         ready={ready}
       />
-      <div className={cn(s.overlay, !isHome && s.active)} />
+      <div className={cn(s.overlay, !isHome && s.active)} style={{ opacity: opacity === null ? undefined : opacity }} />
     </div>
   )
 }
