@@ -12,7 +12,8 @@ export async function POST(req: Request) {
     const paths: string[] = []
     const tags: string[] = [id]
 
-    paths.push(await buildRoute(api_key, attributes))
+    const p = await buildRoute(api_key, attributes)
+    paths.push.apply(paths, Array.isArray(p) ? p : [p])
 
     api_key && tags.push(api_key)
     return revalidate(paths, tags)
