@@ -28,7 +28,7 @@ const routes: Routes = {
 
 export const buildRoute = async (model: string, item?: any): Promise<string | string[]> => {
   if (!routes[model]) throw new Error(`Invalid model: ${model}`)
-  return `${await routes[model].path(item)}`
+  return await routes[model].path(item)
 }
 
 export const recordToRoute = async (record: any): Promise<string | string[]> => {
