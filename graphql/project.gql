@@ -16,6 +16,17 @@ query Project($slug: String!) {
 fragment ProjectFragment on ProjectRecord {
 	id
 	title
+	description {
+		blocks
+		links
+		value
+	}
+	program
+	projectStatus
+	year
+	size
+	commisioner
+	slug
 	gallery {
 		__typename
 		... on MediaRowBlockRecord {
@@ -25,5 +36,4 @@ fragment ProjectFragment on ProjectRecord {
 			}
 		}
 	}
-	slug
 }

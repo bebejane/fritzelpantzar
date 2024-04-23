@@ -12,7 +12,7 @@ export type Props = {
   modal: boolean;
 }
 
-export default function About({ data: { text, image, address, staff }, modal }: Props) {
+export default function About({ data: { text, image, address, people }, modal }: Props) {
 
   const [showAbout] = useStore(state => [state.showAbout])
 
@@ -31,8 +31,8 @@ export default function About({ data: { text, image, address, staff }, modal }: 
         }
         <Markdown className={s.text} content={text} />
         <h3>Personal</h3>
-        <ul className={s.staff}>
-          {staff.map((staff, i) =>
+        <ul className={s.people}>
+          {people.map((staff, i) =>
             <li key={i}>
               <Image data={staff.image?.responsiveImage} />
             </li>

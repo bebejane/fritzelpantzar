@@ -6,7 +6,7 @@ query About {
 			...MediaFragment
 		}
 		address
-		staff {
+		people {
 			id
 			firstName
 			lastName
