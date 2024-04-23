@@ -3,10 +3,12 @@
 	--white: #fffceb;
 	--red: #bf0000;
 	--blue: #0026ff;
+	--background: var(--blue);
+	--foreground: var(--white);
 
 	--line-height: 1;
 	--outer-margin: 2rem;
-	--about-width: 40vw;
+	--about-width: 80vw;
 
 	--z-modal: 100;
 	--z-title: 200;
@@ -14,6 +16,8 @@
 	--z-navbar: 300;
 
 	--z-logo: 1000;
+
+
 
 	@include mq($until: desktop) {}
 }
