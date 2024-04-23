@@ -19,7 +19,7 @@ export default async function Start() {
         </div>
         <Overview overview={overview} />
       </article>
-      <DraftMode url={draftUrl} tag={['project', 'overview']} />
+      <DraftMode url={draftUrl} tag={overview.id} />
     </>
   )
 }
