@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from "react";
+import React from "react";
 import s from './NavBar.module.scss'
 import cn from 'classnames'
 import { useRouter, usePathname } from 'next/navigation'
@@ -12,10 +12,11 @@ export type Props = {
 
 export default function NavBar({ }: Props) {
 
-  const [showAbout, setShowAbout] = useStore(state => [state.showAbout, state.setShowAbout])
+  const [showAbout, setShowAbout, setHoverAbout] = useStore(state => [state.showAbout, state.setShowAbout, state.setHoverAbout])
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const isClose = !isHome || showAbout;
 
   const handleClick = () => {
     if (!isHome) {
@@ -26,8 +27,16 @@ export default function NavBar({ }: Props) {
   }
 
   return (
-    <nav className={cn(s.navbar, !isHome && s.close, showAbout && s.invert)}>
-      <img src="/images/fp.svg" alt="Logo" onClick={handleClick} />
+    <nav className={cn(s.navbar, showAbout && s.invert)}>
+      <img
+        src="/images/fp.svg"
+        alt="Logo"
+        onClick={handleClick}
+        className={cn(!isClose && s.show)}
+        onMouseEnter={() => setHoverAbout(true)}
+        onMouseLeave={() => setHoverAbout(false)}
+      />
+      <img src="/images/close.svg" alt="Close" onClick={handleClick} className={cn(isClose && s.show)} />
     </nav>
   );
 }

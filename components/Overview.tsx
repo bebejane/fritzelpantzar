@@ -2,7 +2,7 @@
 
 import s from './Overview.module.scss'
 import cn from 'classnames'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useScrollInfo } from 'next-dato-utils/hooks';
 import { awaitElement } from 'next-dato-utils/utils';
@@ -18,17 +18,23 @@ export default function Overview({ overview }: Props) {
 
   const router = useRouter()
   const pathname = usePathname()
-  const [showAbout] = useStore(state => [state.showAbout])
+  const [showAbout, setShowAbout, hoverAbout] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout])
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [title, setTitle] = useState<string | null>(null)
   const [ready, setReady] = useState(false)
-  const [opacity, setOpacity] = useState<number | null>(null)
   const [endRatio, setEndRatio] = useState<number | null>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const isHome = pathname === '/';
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = showAbout ? 'hidden' : 'auto'
+    //@ts-ignore
+    document.body.scroll = showAbout ? 'no' : 'auto'
+  }, [showAbout])
 
   useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
@@ -41,9 +47,17 @@ export default function Overview({ overview }: Props) {
   }, [scrolledPosition, viewportHeight, showAbout])
 
   useEffect(() => {
-    document.getElementById('logo').style.opacity = ready ? '0' : '1'
+    const logo = document.getElementById('logo')
+    if (!logo) return
+
+    const handleLogoClick = () => ref.current.scrollIntoView({ behavior: 'smooth' })
+
+    logo.addEventListener('click', handleLogoClick)
+    logo.style.opacity = ready ? '0' : '1'
+
     return () => {
-      document.getElementById('logo').style.opacity = '1'
+      logo.style.opacity = '1'
+      logo.removeEventListener('click', handleLogoClick)
     }
   }, [ready])
 
@@ -75,14 +89,21 @@ export default function Overview({ overview }: Props) {
 
   }, [pathname])
 
+  useEffect(() => {
+    hoverAbout && setTitle('Om oss')
+  }, [hoverAbout])
+
   return (
     <div
-      className={cn(s.overview, ready && s.ready)}
+      id="overview"
+      ref={ref}
+      className={cn(s.overview, ready && s.ready, 'blue-cursor')}
       style={{
         filter: endRatio === null ? undefined : `grayscale(${(1 - Math.pow(endRatio || 0, 4))})`,
-        opacity: endRatio === null ? undefined : endRatio
+        opacity: endRatio === null ? undefined : endRatio,
       }}
       onMouseLeave={() => isHome && setTitle(null)}
+      onClick={() => showAbout && setShowAbout(false)}
     >
       {ready &&
         <h1 className={cn((!isHome && ready) && s.active)}>{title}</h1>
