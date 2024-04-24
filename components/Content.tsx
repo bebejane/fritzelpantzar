@@ -1,5 +1,5 @@
 import { StructuredContent } from 'next-dato-utils/components'
-//import * as blocks from './blocks'
+import * as blocks from './blocks'
 
 export type Props = {
   content: any
@@ -16,7 +16,7 @@ export default function Content({ content, className }: Props) {
     <StructuredContent
       className={className}
       content={content}
-    //blocks={blocks}
+      blocks={blocks}
     />
   )
 }

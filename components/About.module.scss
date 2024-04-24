@@ -38,18 +38,6 @@
       color: var(--white);
       width: 75%;
     }
-
-    .people {
-      margin-top: var(--outer-margin);
-      display: flex;
-      flex-direction: row;
-      list-style: none;
-
-      li {
-        flex: 0 0 auto;
-        width: 25%;
-      }
-    }
   }
 
   &.open {

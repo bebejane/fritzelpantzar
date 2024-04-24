@@ -6,13 +6,14 @@ import { Markdown } from 'next-dato-utils/components';
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../lib/store';
 import { Image } from 'react-datocms/image';
+import Content from './Content';
 
 export type Props = {
   data: AboutQuery['about'];
   modal: boolean;
 }
 
-export default function About({ data: { text, image, address, people }, modal }: Props) {
+export default function About({ data: { image, address, content }, modal }: Props) {
 
   const [showAbout, setShowAbout] = useStore(state => [state.showAbout, state.setShowAbout])
 
@@ -29,15 +30,7 @@ export default function About({ data: { text, image, address, people }, modal }:
         {image?.responsiveImage &&
           <figure><Image data={image.responsiveImage} /></figure>
         }
-        <Markdown className={cn("big", s.text)} content={text} />
-        <h3>Personal</h3>
-        <ul className={s.people}>
-          {people.map((staff, i) =>
-            <li key={i}>
-              <Image data={staff.image?.responsiveImage} />
-            </li>
-          )}
-        </ul>
+        <Content className={cn("big", s.text)} content={content} />
       </div>
     </div>
   )

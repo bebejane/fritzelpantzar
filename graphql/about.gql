@@ -1,18 +1,27 @@
 query About {
 	about {
 		id
-		text(markdown: false)
+		content {
+			blocks {
+				... on StaffBlockRecord {
+					__typename
+					id
+					people {
+						id
+						firstName
+						lastName
+						image {
+							...MediaFragment
+						}
+					}
+				}
+			}
+			links
+			value
+		}
 		image {
 			...MediaFragment
 		}
 		address
-		people {
-			id
-			firstName
-			lastName
-			image {
-				...MediaFragment
-			}
-		}
 	}
 }
