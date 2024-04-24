@@ -70,8 +70,8 @@ export default function Overview({ overview }: Props) {
     const handleScroll = (e: WheelEvent) => {
       const target = e.target as HTMLDivElement
       const bottom = (target.scrollTop + target.clientHeight) > (target.scrollHeight - 100)
-      const end = (target.scrollHeight - (target.scrollTop + target.clientHeight + 100)) - viewportHeight
-
+      const end = ((target.scrollHeight - (target.scrollTop + target.clientHeight)) - viewportHeight)
+      console.log(bottom, end)
       if (bottom) {
         setTitle(null)
         router.back()
@@ -80,12 +80,20 @@ export default function Overview({ overview }: Props) {
         setEndRatio(Math.min(1, (Math.abs(end) / viewportHeight)))
     }
 
+    const handleClick = (e: MouseEvent) => {
+      if (e.target.id === 'modal') router.back()
+    }
+
     (async () => {
       modal = await awaitElement<HTMLDivElement>('#modal');
       modal?.addEventListener('scroll', handleScroll)
+      modal?.addEventListener('click', handleClick)
     })()
 
-    return () => modal?.removeEventListener('scroll', handleScroll)
+    return () => {
+      modal?.removeEventListener('scroll', handleScroll)
+      modal?.removeEventListener('click', handleClick)
+    }
 
   }, [pathname])
 
@@ -94,30 +102,33 @@ export default function Overview({ overview }: Props) {
   }, [hoverAbout])
 
   return (
-    <div
-      id="overview"
-      ref={ref}
-      className={cn(s.overview, ready && s.ready, 'blue-cursor')}
-      style={{ opacity: endRatio === null ? undefined : endRatio }}
-      onMouseLeave={() => isHome && setTitle(null)}
-      onClick={() => showAbout && setShowAbout(false)}
-    >
+    <>
       {ready &&
-        <h1 className={cn((!isHome && ready) && s.active)}>{title}</h1>
+        <h1 className={cn(s.title, (!isHome && ready) && s.active)}>{title}</h1>
       }
-      <ProjectList
-        position='left'
-        items={overview.leftColumn}
-        onHover={(title) => setTitle(title)}
-        ready={ready}
-      />
-      <ProjectList
-        position='right'
-        items={overview.rightColumn}
-        onHover={(title) => setTitle(title)}
-        ready={ready}
-      />
-      {!endRatio && <div className={cn(s.overlay, !isHome && s.active)} />}
-    </div>
+      <div
+        id="overview"
+        ref={ref}
+        className={cn(s.overview, ready && s.ready)}
+        style={{ opacity: endRatio === null ? undefined : endRatio }}
+        onMouseLeave={() => isHome && setTitle(null)}
+        onClick={() => showAbout && setShowAbout(false)}
+      >
+
+        <ProjectList
+          position='left'
+          items={overview.leftColumn}
+          onHover={(title) => setTitle(title)}
+          ready={ready}
+        />
+        <ProjectList
+          position='right'
+          items={overview.rightColumn}
+          onHover={(title) => setTitle(title)}
+          ready={ready}
+        />
+        {!endRatio && <div className={cn(s.overlay, !isHome && s.active)} />}
+      </div>
+    </>
   )
 }

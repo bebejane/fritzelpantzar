@@ -28,7 +28,7 @@ export default async function Page(props: Props) {
 
   return (
     <>
-      <article className={cn(s.project, props.modal && s.modal, 'blue-cursor')}>
+      <article className={cn(s.project, props.modal && s.modal)}>
         {!props.modal && <h1>{title}</h1>}
         {gallery.map((block, index) =>
           <Block key={index} data={block} components={Blocks} />

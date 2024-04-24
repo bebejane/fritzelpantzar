@@ -137,8 +137,6 @@ figure div {
 	max-width: none !important;
 }
 
-.blue-cursor {
-	* {
-		cursor: url("/images/cursor.png") 16 16, auto;
-	}
+* {
+	cursor: url("/images/cursor.png") 16 16, auto;
 }
