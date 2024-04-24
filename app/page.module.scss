@@ -13,9 +13,7 @@
     left: 0;
 
     img {
-      @include mq($until: desktop) {
-        width: 80%;
-      }
+      width: var(--logo-size);
     }
   }
 }

@@ -25,11 +25,11 @@ export default function About({ data: { text, image, address, people }, modal }:
     <div className={cn(s.about, modal && s.modal, showAbout && s.open)} >
       <div className={s.content}>
         <img className={s.logo} src="/images/logo.svg" alt="Logo" />
-        {address}
+        <div className={s.address}>{address}</div>
         {image?.responsiveImage &&
-          <Image data={image.responsiveImage} />
+          <figure><Image data={image.responsiveImage} /></figure>
         }
-        <Markdown className={s.text} content={text} />
+        <Markdown className={cn("big", s.text)} content={text} />
         <h3>Personal</h3>
         <ul className={s.people}>
           {people.map((staff, i) =>

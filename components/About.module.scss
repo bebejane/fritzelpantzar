@@ -2,6 +2,8 @@
   color: var(--white);
   background-color: var(--blue);
   padding: var(--outer-margin);
+  padding-left: calc(2 * var(--outer-margin));
+  padding-right: calc(2 * var(--outer-margin));
 
   &.modal {
     position: fixed;
@@ -13,7 +15,6 @@
     width: var(--about-width);
     transform: translateX(100%);
     transition: all 0.3s ease-in-out;
-
   }
 
   .content {
@@ -21,27 +22,37 @@
 
     .logo {
       max-width: 100%;
+      width: var(--logo-size);
+      margin-bottom: var(--outer-margin);
+    }
+
+    .address {
+      padding-bottom: var(--outer-margin);
+    }
+
+    figure {
+      margin-bottom: var(--outer-margin);
     }
 
     p {
       color: var(--white);
+      width: 75%;
     }
 
     .people {
+      margin-top: var(--outer-margin);
       display: flex;
       flex-direction: row;
       list-style: none;
 
       li {
         flex: 0 0 auto;
+        width: 25%;
       }
     }
   }
 
-
-
   &.open {
     transform: translateX(0);
   }
-
 }

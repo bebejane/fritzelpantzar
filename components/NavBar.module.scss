@@ -1,10 +1,14 @@
 .navbar {
   position: fixed;
-  top: 0;
+  top: 0.1rem;
   right: 0;
   margin: var(--outer-margin);
   z-index: var(--z-navbar);
   cursor: pointer;
+
+  img {
+    height: 4.3vw;
+  }
 
   &.close {
     transform: rotate(-45deg);
