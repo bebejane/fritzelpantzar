@@ -3,7 +3,7 @@
 import s from './About.module.scss'
 import cn from 'classnames'
 import { Markdown } from 'next-dato-utils/components';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../lib/store';
 import { Image } from 'react-datocms/image';
 
@@ -14,7 +14,7 @@ export type Props = {
 
 export default function About({ data: { text, image, address, people }, modal }: Props) {
 
-  const [showAbout] = useStore(state => [state.showAbout])
+  const [showAbout, setShowAbout] = useStore(state => [state.showAbout, state.setShowAbout])
 
   useEffect(() => {
     if (modal)
@@ -22,7 +22,7 @@ export default function About({ data: { text, image, address, people }, modal }:
   }, [modal, showAbout])
 
   return (
-    <div className={cn(s.about, modal && s.modal, showAbout && s.open)} >
+    <div className={cn(s.about, modal && s.modal, showAbout && s.open)}>
       <div className={s.content}>
         <img className={s.logo} src="/images/logo.svg" alt="Logo" />
         {address}

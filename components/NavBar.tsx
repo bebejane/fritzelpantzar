@@ -5,7 +5,8 @@ import s from './NavBar.module.scss'
 import cn from 'classnames'
 import { useRouter, usePathname } from 'next/navigation'
 import { useStore } from "../lib/store";
-
+import Logo from '/images/fp.svg'
+import Close from '/images/close.svg'
 export type Props = {
 
 }
@@ -16,6 +17,7 @@ export default function NavBar({ }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const isClose = !isHome || showAbout;
 
   const handleClick = () => {
     if (!isHome) {
@@ -26,8 +28,9 @@ export default function NavBar({ }: Props) {
   }
 
   return (
-    <nav className={cn(s.navbar, !isHome && s.close, showAbout && s.invert)}>
-      <img src="/images/fp.svg" alt="Logo" onClick={handleClick} />
+    <nav className={cn(s.navbar, showAbout && s.invert)}>
+      <img src="/images/fp.svg" alt="Logo" onClick={handleClick} className={cn(!isClose && s.show)} />
+      <img src="/images/close.svg" alt="Close" onClick={handleClick} className={cn(isClose && s.show)} />
     </nav>
   );
 }

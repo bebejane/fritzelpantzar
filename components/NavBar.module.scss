@@ -7,10 +7,21 @@
   cursor: pointer;
 
   &.close {
-    transform: rotate(-45deg);
+    //transform: rotate(-45deg);
   }
 
   &.invert {
-    filter: invert(100%);
+    img {
+      filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(2078%) hue-rotate(323deg) brightness(110%) contrast(105%);
+    }
+  }
+
+  img {
+    display: none;
+    width: 100px;
+
+    &.show {
+      display: inline;
+    }
   }
 }
