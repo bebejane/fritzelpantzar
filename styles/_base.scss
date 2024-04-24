@@ -18,8 +18,7 @@
 
 	--z-logo: 1000;
 
-	@include mq($until: desktop) {
-	}
+	@include mq($until: desktop) {}
 }
 
 body {
@@ -35,12 +34,6 @@ body {
 
 html {
 	box-sizing: border-box;
-}
-
-.blue-cursor {
-	* {
-		cursor: url("/images/cursor.png"), auto;
-	}
 }
 
 main {
@@ -63,8 +56,7 @@ button {
 	border: 0;
 
 	@include mq($from: desktop) {
-		&:hover {
-		}
+		&:hover {}
 	}
 
 	&[disabled] {
@@ -101,8 +93,7 @@ select {
 	font-family: $nav-font;
 	background-color: var(--background);
 
-	&:focus {
-	}
+	&:focus {}
 
 	&::placeholder {
 		color: var(--orange);
@@ -144,4 +135,10 @@ select {
 
 figure div {
 	max-width: none !important;
+}
+
+.blue-cursor {
+	* {
+		cursor: url("/images/cursor.png") 16 16, auto;
+	}
 }
