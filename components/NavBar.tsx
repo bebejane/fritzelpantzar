@@ -1,12 +1,11 @@
 'use client'
 
-import React, { useEffect } from "react";
+import React from "react";
 import s from './NavBar.module.scss'
 import cn from 'classnames'
 import { useRouter, usePathname } from 'next/navigation'
 import { useStore } from "../lib/store";
-import Logo from '/images/fp.svg'
-import Close from '/images/close.svg'
+
 export type Props = {
 
 }
