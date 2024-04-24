@@ -9,7 +9,7 @@
 	--line-height: 1.2;
 	--outer-margin: 2rem;
 	--about-width: 80vw;
-	--logo-size: 55vw;
+	--logo-size: 52vw;
 
 	--z-modal: 100;
 	--z-title: 200;
@@ -18,7 +18,8 @@
 
 	--z-logo: 1000;
 
-	@include mq($until: desktop) {}
+	@include mq($until: desktop) {
+	}
 }
 
 body {
@@ -38,7 +39,7 @@ html {
 
 .blue-cursor {
 	* {
-		cursor: url('/images/cursor.png'), auto;
+		cursor: url("/images/cursor.png"), auto;
 	}
 }
 
@@ -62,7 +63,8 @@ button {
 	border: 0;
 
 	@include mq($from: desktop) {
-		&:hover {}
+		&:hover {
+		}
 	}
 
 	&[disabled] {
@@ -99,7 +101,8 @@ select {
 	font-family: $nav-font;
 	background-color: var(--background);
 
-	&:focus {}
+	&:focus {
+	}
 
 	&::placeholder {
 		color: var(--orange);
