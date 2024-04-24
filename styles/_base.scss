@@ -6,7 +6,7 @@
 	--background: var(--blue);
 	--foreground: var(--white);
 
-	--line-height: 1;
+	--line-height: 1.2;
 	--outer-margin: 2rem;
 	--about-width: 80vw;
 
@@ -17,9 +17,8 @@
 
 	--z-logo: 1000;
 
-
-
-	@include mq($until: desktop) {}
+	@include mq($until: desktop) {
+	}
 }
 
 body {
@@ -38,7 +37,7 @@ html {
 }
 
 * {
-	cursor: url('/images/cursor.png'), auto;
+	cursor: url("/images/cursor.png"), auto;
 }
 
 main {
@@ -61,7 +60,8 @@ button {
 	border: 0;
 
 	@include mq($from: desktop) {
-		&:hover {}
+		&:hover {
+		}
 	}
 
 	&[disabled] {
@@ -98,7 +98,8 @@ select {
 	font-family: $nav-font;
 	background-color: var(--background);
 
-	&:focus {}
+	&:focus {
+	}
 
 	&::placeholder {
 		color: var(--orange);

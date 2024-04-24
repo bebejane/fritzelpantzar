@@ -1,7 +1,7 @@
 .project {
   position: relative;
   background-color: var(--white);
-  padding-bottom: 50vh;
+  padding-bottom: 10vh;
 
   h1 {
     position: fixed;
@@ -16,5 +16,21 @@
 
   section.text {
     padding: var(--outer-margin);
+    //display: flex;
+    .desc {
+      width: 100%;
+      columns: 2;
+      column-gap: var(--outer-margin);
+    }
+
+    .meta {
+      //width: 100%;
+      padding-top: var(--outer-margin);
+      padding-bottom: var(--outer-margin);
+      td {
+        width: auto;
+        padding-right: 1rem;
+      }
+    }
   }
 }

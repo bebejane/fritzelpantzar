@@ -2,7 +2,6 @@ html,
 body,
 h1,
 h2,
-h3,
 p,
 nav,
 ul {
@@ -22,18 +21,10 @@ ul {
 }
 
 h1,
-h2,
-h3,
-h4,
-h5 {
-  font-size: 60px;
-  font-family: $body-font;
-  font-weight: bold;
-}
-
-h1 {
+h2 {
   letter-spacing: -0.01em;
   font-size: 6vw;
+  font-weight: bold;
 }
 
 h2 {
@@ -41,12 +32,37 @@ h2 {
   margin-bottom: 1em;
 }
 
+h3,
+h4 {
+  font-size: 0.95rem;
+  font-family: $mono-font;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+h3 {
+  padding-bottom: 0.45rem;
+}
+
+h4 {
+  display: inline;
+
+  font-size: 0.85rem;
+}
+
 p {
   line-height: var(--line-height);
+  margin-bottom: 1.4rem;
 
   strong {
     font-family: $headline-font;
   }
+}
+
+p.big,
+.big p {
+  font-size: 1.2rem;
+  font-weight: lighter;
 }
 
 strong {

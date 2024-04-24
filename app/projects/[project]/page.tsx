@@ -33,17 +33,22 @@ export default async function Page(props: Props) {
         {gallery.map((block, index) =>
           <Block key={index} data={block} components={Blocks} />
         )}
-        <section className={s.text}>
-          <Content content={description} />
-          <p>
-            {commisioner && <>{commisioner}<br /></>}
-            {year && <>{year}<br /></>}
-            {size && <>{size}<br /></>}
-            {projectStatus && <>{projectStatus}<br /></>}
-            {program && <>{program}<br /></>}
-          </p>
+        <section className={cn(s.text, "big")}>
+          <table className={s.meta}>
+            <tbody>
+              <tr>
+                {commisioner && <><td><h4>Uppdragsgivare:</h4> {commisioner}</td></>}
+                {year && <><td><h4>År:</h4> {year}</td></>}
+                {size && <><td><h4>Storlek:</h4> {size}</td></>}
+                {projectStatus && <><td><h4>Status:</h4> {projectStatus}</td></>}
+                {program && <><td><h4>Typ:</h4> {program}</td></>}
+              </tr>
+            </tbody>
+          </table>
+          <div className={s.desc}><Content content={description} />
+          </div>
         </section>
-      </article>
+      </article >
       <DraftMode url={draftUrl} tag={id} />
     </>
   );
