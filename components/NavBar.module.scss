@@ -10,8 +10,6 @@
     height: 4.3vw;
   }
 
-  &.close {
-    transform: rotate(-45deg);
   &.invert {
     img {
       filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(2078%) hue-rotate(323deg) brightness(110%) contrast(105%);
