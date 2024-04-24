@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 177.2 104.3">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #0026ff;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        display: none;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1">
+    <rect class="cls-1" x="37.7" y=".5" width="27.8" height="49.2" transform="translate(2.3 54.5) rotate(-56.8)"/>
+    <rect class="cls-1" x="27" y="65.3" width="49.2" height="27.8" transform="translate(-34.9 41.2) rotate(-33.2)"/>
+    <rect class="cls-1" x="111.7" y="54.6" width="27.8" height="49.2" transform="translate(-9.4 140.9) rotate(-56.8)"/>
+    <rect class="cls-1" x="101" y="11.2" width="49.2" height="27.8" transform="translate(6.8 72.9) rotate(-33.2)"/>
+  </g>
+  <g id="Layer_1_copy" data-name="Layer 1 copy" class="cls-3">
+    <rect class="cls-1" x="53.9" y="1.1" width="27.8" height="59.7" transform="translate(-2 57) rotate(-45)"/>
+    <rect class="cls-1" x="37.9" y="59.4" width="59.7" height="27.8" transform="translate(-32 69.4) rotate(-45)"/>
+    <path class="cls-1" d="M71.3,52.4c0,15,6.4,28.6,16.4,38.1,11.2,10.6,27.4,13.8,46.4,13.8h6.3v-27.7h-9.9c-6.7,0-17.9-.4-24.6-7.1-4.3-4.3-6.9-10.4-6.9-17.1s2.5-12.8,6.9-17.1c6.8-6.8,18-7.1,24.6-7.1h9.9V.5h-6.3c-18.9,0-35.2,3.2-46.4,13.8-10,9.5-16.4,23-16.4,38.1"/>
+  </g>
+  <g id="Layer_2" data-name="Layer 2" class="cls-3">
+    <rect class="cls-2" y=".5" width="177.2" height="103.8"/>
+    <g>
+      <rect class="cls-1" width="59.7" height="27.8"/>
+      <rect class="cls-1" y="76.1" width="59.7" height="27.8"/>
+      <path class="cls-1" d="M177.2,52.4c0,15-6.4,28.6-16.4,38.1-11.2,10.6-27.4,13.8-46.4,13.8h-6.3v-27.7h9.9c6.7,0,17.9-.4,24.6-7.1,4.3-4.3,6.9-10.4,6.9-17.1s-2.5-12.8-6.9-17.1c-6.8-6.8-18-7.1-24.6-7.1h-9.9V.5h6.3c18.9,0,35.2,3.2,46.4,13.8,10,9.5,16.4,23,16.4,38.1"/>
+    </g>
+  </g>
+</svg>
