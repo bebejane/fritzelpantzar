@@ -1,6 +1,6 @@
 import '@styles/index.scss'
 import { apiQuery } from 'next-dato-utils/api';
-import { GlobalDocument } from "@graphql";
+import { AboutDocument, GlobalDocument } from "@graphql";
 import { Metadata } from "next/types";
 import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import React from 'react';
@@ -16,6 +16,7 @@ export type LayoutProps = {
 export const dynamic = 'force-static'
 
 export default async function RootLayout({ children, modal }: LayoutProps) {
+  const { about, draftUrl } = await apiQuery<AboutQuery, AboutQueryVariables>(AboutDocument)
 
   return (
     <html lang={'sv'}>
@@ -25,7 +26,7 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
           {children}
         </main>
         <NavBar />
-        <About />
+        <About data={about} modal={true} />
         <Footer />
       </body>
     </html>

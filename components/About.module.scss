@@ -1,24 +1,44 @@
 .about {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: var(--z-about);
   color: var(--white);
   background-color: var(--blue);
   padding: var(--outer-margin);
-  height: 100vh;
-  width: var(--about-width);
-  transform: translateX(100%);
-  transition: all 0.3s ease-in-out;
+
+  &.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: var(--z-about);
+    height: 100vh;
+    overflow-y: scroll;
+    width: var(--about-width);
+    transform: translateX(100%);
+    transition: all 0.3s ease-in-out;
+
+  }
 
   .content {
     width: 100%;
-    padding-right: 10rem;
 
     .logo {
       max-width: 100%;
     }
+
+    p {
+      color: var(--white);
+    }
+
+    .people {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+
+      li {
+        flex: 0 0 auto;
+      }
+    }
   }
+
+
 
   &.open {
     transform: translateX(0);

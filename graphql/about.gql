@@ -1,0 +1,18 @@
+query About {
+	about {
+		id
+		text(markdown: false)
+		image {
+			...MediaFragment
+		}
+		address
+		people {
+			id
+			firstName
+			lastName
+			image {
+				...MediaFragment
+			}
+		}
+	}
+}

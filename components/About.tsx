@@ -2,30 +2,42 @@
 
 import s from './About.module.scss'
 import cn from 'classnames'
-import { Block } from 'next-dato-utils/components';
-import * as Blocks from '@components/blocks'; import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { Markdown } from 'next-dato-utils/components';
+import { useEffect, useState } from 'react';
 import { useStore } from '../lib/store';
+import { Image } from 'react-datocms/image';
 
 export type Props = {
-
+  data: AboutQuery['about'];
+  modal: boolean;
 }
 
-export default function About({ }: Props) {
+export default function About({ data: { text, image, address, people }, modal }: Props) {
 
-  const [showAbout, setShowAbout] = useStore(state => [state.showAbout, state.setShowAbout],)
-  const pathname = usePathname();
-  const [title, setTitle] = useState<string | null>(null)
+  const [showAbout] = useStore(state => [state.showAbout])
 
   useEffect(() => {
-    document.querySelector('main').classList.toggle('slided', showAbout)
-  }, [showAbout])
+    if (modal)
+      document.querySelector('main').classList.toggle('slided', showAbout)
+  }, [modal, showAbout])
 
   return (
-    <div className={cn(s.about, showAbout && s.open)} >
+    <div className={cn(s.about, modal && s.modal, showAbout && s.open)} >
       <div className={s.content}>
         <img className={s.logo} src="/images/logo.svg" alt="Logo" />
-        <p>Fritzell & Pantzar Arkitektur AB, Munkbrogatan 2, 111 27 Stockholm</p>
+        {address}
+        {image?.responsiveImage &&
+          <Image data={image.responsiveImage} />
+        }
+        <Markdown className={s.text} content={text} />
+        <h3>Personal</h3>
+        <ul className={s.people}>
+          {people.map((staff, i) =>
+            <li key={i}>
+              <Image data={staff.image?.responsiveImage} />
+            </li>
+          )}
+        </ul>
       </div>
     </div>
   )
