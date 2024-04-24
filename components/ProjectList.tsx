@@ -6,6 +6,7 @@ import { Block } from 'next-dato-utils/components';
 import * as Blocks from '@components/blocks';
 import { useEffect, useRef, useState } from 'react';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
+import { useStore } from '../lib/store';
 
 export type Props = {
   items: OverviewQuery['overview']['leftColumn'] | OverviewQuery['overview']['rightColumn'];
@@ -21,6 +22,7 @@ export default function ProjectList({ items, position, onHover, ready = false }:
   const oppositeRef = useRef<HTMLUListElement>(null)
   const lastScrollRef = useRef<number>(null)
   const [hover, setHover] = useState(false)
+  const [showAbout] = useStore((state) => [state.showAbout])
   const isDesktop = useIsDesktop()
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export default function ProjectList({ items, position, onHover, ready = false }:
   return (
     <ul
       id={`projects-${position}`}
-      className={cn(s.projects, ready && s.ready)}
+      className={cn(s.projects, ready && s.ready, showAbout && s.inactive)}
       onMouseEnter={() => isDesktop && setHover(true)}
       onMouseLeave={() => isDesktop && setHover(false)}
       ref={ref}

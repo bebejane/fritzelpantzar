@@ -98,10 +98,7 @@ export default function Overview({ overview }: Props) {
       id="overview"
       ref={ref}
       className={cn(s.overview, ready && s.ready, 'blue-cursor')}
-      style={{
-        //filter: endRatio === null ? undefined : `grayscale(${(1 - Math.pow(endRatio || 0, 4))})`,
-        opacity: endRatio === null ? undefined : endRatio,
-      }}
+      style={{ opacity: endRatio === null ? undefined : endRatio }}
       onMouseLeave={() => isHome && setTitle(null)}
       onClick={() => showAbout && setShowAbout(false)}
     >

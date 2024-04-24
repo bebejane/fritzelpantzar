@@ -15,11 +15,12 @@
     padding: 0;
   }
 
-  > li {
+  >li {
     padding: calc(var(--outer-margin) / 2);
     transition: opacity 0.3s ease-out;
 
     opacity: 0.8;
+
     &:hover {
       opacity: 1;
     }
@@ -38,7 +39,7 @@
 
     img {
       transition: opacity 1s ease-out;
-      filter: grayscale(1);
+
     }
   }
 
@@ -52,6 +53,12 @@
         opacity: 1 !important;
         filter: grayscale(0);
       }
+    }
+  }
+
+  &.inactive {
+    img {
+      filter: grayscale(1);
     }
   }
 

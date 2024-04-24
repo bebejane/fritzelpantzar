@@ -10,6 +10,9 @@ query About {
 						id
 						firstName
 						lastName
+						title
+						phone
+						email
 						image {
 							...MediaFragment
 						}
