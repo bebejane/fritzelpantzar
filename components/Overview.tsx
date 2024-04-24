@@ -18,11 +18,10 @@ export default function Overview({ overview }: Props) {
 
   const router = useRouter()
   const pathname = usePathname()
-  const [showAbout, setShowAbout] = useStore(state => [state.showAbout, state.setShowAbout])
+  const [showAbout, setShowAbout, hoverAbout] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout])
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [title, setTitle] = useState<string | null>(null)
   const [ready, setReady] = useState(false)
-  const [opacity, setOpacity] = useState<number | null>(null)
   const [endRatio, setEndRatio] = useState<number | null>(null)
   const ref = useRef<HTMLDivElement>(null)
   const isHome = pathname === '/';
@@ -30,6 +29,12 @@ export default function Overview({ overview }: Props) {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = showAbout ? 'hidden' : 'auto'
+    //@ts-ignore
+    document.body.scroll = showAbout ? 'no' : 'auto'
+  }, [showAbout])
 
   useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
@@ -84,6 +89,10 @@ export default function Overview({ overview }: Props) {
 
   }, [pathname])
 
+  useEffect(() => {
+    hoverAbout && setTitle('Om oss')
+  }, [hoverAbout])
+
   return (
     <div
       id="overview"
@@ -91,7 +100,7 @@ export default function Overview({ overview }: Props) {
       className={cn(s.overview, ready && s.ready, 'blue-cursor')}
       style={{
         filter: endRatio === null ? undefined : `grayscale(${(1 - Math.pow(endRatio || 0, 4))})`,
-        opacity: endRatio === null ? undefined : endRatio
+        opacity: endRatio === null ? undefined : endRatio,
       }}
       onMouseLeave={() => isHome && setTitle(null)}
       onClick={() => showAbout && setShowAbout(false)}
