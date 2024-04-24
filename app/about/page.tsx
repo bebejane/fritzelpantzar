@@ -29,6 +29,5 @@ export async function generateMetadata() {
 
   return {
     title: 'About',
-    description: about.text,
   } as Metadata
 }

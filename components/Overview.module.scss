@@ -8,6 +8,10 @@
   pointer-events: none;
   transition: all 0.2s ease-in-out;
 
+  &.hidden {
+    display: none;
+  }
+
   &.active {
     top: 1rem;
     transform: translate(-50%, 0%);

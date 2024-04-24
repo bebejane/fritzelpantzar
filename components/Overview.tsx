@@ -7,7 +7,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useScrollInfo } from 'next-dato-utils/hooks';
 import { awaitElement } from 'next-dato-utils/utils';
 import ProjectList from './ProjectList';
-import ProjectListLenis from './ProjectListLenis';
 import { useStore } from '../lib/store';
 
 export type Props = {
@@ -71,7 +70,7 @@ export default function Overview({ overview }: Props) {
       const target = e.target as HTMLDivElement
       const bottom = (target.scrollTop + target.clientHeight) > (target.scrollHeight - 100)
       const end = ((target.scrollHeight - (target.scrollTop + target.clientHeight)) - viewportHeight)
-      console.log(bottom, end)
+
       if (bottom) {
         setTitle(null)
         router.back()
@@ -81,7 +80,7 @@ export default function Overview({ overview }: Props) {
     }
 
     const handleClick = (e: MouseEvent) => {
-      if (e.target.id === 'modal') router.back()
+      if ((e.target as HTMLDivElement).id === 'modal') router.back()
     }
 
     (async () => {
@@ -103,9 +102,7 @@ export default function Overview({ overview }: Props) {
 
   return (
     <>
-      {ready &&
-        <h1 className={cn(s.title, (!isHome && ready) && s.active)}>{title}</h1>
-      }
+      <h1 className={cn(s.title, (!isHome && ready) && s.active)}>{title}</h1>
       <div
         id="overview"
         ref={ref}
@@ -114,7 +111,6 @@ export default function Overview({ overview }: Props) {
         onMouseLeave={() => isHome && setTitle(null)}
         onClick={() => showAbout && setShowAbout(false)}
       >
-
         <ProjectList
           position='left'
           items={overview.leftColumn}
