@@ -8,5 +8,9 @@
   li {
     flex: 0 0 auto;
     width: 25%;
+
+    figure {
+      margin-bottom: 1rem !important;
+    }
   }
 }
