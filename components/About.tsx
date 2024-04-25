@@ -23,7 +23,7 @@ export default function About({ data: { image, address, content }, modal }: Prop
   }, [modal, showAbout])
 
   return (
-    <div className={cn(s.about, modal && s.modal, showAbout && s.open)}>
+    <div className={cn(s.about, modal && s.modal, showAbout && s.open, 'cursor-white')}>
       <div className={s.content}>
         <img className={s.logo} src="/images/logo.svg" alt="Logo" />
         <div className={s.address}>{address}</div>

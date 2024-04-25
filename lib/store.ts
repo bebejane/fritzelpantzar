@@ -6,6 +6,8 @@ export interface StoreState {
   showMobileMenu: boolean,
   showAbout: boolean,
   hoverAbout: boolean,
+  ready: boolean,
+  setReady: (ready: boolean) => void,
   setHoverAbout: (hoverAbout: boolean) => void,
   setShowAbout: (showAbout: boolean) => void,
   setShowMobileMenu: (showMobileMenu: boolean) => void,
@@ -17,6 +19,10 @@ const useStore = create<StoreState>((set) => ({
   showMobileMenu: false,
   showAbout: false,
   hoverAbout: false,
+  ready: false,
+  setReady: (ready: boolean) => {
+    set((state) => ({ ready }))
+  },
   setHoverAbout: (hoverAbout: boolean) => {
     set((state) => ({ hoverAbout }))
   },
