@@ -1,17 +1,13 @@
 'use client'
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import s from './NavBar.module.scss'
 import cn from 'classnames'
 import { useRouter, usePathname } from 'next/navigation'
 import { useStore } from "../lib/store";
 import { useScrollInfo } from "next-dato-utils/hooks";
 
-export type Props = {
-
-}
-
-export default function NavBar({ }: Props) {
+export default function NavBar() {
 
   const [showAbout, setShowAbout, setHoverAbout] = useStore(state => [state.showAbout, state.setShowAbout, state.setHoverAbout])
   const { scrolledPosition, viewportHeight } = useScrollInfo()
@@ -19,8 +15,12 @@ export default function NavBar({ }: Props) {
   const pathname = usePathname();
   const isHome = pathname === '/';
   const isClose = !isHome || showAbout;
-  const isInOverView = scrolledPosition >= viewportHeight;
 
+  const [isInOverView, setInOverView] = useState(false);
+  useEffect(() => {
+    const isInOverView = scrolledPosition >= viewportHeight;
+    setInOverView(isInOverView);
+  }, [scrolledPosition, viewportHeight])
   const handleClick = () => {
     if (!isHome) {
       router.back();
@@ -34,7 +34,7 @@ export default function NavBar({ }: Props) {
       <img
         id="menu"
         src="/images/fp.svg"
-        alt="Logo"
+        alt="Menu"
         onClick={handleClick}
         className={s.menu}
         onMouseEnter={() => setHoverAbout(true)}
