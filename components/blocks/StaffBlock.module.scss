@@ -1,14 +1,16 @@
 .staff {
   margin-top: calc(0.25 * var(--outer-margin));
-  display: flex;
-  flex-direction: row;
+  display: grid;
   list-style: none;
   color: var(--white);
   margin-bottom: var(--outer-margin);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-gap: var(--outer-margin);
+
+  width: 100%;
 
   li {
-    flex: 0 0 auto;
-    width: 25%;
+    grid-column: span 1;
 
     figure {
       margin-bottom: 1rem !important;
