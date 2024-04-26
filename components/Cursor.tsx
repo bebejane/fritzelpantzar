@@ -17,6 +17,7 @@ export default function Footer() {
   const ref = useRef<HTMLImageElement>(null);
 
   const initStyle = () => {
+    console.log('init styles')
     setInit(false)
     setReady(false)
 
@@ -35,6 +36,7 @@ export default function Footer() {
       left: bounds.left + (bounds.width * leftDotPercentage),
     }));
   }
+
   const handleMouse = (e: MouseEvent) => {
     setStyle((s) => ({ ...s, top: e.clientY, left: e.clientX, }));
     if (!ready) setTimeout(() => setReady(true), 1000)
@@ -59,6 +61,11 @@ export default function Footer() {
   }, [])
 
   useEffect(() => {
+    console.log('style', style)
+    setInit(!style ? false : style.width > 0 && style.height > 0 && style.top > 0 && style.left > 0);
+  }, [style])
+
+  useEffect(() => {
     const logo = document.getElementById('logo') as HTMLImageElement;
     const bounds = logo?.getBoundingClientRect();
     const size = bounds ? bounds.width / cursorSizeDivider : 16;
@@ -71,9 +78,7 @@ export default function Footer() {
 
   }, [width, height])
 
-  useEffect(() => {
-    setInit(!style ? false : style.width > 0 && style.height > 0 && style.top > 0 && style.left > 0);
-  }, [style])
+
 
   return (
     <img
