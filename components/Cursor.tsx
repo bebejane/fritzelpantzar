@@ -17,11 +17,17 @@ export default function Footer() {
   const ref = useRef<HTMLImageElement>(null);
 
   const initStyle = () => {
+    setInit(false)
+    setReady(false)
+
     const logo = document.getElementById('logo');
     const bounds = logo?.getBoundingClientRect();
 
-    setInit(false)
-    setReady(false)
+    if (!bounds) {
+      setReady(true)
+      setInit(true)
+      return
+    }
 
     setStyle((s) => ({
       ...s,
@@ -55,7 +61,7 @@ export default function Footer() {
   useEffect(() => {
     const logo = document.getElementById('logo') as HTMLImageElement;
     const bounds = logo?.getBoundingClientRect();
-    const size = bounds.width / cursorSizeDivider;
+    const size = bounds ? bounds.width / cursorSizeDivider : 16;
 
     setStyle((s) => ({
       ...s,
