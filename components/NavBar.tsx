@@ -30,16 +30,17 @@ export default function NavBar({ }: Props) {
   }
 
   return (
-    <nav className={cn(s.navbar, showAbout && s.invert, !isInOverView && s.inactive, 'cursor-white')}>
+    <nav className={cn(s.navbar, showAbout && s.invert, !isInOverView && s.inactive, 'cursor-white', isClose && s.closed)}>
       <img
+        id="menu"
         src="/images/fp.svg"
         alt="Logo"
         onClick={handleClick}
-        className={cn(!isClose && s.show)}
+        className={s.menu}
         onMouseEnter={() => setHoverAbout(true)}
         onMouseLeave={() => setHoverAbout(false)}
       />
-      <img src="/images/close.svg" alt="Close" onClick={handleClick} className={cn(isClose && s.show)} />
+      <img id="close" src="/images/close.svg" alt="Close" onClick={handleClick} className={s.close} />
     </nav>
   );
 }

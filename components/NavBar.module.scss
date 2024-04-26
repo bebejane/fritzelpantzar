@@ -1,5 +1,6 @@
 .navbar {
   position: fixed;
+
   top: 0.1rem;
   right: 0;
   margin: var(--outer-margin);
@@ -25,11 +26,32 @@
   }
 
   img {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: -100px;
+    transition: transform 0.2s ease-in-out;
     width: 100px;
+  }
 
-    &.show {
-      display: inline;
+  .close {
+    transform: rotateY(90deg);
+  }
+
+  .menu {
+    transform: rotateY(0deg);
+    transition-delay: 0.2s;
+  }
+
+  &.closed {
+    .close {
+      transform: rotateY(0deg);
+      transition-delay: 0.2s;
+    }
+
+    .menu {
+      transform: rotateY(90deg);
+      transition-delay: 0s;
+
     }
   }
 }
