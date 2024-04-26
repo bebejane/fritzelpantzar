@@ -15,7 +15,7 @@ export type Props = {
 
 export default function About({ data: { image, address, content }, modal }: Props) {
 
-  const [showAbout, setShowAbout] = useStore(state => [state.showAbout, state.setShowAbout])
+  const [showAbout] = useStore(state => [state.showAbout])
 
   useEffect(() => {
     if (modal)

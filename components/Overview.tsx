@@ -17,7 +17,7 @@ export default function Overview({ overview }: Props) {
 
   const router = useRouter()
   const pathname = usePathname()
-  const [showAbout, setShowAbout, hoverAbout, ready, setReady] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout, state.ready, state.setReady])
+  const [showAbout, setShowAbout, hoverAbout, inOverview, setInOverview, setInIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout, state.inOverview, state.setInOverview, state.setInIntro])
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [title, setTitle] = useState<string | null>(null)
   const [hideTitle, setHideTitle] = useState<boolean>(false)
@@ -28,6 +28,10 @@ export default function Overview({ overview }: Props) {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    setInIntro(pathname === '/' && scrolledPosition < viewportHeight)
+  }, [pathname, scrolledPosition, viewportHeight])
 
   useEffect(() => {
     document.body.style.overflow = showAbout ? 'hidden' : 'auto'
@@ -42,7 +46,7 @@ export default function Overview({ overview }: Props) {
 
   useEffect(() => {
     const ready = ((scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout) ? true : false
-    setReady(ready)
+    setInOverview(ready)
   }, [showAbout, scrolledPosition, viewportHeight, pathname])
 
   useEffect(() => {
@@ -52,13 +56,13 @@ export default function Overview({ overview }: Props) {
     const handleLogoClick = () => ref.current.scrollIntoView({ behavior: 'smooth' })
 
     logo.addEventListener('click', handleLogoClick)
-    logo.style.opacity = ready ? '0' : '1'
+    logo.style.opacity = inOverview ? '0' : '1'
 
     return () => {
       logo.style.opacity = '1'
       logo.removeEventListener('click', handleLogoClick)
     }
-  }, [ready])
+  }, [inOverview])
 
   useEffect(() => {
 
@@ -102,15 +106,16 @@ export default function Overview({ overview }: Props) {
 
   useEffect(() => {
     showAbout ? setHideTitle(true) : setTimeout(() => setHideTitle(false), 300)
+    setInOverview(!showAbout)
   }, [showAbout])
 
   return (
     <>
-      {!hideTitle && <h1 className={cn(s.title, (!isHome && ready) && s.active)}>{title}</h1>}
+      {!hideTitle && <h1 className={cn(s.title, (!isHome && inOverview) && s.active)}>{title}</h1>}
       <div
         id="overview"
         ref={ref}
-        className={cn(s.overview, ready && s.ready)}
+        className={cn(s.overview, inOverview && s.ready)}
         style={{ opacity: endRatio === null ? undefined : endRatio }}
         onMouseLeave={() => isHome && setTitle(null)}
         onClick={() => showAbout && setShowAbout(false)}
@@ -119,13 +124,13 @@ export default function Overview({ overview }: Props) {
           position='left'
           items={overview.leftColumn}
           onHover={(title) => setTitle(title)}
-          ready={ready}
+          ready={inOverview}
         />
         <ProjectList
           position='right'
           items={overview.rightColumn}
           onHover={(title) => setTitle(title)}
-          ready={ready}
+          ready={inOverview}
         />
         {!endRatio && <div className={cn(s.overlay, !isHome && s.active)} />}
       </div>

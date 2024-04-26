@@ -4,6 +4,7 @@ import s from './Cursor.module.scss'
 import { useState, useEffect, useRef } from 'react'
 import { useWindowSize } from 'react-use'
 import { useStore } from '../lib/store'
+import { usePathname } from 'next/navigation'
 
 const leftDotPercentage = 0.14;
 const cursorSizeDivider = 45
@@ -19,12 +20,15 @@ type CursorStyle = {
 
 export default function Footer() {
 
-  const [inOverview] = useStore((state) => [state.ready])
+
   const { width, height } = useWindowSize();
   const [style, setStyle] = useState<CursorStyle | null>(null);
   const [init, setInit] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
+  const [showAbout, inIntro] = useStore(state => [state.showAbout, state.inIntro])
+  const [cursorColor, setCursorColor] = useState<'white' | 'blue'>('white')
+  const pathname = usePathname()
   const ref = useRef<HTMLImageElement>(null);
 
   const initStyle = () => {
@@ -93,11 +97,16 @@ export default function Footer() {
 
   }, [width, height])
 
+  useEffect(() => {
+    setCursorColor(showAbout || inIntro || pathname === '/about' ? 'white' : 'blue')
+  }, [pathname, showAbout, inIntro])
+
+
   return (
     <img
       ref={ref}
       className={cn(s.cursor, init && s.init, ready && s.ready, hidden && s.hidden)}
-      src={`/images/cursor-${inOverview ? 'blue' : 'white'}.svg`}
+      src={`/images/cursor-${cursorColor}.svg`}
       style={style}
     />
   );
