@@ -140,3 +140,12 @@ figure div {
 * {
 	cursor: url("/images/cursor.png") 16 16, auto;
 }
+
+.cursor-white {
+
+	cursor: url("/images/cursor-white.png") 16 16, auto !important;
+
+	* {
+		cursor: url("/images/cursor-white.png") 16 16, auto !important;
+	}
+}

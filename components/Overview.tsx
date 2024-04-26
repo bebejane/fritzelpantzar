@@ -2,7 +2,7 @@
 
 import s from './Overview.module.scss'
 import cn from 'classnames'
-import { useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useScrollInfo } from 'next-dato-utils/hooks';
 import { awaitElement } from 'next-dato-utils/utils';
@@ -17,10 +17,10 @@ export default function Overview({ overview }: Props) {
 
   const router = useRouter()
   const pathname = usePathname()
-  const [showAbout, setShowAbout, hoverAbout] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout])
+  const [showAbout, setShowAbout, hoverAbout, ready, setReady] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout, state.ready, state.setReady])
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [title, setTitle] = useState<string | null>(null)
-  const [ready, setReady] = useState(false)
+  const [hideTitle, setHideTitle] = useState<boolean>(false)
   const [endRatio, setEndRatio] = useState<number | null>(null)
   const ref = useRef<HTMLDivElement>(null)
   const isHome = pathname === '/';
@@ -38,12 +38,12 @@ export default function Overview({ overview }: Props) {
   useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
       setTitle(null)
-  }, [scrolledPosition, viewportHeight])
+  }, [showAbout, scrolledPosition, viewportHeight])
 
   useEffect(() => {
     const ready = (scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout ? true : false
     setReady(ready)
-  }, [scrolledPosition, viewportHeight, showAbout])
+  }, [showAbout, scrolledPosition, viewportHeight])
 
   useEffect(() => {
     const logo = document.getElementById('logo')
@@ -100,9 +100,13 @@ export default function Overview({ overview }: Props) {
     hoverAbout && setTitle('Om oss')
   }, [hoverAbout])
 
+  useEffect(() => {
+    showAbout ? setHideTitle(true) : setTimeout(() => setHideTitle(false), 300)
+  }, [showAbout])
+
   return (
     <>
-      <h1 className={cn(s.title, (!isHome && ready) && s.active)}>{title}</h1>
+      {!hideTitle && <h1 className={cn(s.title, (!isHome && ready) && s.active)}>{title}</h1>}
       <div
         id="overview"
         ref={ref}
