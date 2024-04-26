@@ -17,11 +17,12 @@ export default function NavBar() {
   const [invert, setInvert] = useState(false);
 
   const handleClick = () => {
-    if (!isHome) {
+    if (pathname === '/about')
+      router.push('/')
+    else if (!isHome)
       router.back();
-    } else {
+    else
       setShowAbout(!showAbout);
-    }
   }
 
   useEffect(() => {

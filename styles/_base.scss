@@ -36,6 +36,10 @@ html {
 	box-sizing: border-box;
 }
 
+* {
+	cursor: none !important;
+}
+
 main {
 	position: relative;
 	min-height: 100vh;
@@ -135,24 +139,4 @@ select {
 
 figure div {
 	max-width: none !important;
-}
-
-* {
-	cursor: none !important;
-	//url("/images/cursor.png") 16 16,
-	//auto;
-}
-
-.cursor-white {
-	/*
-	cursor:
-		url("/images/cursor-white.png") 16 16,
-		auto !important;
-
-	* {
-		cursor:
-			url("/images/cursor-white.png") 16 16,
-			auto !important;
-	}
-	*/
 }

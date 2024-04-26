@@ -55,7 +55,11 @@ export default function Footer() {
   }
 
   const handleMouse = (e: MouseEvent) => {
-    setStyle((s) => ({ ...s, top: e.clientY, left: e.clientX, }));
+    setStyle((s) => ({
+      ...s,
+      top: e.clientY - (s.height / 2),
+      left: e.clientX - (s.width / 2)
+    }));
     if (init)
       setTimeout(() => setReady(true), transitionTime * 1000);
   }
