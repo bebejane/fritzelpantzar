@@ -3,21 +3,32 @@ import cn from 'classnames'
 import s from './Cursor.module.scss'
 import { useState, useEffect, useRef } from 'react'
 import { useWindowSize } from 'react-use'
+import { useStore } from '../lib/store'
 
 const leftDotPercentage = 0.14;
 const cursorSizeDivider = 45
+const transitionTime = 0.4
+
+type CursorStyle = {
+  top?: number,
+  left?: number,
+  width?: number,
+  height?: number,
+  transitionTime?: string,
+}
 
 export default function Footer() {
 
+  const [inOverview] = useStore((state) => [state.ready])
   const { width, height } = useWindowSize();
-  const [style, setStyle] = useState<{ top: number, left: number, width: number, height: number } | null>(null);
+  const [style, setStyle] = useState<CursorStyle | null>(null);
   const [init, setInit] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(false);
   const [ready, setReady] = useState<boolean>(false);
   const ref = useRef<HTMLImageElement>(null);
 
   const initStyle = () => {
-    console.log('init styles')
+
     setInit(false)
     setReady(false)
 
@@ -34,12 +45,15 @@ export default function Footer() {
       ...s,
       top: bounds.top,
       left: bounds.left + (bounds.width * leftDotPercentage),
+      transitionTime: `${transitionTime}s`,
     }));
+
   }
 
   const handleMouse = (e: MouseEvent) => {
     setStyle((s) => ({ ...s, top: e.clientY, left: e.clientX, }));
-    if (!ready) setTimeout(() => setReady(true), 1000)
+    if (init)
+      setTimeout(() => setReady(true), transitionTime * 1000);
   }
 
   const handleMouseLeave = () => setHidden(true);
@@ -58,11 +72,12 @@ export default function Footer() {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     }
-  }, [])
+  }, [init])
 
   useEffect(() => {
-    console.log('style', style)
-    setInit(!style ? false : style.width > 0 && style.height > 0 && style.top > 0 && style.left > 0);
+    const init = !style ? false : style.width > 0 && style.height > 0 && style.top > 0 && style.left > 0;
+    setInit(init);
+
   }, [style])
 
   useEffect(() => {
@@ -78,14 +93,13 @@ export default function Footer() {
 
   }, [width, height])
 
-
-
   return (
     <img
       ref={ref}
       className={cn(s.cursor, init && s.init, ready && s.ready, hidden && s.hidden)}
-      src="/images/cursor-white.svg"
+      src={`/images/cursor-${inOverview ? 'blue' : 'white'}.svg`}
       style={style}
+    //onTransitionEnd={() => setReady(true)}
     />
   );
 }

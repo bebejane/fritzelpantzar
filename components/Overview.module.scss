@@ -34,6 +34,11 @@
   flex-direction: row;
   width: 100%;
   background-color: var(--white);
+  pointer-events: none;
+
+  &.ready {
+    pointer-events: all;
+  }
 
   @include mq($until: desktop) {
     flex-direction: column;
