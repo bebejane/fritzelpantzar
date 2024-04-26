@@ -17,7 +17,7 @@ export default function Overview({ overview }: Props) {
 
   const router = useRouter()
   const pathname = usePathname()
-  const [showAbout, setShowAbout, hoverAbout, inOverview, setInOverview, setInIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout, state.inOverview, state.setInOverview, state.setInIntro])
+  const [showAbout, setShowAbout, hoverAbout, inOverview, setInOverview, setInIntro, inIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout, state.inOverview, state.setInOverview, state.setInIntro, state.inIntro])
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [title, setTitle] = useState<string | null>(null)
   const [hideTitle, setHideTitle] = useState<boolean>(false)
@@ -56,13 +56,13 @@ export default function Overview({ overview }: Props) {
     const handleLogoClick = () => ref.current.scrollIntoView({ behavior: 'smooth' })
 
     logo.addEventListener('click', handleLogoClick)
-    logo.style.opacity = inOverview ? '0' : '1'
+    logo.style.opacity = !inIntro ? '0' : '1'
 
     return () => {
       logo.style.opacity = '1'
       logo.removeEventListener('click', handleLogoClick)
     }
-  }, [inOverview])
+  }, [inIntro])
 
   useEffect(() => {
 
