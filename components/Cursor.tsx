@@ -32,7 +32,7 @@ export default function Footer() {
   const ref = useRef<HTMLImageElement>(null);
 
   const initStyle = () => {
-
+    console.log('initStyle')
     setInit(false)
     setReady(false)
 
@@ -51,6 +51,8 @@ export default function Footer() {
       left: bounds.left + (bounds.width * leftDotPercentage),
       transitionTime: `${transitionTime}s`,
     }));
+    setInit(true);
+    console.log('initStyle', 'done')
 
   }
 
@@ -84,8 +86,7 @@ export default function Footer() {
 
   useEffect(() => {
     const init = !style ? false : style.width > 0 && style.height > 0 && style.top > 0 && style.left > 0;
-    setInit(init);
-
+    //setInit(init);
   }, [style])
 
   useEffect(() => {
