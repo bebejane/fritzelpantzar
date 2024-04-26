@@ -1,5 +1,5 @@
 .staff {
-  margin-top: var(--outer-margin);
+  margin-top: calc(0.25 * var(--outer-margin));
   display: flex;
   flex-direction: row;
   list-style: none;

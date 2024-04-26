@@ -6,7 +6,7 @@
 	--background: var(--blue);
 	--foreground: var(--white);
 
-	--line-height: 1.2;
+	--line-height: 1.25;
 	--outer-margin: 2rem;
 	--about-width: 80vw;
 	--logo-size: 52vw;
@@ -18,7 +18,8 @@
 
 	--z-logo: 1000;
 
-	@include mq($until: desktop) {}
+	@include mq($until: desktop) {
+	}
 }
 
 body {
@@ -56,7 +57,8 @@ button {
 	border: 0;
 
 	@include mq($from: desktop) {
-		&:hover {}
+		&:hover {
+		}
 	}
 
 	&[disabled] {
@@ -93,7 +95,8 @@ select {
 	font-family: $nav-font;
 	background-color: var(--background);
 
-	&:focus {}
+	&:focus {
+	}
 
 	&::placeholder {
 		color: var(--orange);
@@ -138,14 +141,19 @@ figure div {
 }
 
 * {
-	cursor: url("/images/cursor.png") 16 16, auto;
+	cursor:
+		url("/images/cursor.png") 16 16,
+		auto;
 }
 
 .cursor-white {
-
-	cursor: url("/images/cursor-white.png") 16 16, auto !important;
+	cursor:
+		url("/images/cursor-white.png") 16 16,
+		auto !important;
 
 	* {
-		cursor: url("/images/cursor-white.png") 16 16, auto !important;
+		cursor:
+			url("/images/cursor-white.png") 16 16,
+			auto !important;
 	}
 }
