@@ -9,7 +9,7 @@ import { useScrollInfo } from "next-dato-utils/hooks";
 
 export default function NavBar() {
 
-  const [showAbout, setShowAbout, setHoverAbout] = useStore(state => [state.showAbout, state.setShowAbout, state.setHoverAbout])
+  const [showAbout, setShowAbout, setHoverAbout, setReady] = useStore(state => [state.showAbout, state.setShowAbout, state.setHoverAbout, state.setReady])
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const router = useRouter();
   const pathname = usePathname();
@@ -18,9 +18,16 @@ export default function NavBar() {
   const [isInOverView, setInOverView] = useState(false);
 
   useEffect(() => {
-    const isInOverView = scrolledPosition >= viewportHeight;
+    const isInOverView = scrolledPosition >= viewportHeight || pathname !== '/';
     setInOverView(isInOverView);
-  }, [scrolledPosition, viewportHeight])
+  }, [scrolledPosition, viewportHeight, pathname])
+
+  useEffect(() => {
+    if (pathname !== '/') {
+      setReady(true)
+    }
+  }, [pathname])
+
 
   const handleClick = () => {
     if (!isHome) {

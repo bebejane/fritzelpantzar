@@ -41,9 +41,9 @@ export default function Overview({ overview }: Props) {
   }, [showAbout, scrolledPosition, viewportHeight])
 
   useEffect(() => {
-    const ready = (scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout ? true : false
+    const ready = ((scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout) ? true : false
     setReady(ready)
-  }, [showAbout, scrolledPosition, viewportHeight])
+  }, [showAbout, scrolledPosition, viewportHeight, pathname])
 
   useEffect(() => {
     const logo = document.getElementById('logo')

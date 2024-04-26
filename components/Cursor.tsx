@@ -99,7 +99,6 @@ export default function Footer() {
       className={cn(s.cursor, init && s.init, ready && s.ready, hidden && s.hidden)}
       src={`/images/cursor-${inOverview ? 'blue' : 'white'}.svg`}
       style={style}
-    //onTransitionEnd={() => setReady(true)}
     />
   );
 }
