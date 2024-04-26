@@ -15,12 +15,13 @@ export default function NavBar() {
   const pathname = usePathname();
   const isHome = pathname === '/';
   const isClose = !isHome || showAbout;
-
   const [isInOverView, setInOverView] = useState(false);
+
   useEffect(() => {
     const isInOverView = scrolledPosition >= viewportHeight;
     setInOverView(isInOverView);
   }, [scrolledPosition, viewportHeight])
+
   const handleClick = () => {
     if (!isHome) {
       router.back();
