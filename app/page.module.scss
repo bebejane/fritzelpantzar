@@ -14,8 +14,24 @@
     cursor: pointer;
 
     img {
-      width: var(--logo-size);
+      height: var(--logo-size);
       cursor: pointer;
+    }
+
+    //filter: invert(1);
+
+    .f {
+      display: none;
+      margin: var(--outer-margin);
+      position: absolute;
+      --left: 26.4vw;
+      --final-left: calc(var(--outer-margin) + 62.9vw);
+      left: var(--left);
+
+      --height: -20vw;
+      transition: 1s all;
+      //transform: translate(65vw, -42vh) rotate(360deg);
+      transform: translate(var(--final-left), var(--height));
     }
   }
 }

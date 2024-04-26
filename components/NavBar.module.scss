@@ -1,13 +1,13 @@
 .navbar {
   position: fixed;
-  top: 0.1rem;
+  top: 0.9vh;
   right: 0;
   margin: var(--outer-margin);
   z-index: var(--z-navbar);
   cursor: pointer;
 
   img {
-    height: 4.3vw;
+    //height: 18vh;
   }
 
   &.inactive {
@@ -20,13 +20,15 @@
 
   &.invert {
     img {
-      filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(2078%) hue-rotate(323deg) brightness(110%) contrast(105%);
+      filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(2078%) hue-rotate(323deg) brightness(110%)
+        contrast(105%);
     }
   }
 
   img {
     display: none;
-    width: 100px;
+    //width: 100px;
+    height: 3.75vw;
 
     &.show {
       display: inline;
