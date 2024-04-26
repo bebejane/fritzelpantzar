@@ -69,7 +69,7 @@ export default function Footer() {
 
   useEffect(() => {
 
-    initStyle();
+    initStyle()
 
     document.addEventListener('mousemove', handleMouse);
     document.addEventListener('mouseleave', handleMouseLeave);

@@ -22,12 +22,16 @@ export default function Overview({ overview }: Props) {
   const [title, setTitle] = useState<string | null>(null)
   const [hideTitle, setHideTitle] = useState<boolean>(false)
   const [endRatio, setEndRatio] = useState<number | null>(null)
+  const [isHome, setIsHome] = useState<boolean>(pathname === '/')
   const ref = useRef<HTMLDivElement>(null)
-  const isHome = pathname === '/';
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    setIsHome(pathname === '/')
+  }, [pathname])
 
   useEffect(() => {
     setInIntro(pathname === '/' && scrolledPosition < viewportHeight)
