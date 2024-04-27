@@ -110,6 +110,8 @@ export default function Footer() {
     setCursorColor(showAbout || inIntro || pathname === '/about' ? 'white' : 'blue')
   }, [pathname, showAbout, inIntro])
 
+  console.log(init, ready, hidden, style)
+
   return (
     <img
       ref={ref}
