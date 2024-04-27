@@ -70,12 +70,14 @@ export default function Footer() {
 
     const handleMouseLeave = () => setHidden(true);
     const handleMouseEnter = () => setHidden(false);
+
     const handleMouse = (e: MouseEvent) => {
       setStyle((s) => ({
         ...s,
         top: e.clientY - (s.height / 2),
         left: e.clientX - (s.width / 2)
       }));
+      setHidden(false)
 
       if (init && !ready)
         return setTimeout(() => setReady(true), transitionTime * 1000);
