@@ -1,21 +1,25 @@
 'use client'
 
-import Link from "next/link";
 import s from './Intro.module.scss'
 import cn from 'classnames'
 import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 import { useScrollInfo } from "next-dato-utils/hooks";
 
+const symbolSpace = '2vw';
+const logoFLeftPerc = 1.057
+const logoPLeftPerc = 1.99
+
 export default function Intro() {
+
   const ref = useRef<HTMLImageElement>(null)
   const f = useRef<HTMLImageElement>(null)
   const p = useRef<HTMLImageElement>(null)
+
   const [logoFStyle, setLogoFStyle] = useState<any | null>(null)
   const [logoPStyle, setLogoPStyle] = useState<any | null>(null)
   const { width, height } = useWindowSize()
   const { scrolledPosition, viewportHeight } = useScrollInfo()
-
 
   useEffect(() => {
     const logo = ref.current
@@ -25,11 +29,6 @@ export default function Intro() {
     if (!logo || !logoF || !logoP) return
 
     const ratio = Math.min(scrolledPosition / viewportHeight, 1)
-    const margin = 20;
-    const space = '2vw';
-    const logoFLeftPerc = 1.057
-    const logoPLeftPerc = 1.99
-
     const bounds = logo.getBoundingClientRect()
 
     const logoFLeftEnd = width - logoF.getBoundingClientRect().width - logoP.getBoundingClientRect().width;
@@ -40,21 +39,20 @@ export default function Intro() {
     const logoPLeft = ((logoPLeftEnd - ((bounds.left * logoPLeftPerc))) * ratio) + (bounds.left * logoPLeftPerc)
 
     setLogoFStyle({
-      top: `calc(${logoFTop}px + calc(${ratio} * var(--outer-margin)))`,
-      left: `calc(${logoFLeft}px - calc(${ratio} * ${space}) - calc(${ratio} * var(--outer-margin)))`,
+      top: `calc(${logoFTop}px + calc(${ratio} * var(--nav-margin)))`,
+      left: `calc(${logoFLeft}px - calc(${ratio} * ${symbolSpace}) - calc(${ratio} * var(--nav-margin)))`,
       transform: `rotate(${ratio * 360}deg)`,
       opacity: ratio > 0.99 ? 0 : 1
     })
 
     setLogoPStyle({
-      top: `calc(${logoPTop}px + calc(${ratio} * var(--outer-margin)))`,
-      left: `calc(${logoPLeft}px - calc(calc(${ratio} * var(--outer-margin)))`,
+      top: `calc(${logoPTop}px + calc(${ratio} * var(--nav-margin)))`,
+      left: `calc(${logoPLeft}px - calc(calc(${ratio} * var(--nav-margin)))`,
       transform: `rotate(${ratio * 360}deg)`,
       opacity: ratio > 0.99 ? 0 : 1
     })
 
   }, [scrolledPosition, viewportHeight, width, height])
-
 
   return (
     <>
