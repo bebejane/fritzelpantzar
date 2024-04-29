@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useWindowSize } from 'react-use'
 import { useStore } from '../lib/store'
 import { usePathname } from 'next/navigation'
+import { set } from 'zod'
 
 const leftDotPercentage = 0.14;
 const cursorSizeDivider = 45
@@ -50,6 +51,7 @@ export default function Footer() {
     if (!logo) {
       setInit(true)
       setReady(true)
+      setHidden(false)
       console.log('initStyle', 'no logo')
       return
     }

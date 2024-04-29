@@ -14,7 +14,9 @@
 	--z-modal: 100;
 	--z-title: 200;
 	--z-about: 250;
+	--z-symbols: 299;
 	--z-navbar: 300;
+
 
 	--z-logo: 1000;
 
@@ -63,8 +65,7 @@ button {
 	border: 0;
 
 	@include mq($from: desktop) {
-		&:hover {
-		}
+		&:hover {}
 	}
 
 	&[disabled] {
@@ -101,8 +102,7 @@ select {
 	font-family: $nav-font;
 	background-color: var(--background);
 
-	&:focus {
-	}
+	&:focus {}
 
 	&::placeholder {
 		color: var(--orange);
