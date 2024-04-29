@@ -50,6 +50,7 @@ export default function Footer() {
     if (!logo) {
       setInit(true)
       setReady(true)
+      setHidden(false)
       console.log('initStyle', 'no logo')
       return
     }
@@ -59,7 +60,9 @@ export default function Footer() {
       top: bounds.top,
       left: bounds.left + (bounds.width * leftDotPercentage),
     }));
-    setInit(true);
+
+    setTimeout(() => setInit(true), 100);
+
     console.log('initStyle', 'done')
   }
 
