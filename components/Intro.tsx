@@ -24,25 +24,27 @@ export default function Intro() {
 
     const ratio = Math.min(scrolledPosition / viewportHeight, 1)
     const margin = 20;
-    const topEnd = margin;
+    const space = '2vw';
+    const logoFLeftPerc = 1.057
+    const logoPLeftPerc = 1.99
+
     const bounds = logo.getBoundingClientRect()
 
-    const logoFLeftPerc = 1.057
-    const logoFLeftEnd = width - logoF.getBoundingClientRect().width - logoP.getBoundingClientRect().width - margin;
-    const logoFTopEnd = margin
-    const logoFTop = (bounds.top * (1 - ratio)) + (logoFTopEnd * ratio)
+    const logoFLeftEnd = width - logoF.getBoundingClientRect().width - logoP.getBoundingClientRect().width;
+    const logoFTop = (bounds.top * (1 - ratio))
     const logoFLeft = ((logoFLeftEnd - ((bounds.left * logoFLeftPerc))) * ratio) + (bounds.left * logoFLeftPerc)
-
-    const logoPLeftPerc = 1.99
-    const logoPLeftEnd = width - logoP.getBoundingClientRect().width - margin;
-    const logoPTopEnd = margin
-    const logoPTop = (bounds.top * (1 - ratio)) + (logoPTopEnd * ratio)
+    const logoPLeftEnd = width - logoP.getBoundingClientRect().width;
+    const logoPTop = (bounds.top * (1 - ratio))
     const logoPLeft = ((logoPLeftEnd - ((bounds.left * logoPLeftPerc))) * ratio) + (bounds.left * logoPLeftPerc)
 
-    logoF.style.top = `${logoFTop}px`
-    logoF.style.left = `${logoFLeft}px`
-    logoP.style.top = `${logoPTop}px`
-    logoP.style.left = `${logoPLeft}px`
+    logoF.style.top = `calc(${logoFTop}px + calc(${ratio} * var(--outer-margin)))`
+    logoF.style.left = `calc(${logoFLeft}px - calc(${ratio} * ${space}) - calc(${ratio} * var(--outer-margin)))`
+    logoF.style.transform = `rotate(${ratio * 360}deg)`
+
+    logoP.style.top = `calc(${logoPTop}px + calc(${ratio} * var(--outer-margin)))`
+    logoP.style.left = `calc(${logoPLeft}px - calc(calc(${ratio} * var(--outer-margin)))`
+
+    logoP.style.transform = `rotate(${ratio * 360}deg)`
 
   }, [scrolledPosition, viewportHeight, width, height])
 
