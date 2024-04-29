@@ -31,11 +31,10 @@ export default async function Page(props: Props) {
       <article className={cn(s.project, props.modal && s.modal)}>
         {!props.modal && <h1>{title}</h1>}
         {gallery.map((block, index) =>
-          index !== 1 ?
-            <Block key={index} data={block} components={Blocks} />
-            :
-            <>
-              <section key={index} className={cn(s.text, "big")}>
+          <>
+            <Block data={block} components={Blocks} />
+            {index === 0 &&
+              <section className={cn(s.text, "big")}>
                 <ul className={s.meta}>
                   {commisioner && <><li><h4>Uppdragsgivare:</h4> {commisioner}</li></>}
                   {year && <><li><h4>År:</h4> {year}</li></>}
@@ -50,7 +49,8 @@ export default async function Page(props: Props) {
                   {credits}
                 </div>
               </section>
-            </>
+            }
+          </>
         )}
       </article>
       <DraftMode url={draftUrl} tag={id} />
