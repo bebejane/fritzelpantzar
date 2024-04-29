@@ -58,7 +58,6 @@ export default function ProjectList({ items, position, project, onHover, ready =
       lastScrollRef.current = scrollTop
     else {
       oppositeRef.current.scrollTop = oppositeRef.current.scrollTop - (scrollTop - lastScrollRef.current)
-
       lastScrollRef.current = (bottom || top) ? target.scrollTop : scrollTop
     }
   }

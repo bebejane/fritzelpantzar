@@ -34,19 +34,20 @@ export default function Intro() {
     const logoFLeftEnd = width - logoF.getBoundingClientRect().width - logoP.getBoundingClientRect().width;
     const logoFTop = (bounds.top * (1 - ratio))
     const logoFLeft = ((logoFLeftEnd - ((bounds.left * logoFLeftPerc))) * ratio) + (bounds.left * logoFLeftPerc)
+
     const logoPLeftEnd = width - logoP.getBoundingClientRect().width;
     const logoPTop = (bounds.top * (1 - ratio))
     const logoPLeft = ((logoPLeftEnd - ((bounds.left * logoPLeftPerc))) * ratio) + (bounds.left * logoPLeftPerc)
 
     setLogoFStyle({
-      top: `calc(${logoFTop}px + calc(${ratio} * var(--nav-margin)))`,
+      top: `calc(${logoFTop}px + calc(${ratio} * var(--nav-margin-top)))`,
       left: `calc(${logoFLeft}px - calc(${ratio} * ${symbolSpace}) - calc(${ratio} * var(--nav-margin)))`,
       transform: `rotate(${ratio * 360}deg)`,
       opacity: ratio > 0.99 ? 0 : 1
     })
 
     setLogoPStyle({
-      top: `calc(${logoPTop}px + calc(${ratio} * var(--nav-margin)))`,
+      top: `calc(${logoPTop}px + calc(${ratio} * var(--nav-margin-top)))`,
       left: `calc(${logoPLeft}px - calc(calc(${ratio} * var(--nav-margin)))`,
       transform: `rotate(${ratio * 360}deg)`,
       opacity: ratio > 0.99 ? 0 : 1
