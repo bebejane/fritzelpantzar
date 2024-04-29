@@ -18,12 +18,15 @@
     padding: var(--outer-margin);
     display: flex;
     flex-direction: column;
+
     .desc {
       width: 100%;
+
       @include mq($from: desktop) {
         columns: 2;
         column-gap: var(--outer-margin);
       }
+
       @include mq($until: desktop) {
         order: -1;
       }
@@ -36,9 +39,11 @@
       list-style: none;
       display: flex;
       justify-content: space-between;
+
       li {
         width: auto;
         padding-right: 1rem;
+
         @include mq($until: desktop) {
           padding-bottom: 0.5em;
         }
@@ -50,5 +55,7 @@
         column-count: 2;
       }
     }
+
+    .credits {}
   }
 }

@@ -31,24 +31,28 @@ export default async function Page(props: Props) {
       <article className={cn(s.project, props.modal && s.modal)}>
         {!props.modal && <h1>{title}</h1>}
         {gallery.map((block, index) =>
-          <Block key={index} data={block} components={Blocks} />
+          index !== 1 ?
+            <Block key={index} data={block} components={Blocks} />
+            :
+            <>
+              <section key={index} className={cn(s.text, "big")}>
+                <ul className={s.meta}>
+                  {commisioner && <><li><h4>Uppdragsgivare:</h4> {commisioner}</li></>}
+                  {year && <><li><h4>År:</h4> {year}</li></>}
+                  {size && <><li><h4>Storlek:</h4> {size}</li></>}
+                  {projectStatus && <><li><h4>Status:</h4> {projectStatus}</li></>}
+                  {program && <><li><h4>Typ:</h4> {program}</li></>}
+                </ul>
+                <div className={s.desc}>
+                  <Content content={description} />
+                </div>
+                <div className={s.credits}>
+                  {credits}
+                </div>
+              </section>
+            </>
         )}
-        <section className={cn(s.text, "big")}>
-          <ul className={s.meta}>
-            {projectStatus && <><li><h4>Status:</h4> {projectStatus}</li></>}
-            {program && <><li><h4>Typ:</h4> {program}</li></>}
-            {size && <><li><h4>Storlek:</h4> {size}</li></>}
-            {commisioner && <><li><h4>Uppdragsgivare:</h4> {commisioner}</li></>}
-            {year && <><li><h4>År:</h4> {year}</li></>}
-          </ul>
-          <div className={s.desc}>
-            <Content content={description} />
-          </div>
-          <div>
-            {credits}
-          </div>
-        </section>
-      </article >
+      </article>
       <DraftMode url={draftUrl} tag={id} />
     </>
   );
