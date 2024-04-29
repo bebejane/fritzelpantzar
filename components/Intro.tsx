@@ -43,14 +43,14 @@ export default function Intro() {
       top: `calc(${logoFTop}px + calc(${ratio} * var(--outer-margin)))`,
       left: `calc(${logoFLeft}px - calc(${ratio} * ${space}) - calc(${ratio} * var(--outer-margin)))`,
       transform: `rotate(${ratio * 360}deg)`,
-      opacity: 1
+      opacity: ratio > 0.99 ? 0 : 1
     })
 
     setLogoPStyle({
       top: `calc(${logoPTop}px + calc(${ratio} * var(--outer-margin)))`,
       left: `calc(${logoPLeft}px - calc(calc(${ratio} * var(--outer-margin)))`,
       transform: `rotate(${ratio * 360}deg)`,
-      opacity: 1
+      opacity: ratio > 0.99 ? 0 : 1
     })
 
   }, [scrolledPosition, viewportHeight, width, height])

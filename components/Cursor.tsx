@@ -5,7 +5,6 @@ import { useState, useEffect, useRef } from 'react'
 import { useWindowSize } from 'react-use'
 import { useStore } from '../lib/store'
 import { usePathname } from 'next/navigation'
-import { set } from 'zod'
 
 const leftDotPercentage = 0.14;
 const cursorSizeDivider = 45
@@ -61,7 +60,9 @@ export default function Footer() {
       top: bounds.top,
       left: bounds.left + (bounds.width * leftDotPercentage),
     }));
-    setInit(true);
+
+    setTimeout(() => setInit(true), 100);
+
     console.log('initStyle', 'done')
   }
 

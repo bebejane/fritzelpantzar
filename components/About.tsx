@@ -2,7 +2,6 @@
 
 import s from './About.module.scss'
 import cn from 'classnames'
-import { Markdown } from 'next-dato-utils/components';
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../lib/store';
 import { Image } from 'react-datocms/image';
