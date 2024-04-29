@@ -35,14 +35,12 @@ export default async function Page(props: Props) {
         )}
         <section className={cn(s.text, "big")}>
           <ul className={s.meta}>
-
-            {commisioner && <><li><h4>Uppdragsgivare:</h4> {commisioner}</li></>}
-            {year && <><li><h4>År:</h4> {year}</li></>}
-            {size && <><li><h4>Storlek:</h4> {size}</li></>}
             {projectStatus && <><li><h4>Status:</h4> {projectStatus}</li></>}
             {program && <><li><h4>Typ:</h4> {program}</li></>}
+            {size && <><li><h4>Storlek:</h4> {size}</li></>}
+            {commisioner && <><li><h4>Uppdragsgivare:</h4> {commisioner}</li></>}
+            {year && <><li><h4>År:</h4> {year}</li></>}
           </ul>
-
           <div className={s.desc}>
             <Content content={description} />
           </div>
