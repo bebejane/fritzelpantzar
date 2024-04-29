@@ -22,7 +22,7 @@
     padding: 0;
   }
 
-  >li {
+  > li {
     @include mq($until: desktop) {
       padding: calc(var(--outer-margin));
     }
@@ -43,7 +43,7 @@
     }
 
     &.unfocused {
-      opacity: 0.4;
+      opacity: 0.8;
     }
 
     a {
@@ -101,7 +101,6 @@
       filter: grayscale(1);
     }
   }
-
 
   &::-webkit-scrollbar {
     display: none;
