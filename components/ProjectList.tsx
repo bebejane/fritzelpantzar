@@ -11,7 +11,7 @@ import { useStore } from '../lib/store';
 export type Props = {
   items: OverviewQuery['overview']['leftColumn'] | OverviewQuery['overview']['rightColumn'];
   position: 'left' | 'right'
-  onHover: (project: ProjectRecord) => void
+  onHover: (project: ProjectRecord, position: 'left' | 'right') => void
   ready: boolean
   project: ProjectRecord | null
 }
@@ -76,7 +76,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
           id={`${position}.${index - items.length}`}
           key={index}
           className={cn(project && block.project?.id !== project?.id && s.unfocused)}
-          onMouseEnter={() => isDesktop && onHover(block.project as ProjectRecord)}
+          onMouseEnter={() => isDesktop && onHover(block.project as ProjectRecord, position)}
         >
           <Block data={block} components={Blocks} />
         </li>

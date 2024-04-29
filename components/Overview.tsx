@@ -21,12 +21,14 @@ export default function Overview({ overview }: Props) {
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [project, setProject] = useState<ProjectRecord | null>(null)
   const [hideTitle, setHideTitle] = useState<boolean>(false)
+  const [titlePosition, setTitlePosition] = useState<'left' | 'right' | null>(null)
   const [endRatio, setEndRatio] = useState<number | null>(null)
   const [isHome, setIsHome] = useState<boolean>(pathname === '/')
   const ref = useRef<HTMLDivElement>(null)
 
-  const handleHover = (project: ProjectRecord) => {
+  const handleHover = (project: ProjectRecord, position: 'left' | 'right') => {
     setProject(project)
+    setTitlePosition(position)
   }
 
   useEffect(() => {
@@ -113,10 +115,11 @@ export default function Overview({ overview }: Props) {
     setInOverview(!showAbout)
   }, [showAbout])
 
+
   return (
     <>
       {!hideTitle &&
-        <h1 className={cn(s.title, (!isHome && inOverview) && s.active)}>
+        <h1 className={cn(s.title, (!isHome && inOverview) && s.active, s[titlePosition])}>
           {hoverAbout ? 'Om oss' : project?.title}
         </h1>
       }
