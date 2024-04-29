@@ -8,6 +8,14 @@
   pointer-events: none;
   transition: all 0.2s ease-in-out;
 
+  &.left {
+    left: 25%;
+  }
+
+  &.right {
+    left: 75%;
+  }
+
   &.hidden {
     display: none;
   }
