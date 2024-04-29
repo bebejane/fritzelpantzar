@@ -24,7 +24,7 @@ export default async function Page(props: Props) {
 
   if (!project) return notFound()
 
-  const { id, title, description, gallery, commisioner, year, size, projectStatus, program } = project
+  const { id, title, description, gallery, commisioner, year, size, projectStatus, program, credits } = project
 
   return (
     <>
@@ -41,9 +41,13 @@ export default async function Page(props: Props) {
             {size && <><li><h4>Storlek:</h4> {size}</li></>}
             {projectStatus && <><li><h4>Status:</h4> {projectStatus}</li></>}
             {program && <><li><h4>Typ:</h4> {program}</li></>}
-
           </ul>
-          <div className={s.desc}><Content content={description} />
+
+          <div className={s.desc}>
+            <Content content={description} />
+          </div>
+          <div>
+            {credits}
           </div>
         </section>
       </article >
