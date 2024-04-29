@@ -7,8 +7,8 @@ import { useWindowSize } from "react-use";
 import { useScrollInfo } from "next-dato-utils/hooks";
 
 const symbolSpace = '2vw';
-const logoFLeftPerc = 1.057
-const logoPLeftPerc = 1.99
+const logoFLeftPerc = 1.062
+const logoPLeftPerc = 1.995
 
 export default function Intro() {
 
