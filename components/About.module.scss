@@ -2,8 +2,10 @@
   color: var(--white);
   background-color: var(--blue);
   padding: var(--outer-margin);
-  padding-left: calc(2 * var(--outer-margin));
-  padding-right: calc(2 * var(--outer-margin));
+  @include mq($from: desktop) {
+    padding-left: calc(2 * var(--outer-margin));
+    padding-right: calc(2 * var(--outer-margin));
+  }
 
   &.modal {
     position: fixed;
@@ -36,7 +38,9 @@
 
     p {
       color: var(--white);
-      width: 75%;
+      @include mq($from: desktop) {
+        width: 75%;
+      }
     }
 
     h3 {
