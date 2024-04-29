@@ -19,11 +19,15 @@ export default function Overview({ overview }: Props) {
   const pathname = usePathname()
   const [showAbout, setShowAbout, hoverAbout, inOverview, setInOverview, setInIntro, inIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout, state.inOverview, state.setInOverview, state.setInIntro, state.inIntro])
   const { scrolledPosition, viewportHeight } = useScrollInfo()
-  const [title, setTitle] = useState<string | null>(null)
+  const [project, setProject] = useState<ProjectRecord | null>(null)
   const [hideTitle, setHideTitle] = useState<boolean>(false)
   const [endRatio, setEndRatio] = useState<number | null>(null)
   const [isHome, setIsHome] = useState<boolean>(pathname === '/')
   const ref = useRef<HTMLDivElement>(null)
+
+  const handleHover = (project: ProjectRecord) => {
+    setProject(project)
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -45,7 +49,7 @@ export default function Overview({ overview }: Props) {
 
   useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
-      setTitle(null)
+      setProject(null)
   }, [showAbout, scrolledPosition, viewportHeight])
 
   useEffect(() => {
@@ -80,7 +84,7 @@ export default function Overview({ overview }: Props) {
       const end = ((target.scrollHeight - (target.scrollTop + target.clientHeight)) - viewportHeight)
 
       if (bottom) {
-        setTitle(null)
+        setProject(null)
         router.back()
       }
       if (end < 0)
@@ -105,36 +109,38 @@ export default function Overview({ overview }: Props) {
   }, [pathname])
 
   useEffect(() => {
-    hoverAbout && setTitle('Om oss')
-  }, [hoverAbout])
-
-  useEffect(() => {
     showAbout ? setHideTitle(true) : setTimeout(() => setHideTitle(false), 300)
     setInOverview(!showAbout)
   }, [showAbout])
 
   return (
     <>
-      {!hideTitle && <h1 className={cn(s.title, (!isHome && inOverview) && s.active)}>{title}</h1>}
+      {!hideTitle &&
+        <h1 className={cn(s.title, (!isHome && inOverview) && s.active)}>
+          {hoverAbout ? 'Om oss' : project?.title}
+        </h1>
+      }
       <div
         id="overview"
         ref={ref}
         className={cn(s.overview, inOverview && s.ready)}
         style={{ opacity: endRatio === null ? undefined : endRatio }}
-        onMouseLeave={() => isHome && setTitle(null)}
+        onMouseLeave={() => isHome && setProject(null)}
         onClick={() => showAbout && setShowAbout(false)}
       >
         <ProjectList
           position='left'
           items={overview.leftColumn}
-          onHover={(title) => setTitle(title)}
+          onHover={handleHover}
           ready={inOverview}
+          project={project}
         />
         <ProjectList
           position='right'
           items={overview.rightColumn}
-          onHover={(title) => setTitle(title)}
+          onHover={handleHover}
           ready={inOverview}
+          project={project}
         />
         {!endRatio && <div className={cn(s.overlay, !isHome && s.active)} />}
       </div>

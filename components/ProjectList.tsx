@@ -11,19 +11,22 @@ import { useStore } from '../lib/store';
 export type Props = {
   items: OverviewQuery['overview']['leftColumn'] | OverviewQuery['overview']['rightColumn'];
   position: 'left' | 'right'
-  onHover: (title: string) => void
+  onHover: (project: ProjectRecord) => void
   ready: boolean
+  project: ProjectRecord | null
 }
 
-export default function ProjectList({ items, position, onHover, ready = false }: Props) {
+export default function ProjectList({ items, position, project, onHover, ready = false }: Props) {
 
-  const vitems = items.concat(items).concat(items)
+
   const ref = useRef<HTMLUListElement>(null)
   const oppositeRef = useRef<HTMLUListElement>(null)
   const lastScrollRef = useRef<number>(null)
   const [hover, setHover] = useState(false)
   const [showAbout] = useStore((state) => [state.showAbout])
   const isDesktop = useIsDesktop()
+
+  const vitems = isDesktop ? items.concat(items).concat(items) : items
 
   useEffect(() => {
     oppositeRef.current = document.getElementById(`projects-${position === 'left' ? 'right' : 'left'}`) as HTMLUListElement
@@ -72,11 +75,12 @@ export default function ProjectList({ items, position, onHover, ready = false }:
         <li
           id={`${position}.${index - items.length}`}
           key={index}
-          onMouseEnter={() => isDesktop && onHover(block.project.title)}
+          className={cn(project && block.project?.id !== project?.id && s.unfocused)}
+          onMouseEnter={() => isDesktop && onHover(block.project as ProjectRecord)}
         >
           <Block data={block} components={Blocks} />
         </li>
       )}
-    </ul >
+    </ul>
   )
 }
