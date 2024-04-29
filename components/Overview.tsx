@@ -115,14 +115,8 @@ export default function Overview({ overview }: Props) {
     setInOverview(!showAbout)
   }, [showAbout])
 
-
   return (
     <>
-      {!hideTitle &&
-        <h1 className={cn(s.title, (!isHome && inOverview) && s.active, s[titlePosition])}>
-          {hoverAbout ? 'Om oss' : project?.title}
-        </h1>
-      }
       <div
         id="overview"
         ref={ref}

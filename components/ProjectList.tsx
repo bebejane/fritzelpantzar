@@ -2,11 +2,11 @@
 
 import s from './ProjectList.module.scss'
 import cn from 'classnames'
-import { Block } from 'next-dato-utils/components';
-import * as Blocks from '@components/blocks';
 import { useEffect, useRef, useState } from 'react';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
 import { useStore } from '../lib/store';
+import { Image } from 'react-datocms';
+import Link from 'next/link';
 
 export type Props = {
   items: OverviewQuery['overview']['leftColumn'] | OverviewQuery['overview']['rightColumn'];
@@ -78,7 +78,18 @@ export default function ProjectList({ items, position, project, onHover, ready =
           className={cn(project && block.project?.id !== project?.id && s.unfocused)}
           onMouseEnter={() => isDesktop && onHover(block.project as ProjectRecord, position)}
         >
-          <Block data={block} components={Blocks} />
+          <Link href={`/projects/${block.project.slug}`} scroll={false} prefetch={true} className={s.project}>
+            <Image
+              data={block.image.responsiveImage}
+              fadeInDuration={0}
+              usePlaceholder={false}
+              priority={true}
+              intersectionMargin="0px 0px 2000px 0px"
+            />
+            <h2 className={cn(s.title, block.project?.id === project?.id && s.show)}>
+              {block.project.title}
+            </h2>
+          </Link>
         </li>
       )}
     </ul>

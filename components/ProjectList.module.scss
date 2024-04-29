@@ -1,4 +1,5 @@
 .projects {
+  position: relative;
   list-style: none;
   background-color: var(--white);
   width: 50%;
@@ -45,6 +46,25 @@
       opacity: 0.4;
     }
 
+    a {
+      position: relative;
+    }
+
+    .title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+
+      &.show {
+        opacity: 1;
+      }
+    }
   }
 
   &:first-of-type {
