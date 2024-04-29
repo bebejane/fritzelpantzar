@@ -5,7 +5,7 @@ h2,
 p,
 nav,
 ul {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: normal;
   line-height: var(--line-height);
   font-family: $body-font, Arial, Helvetica, sans-serif !important;
@@ -45,8 +45,7 @@ h3 {
 }
 
 h4 {
-  display: inline;
-
+  //display: inline;
   font-size: 0.85rem;
 }
 

@@ -34,17 +34,15 @@ export default async function Page(props: Props) {
           <Block key={index} data={block} components={Blocks} />
         )}
         <section className={cn(s.text, "big")}>
-          <table className={s.meta}>
-            <tbody>
-              <tr>
-                {commisioner && <><td><h4>Uppdragsgivare:</h4> {commisioner}</td></>}
-                {year && <><td><h4>År:</h4> {year}</td></>}
-                {size && <><td><h4>Storlek:</h4> {size}</td></>}
-                {projectStatus && <><td><h4>Status:</h4> {projectStatus}</td></>}
-                {program && <><td><h4>Typ:</h4> {program}</td></>}
-              </tr>
-            </tbody>
-          </table>
+          <ul className={s.meta}>
+
+            {commisioner && <><li><h4>Uppdragsgivare:</h4> {commisioner}</li></>}
+            {year && <><li><h4>År:</h4> {year}</li></>}
+            {size && <><li><h4>Storlek:</h4> {size}</li></>}
+            {projectStatus && <><li><h4>Status:</h4> {projectStatus}</li></>}
+            {program && <><li><h4>Typ:</h4> {program}</li></>}
+
+          </ul>
           <div className={s.desc}><Content content={description} />
           </div>
         </section>

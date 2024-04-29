@@ -16,21 +16,38 @@
 
   section.text {
     padding: var(--outer-margin);
-    //display: flex;
+    display: flex;
+    flex-direction: column;
     .desc {
       width: 100%;
-      columns: 2;
-      column-gap: var(--outer-margin);
-      //padding-right: 15%;
+      @include mq($from: desktop) {
+        columns: 2;
+        column-gap: var(--outer-margin);
+      }
+      @include mq($until: desktop) {
+        order: -1;
+      }
     }
 
     .meta {
       //width: 100%;
       padding-top: var(--outer-margin);
       padding-bottom: var(--outer-margin);
-      td {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      li {
         width: auto;
         padding-right: 1rem;
+        @include mq($until: desktop) {
+          padding-bottom: 0.5em;
+        }
+      }
+
+      @include mq($until: desktop) {
+        padding-top: 0;
+        flex-direction: column;
+        column-count: 2;
       }
     }
   }
