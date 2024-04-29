@@ -54,11 +54,15 @@ export default function Intro() {
       left: `calc(${logoPLeft}px - calc(calc(${ratio} * var(--nav-margin)))`,
     })
 
+    logo.style.opacity = !inIntro ? '0' : '1'
+
   }, [scrolledPosition, viewportHeight, width, height, inIntro])
+
+  const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <>
-      <div className={s.intro}>
+      <div className={s.intro} onClick={handleClick}>
         <img id="logo" className={cn(s.logo, !logoFStyle && s.hidden)} src="/images/logo-stripped.svg" alt="Logo" ref={ref} />
       </div>
       <img id="logo-f" className={s.f} style={logoFStyle} src="/images/logo-f.svg" ref={f} />
