@@ -36,7 +36,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
   useEffect(() => {
     if (!isDesktop) return
     ref.current.addEventListener('scroll', handleScroll)
-    return () => ref.current.removeEventListener('scroll', handleScroll)
+    return () => ref.current?.removeEventListener('scroll', handleScroll)
   }, [hover, isDesktop])
 
   const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
