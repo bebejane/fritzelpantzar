@@ -35,7 +35,7 @@
     }
 
     @include mq($from: desktop) {
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
     &:hover {
@@ -43,7 +43,7 @@
     }
 
     &.unfocused {
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
     a {
