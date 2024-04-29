@@ -4,6 +4,7 @@ import { apiQuery } from 'next-dato-utils/api';
 import { DraftMode } from 'next-dato-utils/components';
 import { OverviewDocument } from '../graphql';
 import Overview from '@components/Overview';
+import Intro from '@components/Intro';
 
 export default async function Start() {
 
@@ -14,10 +15,7 @@ export default async function Start() {
   return (
     <>
       <article className={s.article}>
-        <div className={s.logo}>
-          <img id="logo" src="/images/logo-nodot.svg" alt="Logo" />
-          <img id="logoF" className={s.f} src="/images/logo_f.svg" alt="Logo" />
-        </div>
+        <Intro />
         <Overview overview={overview} />
       </article>
       <DraftMode url={draftUrl} tag={overview.id} />
