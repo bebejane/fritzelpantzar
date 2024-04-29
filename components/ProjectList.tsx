@@ -74,7 +74,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
         <li
           id={`${position}.${index - items.length}`}
           key={index}
-          className={cn(project && block.project?.id !== project?.id && s.unfocused)}
+          className={cn(project && block.project?.id !== project?.id && hover && s.unfocused)}
           onMouseEnter={() => isDesktop && onHover(block.project as ProjectRecord, position)}
         >
           <Link href={`/projects/${block.project.slug}`} scroll={false} prefetch={true} className={s.project}>
@@ -85,7 +85,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
               priority={true}
               intersectionMargin="0px 0px 2000px 0px"
             />
-            <h2 className={cn(s.title, block.project?.id === project?.id && s.show)}>
+            <h2 className={cn(s.title, block.project?.id === project?.id && hover && s.show)}>
               {block.project.title}
             </h2>
           </Link>
