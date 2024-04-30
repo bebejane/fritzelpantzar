@@ -3,7 +3,6 @@
   background-color: var(--blue);
   padding: var(--outer-margin);
 
-
   @include mq($from: desktop) {
     padding-left: calc(2 * var(--outer-margin));
     padding-right: calc(2 * var(--outer-margin));
@@ -22,12 +21,11 @@
   }
 
   .content {
-
     width: 100%;
 
     .logo {
       max-width: 100%;
-      width: 80%;
+      height: var(--logo-size);
       margin-bottom: var(--outer-margin);
     }
 
@@ -55,6 +53,4 @@
   &.open {
     transform: translateX(0);
   }
-
-
 }
