@@ -107,7 +107,7 @@ export default function Footer() {
       height: size,
     }));
 
-  }, [width, height])
+  }, [width, height, init, ready])
 
   useEffect(() => {
     setCursorColor(showAbout || inIntro || pathname === '/about' ? 'white' : 'blue')
