@@ -66,25 +66,24 @@ export default function Footer() {
     console.log('initStyle', 'done')
   }
 
+  const handleMouseLeave = () => setHidden(true);
+  const handleMouseEnter = () => setHidden(false);
+  const handleMouse = (e: MouseEvent) => {
+    setStyle((s) => ({
+      ...s,
+      top: e.clientY - (s.height / 2),
+      left: e.clientX - (s.width / 2)
+    }));
+    setHidden(false)
+
+    if (init && !ready)
+      return setTimeout(() => setReady(true), transitionTime * 1000);
+  }
+
   useEffect(() => {
 
     if (!init)
       initStyle()
-
-    const handleMouseLeave = () => setHidden(true);
-    const handleMouseEnter = () => setHidden(false);
-
-    const handleMouse = (e: MouseEvent) => {
-      setStyle((s) => ({
-        ...s,
-        top: e.clientY - (s.height / 2),
-        left: e.clientX - (s.width / 2)
-      }));
-      setHidden(false)
-
-      if (init && !ready)
-        return setTimeout(() => setReady(true), transitionTime * 1000);
-    }
 
     document.addEventListener('mousemove', handleMouse);
     document.addEventListener('mouseleave', handleMouseLeave);
@@ -96,7 +95,6 @@ export default function Footer() {
       document.removeEventListener('mouseenter', handleMouseEnter);
     }
   }, [init, ready])
-
 
   useEffect(() => {
     const logo = document.getElementById('logo') as HTMLImageElement;
@@ -115,6 +113,7 @@ export default function Footer() {
     setCursorColor(showAbout || inIntro || pathname === '/about' ? 'white' : 'blue')
   }, [pathname, showAbout, inIntro])
 
+  console.log('render', { init, ready, hidden, style })
   return (
     <img
       ref={ref}
