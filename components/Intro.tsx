@@ -25,12 +25,13 @@ export default function Intro() {
   const { width, height } = useWindowSize()
   const { scrolledPosition, viewportHeight } = useScrollInfo()
 
-  useEffect(() => {
+  const updateStyles = async () => {
+
     const logo = ref.current
     const logoF = f.current
     const logoP = p.current
 
-    if (!logo || !logoF || !logoP) return
+    if (!logo || !logoF || !logoP) return console.error('Logo not found')
 
     const ratio = Math.min(scrolledPosition / viewportHeight, 1)
     const bounds = logo.getBoundingClientRect()
@@ -57,7 +58,10 @@ export default function Intro() {
     })
 
     logo.style.opacity = !inIntro ? '0' : '1'
+  }
 
+  useEffect(() => {
+    updateStyles()
   }, [scrolledPosition, viewportHeight, width, height, inIntro, pathname])
 
   const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })
