@@ -26,6 +26,7 @@ export default function Intro() {
   const { scrolledPosition, viewportHeight } = useScrollInfo()
 
   const updateStyles = async () => {
+    console.log('updateStyles')
 
     const logo = ref.current
     const logoF = f.current
@@ -65,7 +66,7 @@ export default function Intro() {
   }, [scrolledPosition, viewportHeight, width, height, inIntro, pathname])
 
   const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })
-
+  console.log(logoFStyle)
   return (
     <>
       <div className={s.intro} onClick={handleClick}>
