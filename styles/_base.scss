@@ -43,7 +43,9 @@ html {
 }
 
 * {
-	cursor: none;
+	@include mq($from: desktop) {
+		cursor: none;
+	}
 }
 
 main {

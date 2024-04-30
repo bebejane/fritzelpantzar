@@ -8,21 +8,20 @@
   position: fixed;
   top: 0;
   left: 0;
-  cursor: none;
+
+  @include mq($from: desktop) {
+    cursor: none;
+  }
 
   .logo {
     transition: opacity 0.2s ease-in-out;
     opacity: 1;
     height: var(--logo-size);
 
-
     &.hidden {
       opacity: 0;
     }
   }
-
-
-
 }
 
 .f,

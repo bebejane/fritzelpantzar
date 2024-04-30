@@ -7,6 +7,7 @@ import { useWindowSize } from "react-use";
 import { useScrollInfo } from "next-dato-utils/hooks";
 import { useStore } from '../lib/store';
 import { usePathname } from 'next/navigation';
+import useIsDesktop from '../lib/hooks/useIsDesktop';
 
 const symbolSpace = '2vw';
 const logoFLeftPerc = 1.062
@@ -24,6 +25,7 @@ export default function Intro() {
   const [logoPStyle, setLogoPStyle] = useState<any | null>(null)
   const { width, height } = useWindowSize()
   const { scrolledPosition, viewportHeight } = useScrollInfo()
+  const isDesktop = useIsDesktop()
 
   const updateStyles = async () => {
 
@@ -58,22 +60,30 @@ export default function Intro() {
       left: `calc(${logoPLeft}px - calc(calc(${ratio} * var(--nav-margin)))`,
     })
 
-    logo.style.opacity = !inIntro ? '0' : '1'
+    logo.style.opacity = !inIntro && !isDesktop ? '0' : '1'
   }
 
   useEffect(() => {
     updateStyles()
-  }, [scrolledPosition, viewportHeight, width, height, inIntro, pathname])
+  }, [isDesktop, scrolledPosition, viewportHeight, width, height, inIntro, pathname])
 
   const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <>
       <div className={s.intro} onClick={handleClick}>
-        <img id="logo" className={cn(s.logo, !logoFStyle && s.hidden)} onLoad={updateStyles} src="/images/logo-stripped.svg" alt="Logo" ref={ref} />
+        <img
+          id="logo"
+          className={cn(s.logo, (!logoFStyle && isDesktop) && s.hidden)}
+          onLoad={updateStyles}
+          src={isDesktop ? '/images/logo-stripped.svg' : '/images/logo-stripped-mobile.svg'}
+          alt="Logo"
+          ref={ref}
+        />
       </div>
       <img id="logo-f" className={s.f} style={logoFStyle} src="/images/logo-f.svg" ref={f} />
       <img id="logo-p" className={s.p} style={logoPStyle} src="/images/logo-p.svg" ref={p} />
+
     </>
   );
 }
