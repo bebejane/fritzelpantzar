@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 import { useScrollInfo } from "next-dato-utils/hooks";
 import { useStore } from '../lib/store';
+import { usePathname } from 'next/navigation';
 
 const symbolSpace = '2vw';
 const logoFLeftPerc = 1.062
@@ -17,6 +18,7 @@ export default function Intro() {
   const f = useRef<HTMLImageElement>(null)
   const p = useRef<HTMLImageElement>(null)
 
+  const pathname = usePathname()
   const [inIntro] = useStore((state) => [state.inIntro])
   const [logoFStyle, setLogoFStyle] = useState<any | null>(null)
   const [logoPStyle, setLogoPStyle] = useState<any | null>(null)
@@ -56,7 +58,7 @@ export default function Intro() {
 
     logo.style.opacity = !inIntro ? '0' : '1'
 
-  }, [scrolledPosition, viewportHeight, width, height, inIntro])
+  }, [scrolledPosition, viewportHeight, width, height, inIntro, pathname])
 
   const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })
 
