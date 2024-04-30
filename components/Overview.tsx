@@ -2,7 +2,7 @@
 
 import s from './Overview.module.scss'
 import cn from 'classnames'
-import { use, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useScrollInfo } from 'next-dato-utils/hooks';
 import { awaitElement } from 'next-dato-utils/utils';
@@ -36,11 +36,8 @@ export default function Overview({ overview }: Props) {
   }, [])
 
   useEffect(() => {
-    setIsHome(pathname === '/')
-  }, [pathname])
-
-  useEffect(() => {
     setInIntro(pathname === '/' && scrolledPosition < viewportHeight)
+    setIsHome(pathname === '/')
   }, [pathname, scrolledPosition, viewportHeight])
 
   useEffect(() => {
@@ -58,21 +55,6 @@ export default function Overview({ overview }: Props) {
     const ready = ((scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout) ? true : false
     setInOverview(ready)
   }, [showAbout, scrolledPosition, viewportHeight, pathname])
-
-  useEffect(() => {
-    const logo = document.getElementById('logo')
-    if (!logo) return
-
-    const handleLogoClick = () => ref.current.scrollIntoView({ behavior: 'smooth' })
-
-    logo.addEventListener('click', handleLogoClick)
-    logo.style.opacity = !inIntro ? '0' : '1'
-
-    return () => {
-      logo.style.opacity = '1'
-      logo.removeEventListener('click', handleLogoClick)
-    }
-  }, [inIntro])
 
   useEffect(() => {
 

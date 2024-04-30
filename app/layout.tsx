@@ -28,7 +28,6 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
         </main>
         <NavBar />
         <About data={about} modal={true} />
-        <Footer />
         <Cursor />
       </body>
     </html>

@@ -43,7 +43,7 @@ html {
 }
 
 * {
-	cursor: none !important;
+	cursor: none;
 }
 
 main {
@@ -66,8 +66,7 @@ button {
 	border: 0;
 
 	@include mq($from: desktop) {
-		&:hover {
-		}
+		&:hover {}
 	}
 
 	&[disabled] {
@@ -104,8 +103,7 @@ select {
 	font-family: $nav-font;
 	background-color: var(--background);
 
-	&:focus {
-	}
+	&:focus {}
 
 	&::placeholder {
 		color: var(--orange);

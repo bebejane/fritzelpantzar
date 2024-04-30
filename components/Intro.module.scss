@@ -8,13 +8,13 @@
   position: fixed;
   top: 0;
   left: 0;
-  cursor: pointer;
+  cursor: none;
 
   .logo {
     transition: opacity 0.2s ease-in-out;
     opacity: 1;
     height: var(--logo-size);
-    cursor: pointer;
+
 
     &.hidden {
       opacity: 0;

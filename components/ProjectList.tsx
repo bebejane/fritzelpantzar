@@ -70,26 +70,29 @@ export default function ProjectList({ items, position, project, onHover, ready =
       onMouseLeave={() => isDesktop && setHover(false)}
       ref={ref}
     >
-      {vitems.map((block, index) =>
-        <li
-          id={`${position}.${index - items.length}`}
-          key={index}
-          className={cn(project && block.project?.id !== project?.id && s.unfocused)}
-          onMouseEnter={() => isDesktop && onHover(block.project as ProjectRecord, position)}
-        >
-          <Link href={`/projects/${block.project.slug}`} scroll={false} prefetch={true} className={s.project}>
-            <Image
-              data={block.image.responsiveImage}
-              fadeInDuration={0}
-              usePlaceholder={false}
-              priority={true}
-              intersectionMargin="0px 0px 2000px 0px"
-            />
-            <h2 className={cn(s.title, block.project?.id === project?.id && s.show)}>
-              {block.project.title}
-            </h2>
-          </Link>
-        </li>
+      {vitems.map((block, index) => {
+        const active = project && block.project?.id === project?.id && hover
+        return (
+          <li
+            id={`${position}.${index - items.length}`}
+            key={index}
+            className={cn(!active && s.unfocused)}
+            onMouseEnter={() => isDesktop && onHover(block.project as ProjectRecord, position)}
+          >
+            <Link href={`/projects/${block.project.slug}`} scroll={false} prefetch={true}>
+              <Image
+                data={block.image.responsiveImage}
+                fadeInDuration={0}
+                usePlaceholder={false}
+                priority={true}
+                intersectionMargin="0px 0px 2000px 0px"
+              />
+              <h2 className={cn(s.title, active && s.show)}>
+                {block.project.title}
+              </h2>
+            </Link>
+          </li>)
+      }
       )}
     </ul>
   )
