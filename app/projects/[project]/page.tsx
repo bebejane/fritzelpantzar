@@ -10,6 +10,7 @@ import { Metadata } from "next";
 import { Block } from 'next-dato-utils/components';
 import * as Blocks from '@components/blocks';
 import Content from '@components/Content';
+import React from 'react';
 
 export type Props = {
   params: { project: string },
@@ -24,19 +25,19 @@ export default async function Page(props: Props) {
 
   if (!project) return notFound()
 
-  const { id, title, description, gallery, commisioner, year, size, projectStatus, program, credits } = project
+  const { id, title, summary, description, gallery, commisioner, year, size, projectStatus, program, credits } = project
 
   return (
     <>
       <article className={cn(s.project, props.modal && s.modal)}>
         <h1>{title}</h1>
         {gallery.map((block, index) =>
-          <>
+          <React.Fragment key={index}>
             <Block data={block} components={Blocks} />
             {index === 0 &&
               <section className={cn(s.text)}>
                 <div className={s.left}>
-                  <p className="intro">Intro ska in här</p></div>
+                  <p className="intro">{summary}</p></div>
                 <div className={s.right}>
                   <table className={s.meta}>
                     <tbody>
@@ -54,7 +55,7 @@ export default async function Page(props: Props) {
                 </div >
               </section>
             }
-          </>
+          </React.Fragment>
         )
         }
       </article >

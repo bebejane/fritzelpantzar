@@ -16,6 +16,7 @@ query Project($slug: String!) {
 fragment ProjectFragment on ProjectRecord {
 	id
 	title
+	summary
 	description {
 		blocks
 		links
