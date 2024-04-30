@@ -29,30 +29,35 @@ export default async function Page(props: Props) {
   return (
     <>
       <article className={cn(s.project, props.modal && s.modal)}>
-        {!props.modal && <h1>{title}</h1>}
+        <h1>{title}</h1>
         {gallery.map((block, index) =>
           <>
             <Block data={block} components={Blocks} />
             {index === 0 &&
-              <section className={cn(s.text, "big")}>
-                <ul className={s.meta}>
-                  {commisioner && <><li><h4>Uppdragsgivare:</h4> {commisioner}</li></>}
-                  {year && <><li><h4>År:</h4> {year}</li></>}
-                  {size && <><li><h4>Storlek:</h4> {size}</li></>}
-                  {projectStatus && <><li><h4>Status:</h4> {projectStatus}</li></>}
-                  {program && <><li><h4>Typ:</h4> {program}</li></>}
-                </ul>
-                <div className={s.desc}>
-                  <Content content={description} />
-                </div>
-                <div className={s.credits}>
-                  {credits}
-                </div>
+              <section className={cn(s.text)}>
+                <div className={s.left}>
+                  <p className="intro">Intro ska in här</p></div>
+                <div className={s.right}>
+                  <table className={s.meta}>
+                    <tbody>
+                      {commisioner && <><tr><td><h4>Kund:</h4></td><td> {commisioner}</td></tr></>}
+                      {year && <><tr><td><h4>År:</h4></td><td> {year}</td></tr></>}
+                      {size && <><tr><td><h4>Storlek:</h4></td><td> {size}</td></tr></>}
+                      {projectStatus && <><tr><td><h4>Status:</h4></td><td> {projectStatus}</td></tr></>}
+                      {program && <><tr><td><h4>Typ:</h4></td><td> {program}</td></tr></>}
+                      {credits && <><tr><td><h4>Samarbete:</h4></td><td> {credits}</td></tr></>}
+                    </tbody>
+                  </table>
+                  <div className={s.desc}>
+                    <Content content={description} />
+                  </div>
+                </div >
               </section>
             }
           </>
-        )}
-      </article>
+        )
+        }
+      </article >
       <DraftMode url={draftUrl} tag={id} />
     </>
   );

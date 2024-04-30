@@ -1,14 +1,15 @@
 .project {
   position: relative;
   background-color: var(--white);
-  padding-bottom: 10vh;
+  padding-bottom: calc(2 * var(--outer-margin));
 
   h1 {
     position: fixed;
-    top: 1rem;
-    left: 0;
+    top: 2.5rem;
+    left: var(--nav-margin);
+    line-height: 1;
     display: flex;
-    justify-content: center;
+    //justify-content: center;
     width: 100%;
     color: var(--blue);
     z-index: var(--z-title);
@@ -16,33 +17,48 @@
 
   section.text {
     padding: var(--outer-margin);
+    padding-top: calc(2 * var(--outer-margin));
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .left,
+    .right {
+      @include mq($from: desktop) {
+        width: calc(50% - (0.5 * var(--outer-margin)));
+      }
+    }
+
+    .left p {
+      margin-top: -0.4em;
+      width: 90%;
+      padding-left: var(--outer-margin);
+    }
 
     .desc {
-      width: 100%;
-
-      @include mq($from: desktop) {
-        columns: 2;
-        column-gap: var(--outer-margin);
-      }
-
+      width: 90%;
       @include mq($until: desktop) {
         order: -1;
+      }
+
+      p:last-of-type {
+        margin-bottom: 0;
       }
     }
 
     .meta {
-      //width: 100%;
-      padding-top: var(--outer-margin);
+      width: 90%;
       padding-bottom: var(--outer-margin);
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
+      display: block;
 
-      li {
+      @include mq($from: desktop) {
+        column-count: 2;
+      }
+
+      td {
         width: auto;
         padding-right: 1rem;
+        padding-bottom: 0.2em;
 
         @include mq($until: desktop) {
           padding-bottom: 0.5em;
@@ -56,6 +72,7 @@
       }
     }
 
-    .credits {}
+    .credits {
+    }
   }
 }

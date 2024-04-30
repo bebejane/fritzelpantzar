@@ -32,7 +32,7 @@
       <path class="cls-1" d="M177.2,52.4c0,15-6.4,28.6-16.4,38.1-11.2,10.6-27.4,13.8-46.4,13.8h-6.3v-27.7h9.9c6.7,0,17.9-.4,24.6-7.1,4.3-4.3,6.9-10.4,6.9-17.1s-2.5-12.8-6.9-17.1c-6.8-6.8-18-7.1-24.6-7.1h-9.9V.5h6.3c18.9,0,35.2,3.2,46.4,13.8,10,9.5,16.4,23,16.4,38.1"/>
     </g>
   </g>
-  <rect class="cls-1" x="5" y="38.8" width="169.9" height="26.7" transform="translate(34.5 -35.8) rotate(27.7)"/>
-  <rect class="cls-1" x="12.2" y="67.9" width="44.4" height="26.7" transform="translate(102.6 137.3) rotate(152.3)"/>
-  <rect class="cls-1" x="121.9" y="8.8" width="44.4" height="26.7" transform="translate(282 -25.2) rotate(152.3)"/>
+  <rect class="cls-1" x="111.2" y="-7" width="28" height="118.5" transform="translate(-.3 103.8) rotate(-45)"/>
+  <rect class="cls-1" x="78" y="67.4" width="35.9" height="28" transform="translate(-29.5 91.7) rotate(-45)"/>
+  <rect class="cls-1" x="136.7" y="8.8" width="35.9" height="28" transform="translate(29.2 116) rotate(-45)"/>
 </svg>

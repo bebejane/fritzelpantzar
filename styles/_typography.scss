@@ -17,18 +17,23 @@ ul {
   @include mq($from: wide) {
     font-size: 18px;
   }
+  @include mq($from: very-wide) {
+    font-size: 26px;
+  }
+
   color: var(--blue);
 }
 
 h1,
 h2 {
   letter-spacing: -0.01em;
-  font-size: 6vw;
+  font-size: 5vw;
   font-weight: bold;
 }
 
-h2 {
-  text-align: center;
+h2,
+p.intro {
+  font-size: 1.8rem;
 }
 
 h3,
