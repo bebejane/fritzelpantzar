@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 import { useScrollInfo } from "next-dato-utils/hooks";
 import { useStore } from '../lib/store';
+import { usePathname } from 'next/navigation';
+import useIsDesktop from '../lib/hooks/useIsDesktop';
 
 const symbolSpace = '2vw';
 const logoFLeftPerc = 1.062
@@ -17,18 +19,21 @@ export default function Intro() {
   const f = useRef<HTMLImageElement>(null)
   const p = useRef<HTMLImageElement>(null)
 
+  const pathname = usePathname()
   const [inIntro] = useStore((state) => [state.inIntro])
   const [logoFStyle, setLogoFStyle] = useState<any | null>(null)
   const [logoPStyle, setLogoPStyle] = useState<any | null>(null)
   const { width, height } = useWindowSize()
   const { scrolledPosition, viewportHeight } = useScrollInfo()
+  const isDesktop = useIsDesktop()
 
-  useEffect(() => {
+  const updateStyles = async () => {
+
     const logo = ref.current
     const logoF = f.current
     const logoP = p.current
 
-    if (!logo || !logoF || !logoP) return
+    if (!logo || !logoF || !logoP) return console.error('Logo not found')
 
     const ratio = Math.min(scrolledPosition / viewportHeight, 1)
     const bounds = logo.getBoundingClientRect()
@@ -40,6 +45,7 @@ export default function Intro() {
     const logoPLeftEnd = width - logoP.getBoundingClientRect().width;
     const logoPTop = (bounds.top * (1 - ratio))
     const logoPLeft = ((logoPLeftEnd - ((bounds.left * logoPLeftPerc))) * ratio) + (bounds.left * logoPLeftPerc)
+
     const baseStyle = { transform: `rotate(${ratio * 360}deg)`, opacity: !inIntro ? 0 : 1 }
 
     setLogoFStyle({
@@ -54,19 +60,30 @@ export default function Intro() {
       left: `calc(${logoPLeft}px - calc(calc(${ratio} * var(--nav-margin)))`,
     })
 
-    logo.style.opacity = !inIntro ? '0' : '1'
+    logo.style.opacity = !inIntro && !isDesktop ? '0' : '1'
+  }
 
-  }, [scrolledPosition, viewportHeight, width, height, inIntro])
+  useEffect(() => {
+    updateStyles()
+  }, [isDesktop, scrolledPosition, viewportHeight, width, height, inIntro, pathname])
 
   const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <>
       <div className={s.intro} onClick={handleClick}>
-        <img id="logo" className={cn(s.logo, !logoFStyle && s.hidden)} src="/images/logo-stripped.svg" alt="Logo" ref={ref} />
+        <img
+          id="logo"
+          className={cn(s.logo, (!logoFStyle && isDesktop) && s.hidden)}
+          onLoad={updateStyles}
+          src={isDesktop ? '/images/logo-stripped.svg' : '/images/logo-stripped-mobile.svg'}
+          alt="Logo"
+          ref={ref}
+        />
       </div>
       <img id="logo-f" className={s.f} style={logoFStyle} src="/images/logo-f.svg" ref={f} />
       <img id="logo-p" className={s.p} style={logoPStyle} src="/images/logo-p.svg" ref={p} />
+
     </>
   );
 }

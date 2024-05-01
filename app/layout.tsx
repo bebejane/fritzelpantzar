@@ -5,7 +5,6 @@ import { Metadata } from "next/types";
 import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import React from 'react';
 import NavBar from '@components/NavBar';
-import Footer from '@components/Footer';
 import About from '@components/About';
 import Cursor from '@components/Cursor';
 

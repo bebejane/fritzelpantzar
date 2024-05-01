@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useWindowSize } from 'react-use'
 import { useStore } from '../lib/store'
 import { usePathname } from 'next/navigation'
+import useIsDesktop from '../lib/hooks/useIsDesktop'
 
 const leftDotPercentage = 0.14;
 const cursorSizeDivider = 45
@@ -38,9 +39,9 @@ export default function Footer() {
   const [cursorColor, setCursorColor] = useState<'white' | 'blue'>('white')
   const pathname = usePathname()
   const ref = useRef<HTMLImageElement>(null);
+  const isDesktop = useIsDesktop()
 
   const initStyle = () => {
-    console.log('initStyle')
     setInit(false)
     setReady(false)
 
@@ -51,7 +52,6 @@ export default function Footer() {
       setInit(true)
       setReady(true)
       setHidden(false)
-      console.log('initStyle', 'no logo')
       return
     }
 
@@ -63,7 +63,20 @@ export default function Footer() {
 
     setTimeout(() => setInit(true), 100);
 
-    console.log('initStyle', 'done')
+  }
+
+  const handleMouseLeave = () => setHidden(true);
+  const handleMouseEnter = () => setHidden(false);
+  const handleMouse = (e: MouseEvent) => {
+    setStyle((s) => ({
+      ...s,
+      top: e.clientY - (s.height / 2),
+      left: e.clientX - (s.width / 2)
+    }));
+    setHidden(false)
+
+    if (init && !ready)
+      return setTimeout(() => setReady(true), transitionTime * 1000);
   }
 
   useEffect(() => {
@@ -71,20 +84,6 @@ export default function Footer() {
     if (!init)
       initStyle()
 
-    const handleMouseLeave = () => setHidden(true);
-    const handleMouseEnter = () => setHidden(false);
-
-    const handleMouse = (e: MouseEvent) => {
-      setStyle((s) => ({
-        ...s,
-        top: e.clientY - (s.height / 2),
-        left: e.clientX - (s.width / 2)
-      }));
-      setHidden(false)
-
-      if (init && !ready)
-        return setTimeout(() => setReady(true), transitionTime * 1000);
-    }
 
     document.addEventListener('mousemove', handleMouse);
     document.addEventListener('mouseleave', handleMouseLeave);
@@ -95,8 +94,7 @@ export default function Footer() {
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
     }
-  }, [init, ready])
-
+  }, [isDesktop, init, ready])
 
   useEffect(() => {
     const logo = document.getElementById('logo') as HTMLImageElement;
@@ -109,11 +107,13 @@ export default function Footer() {
       height: size,
     }));
 
-  }, [width, height])
+  }, [width, height, init, ready])
 
   useEffect(() => {
     setCursorColor(showAbout || inIntro || pathname === '/about' ? 'white' : 'blue')
   }, [pathname, showAbout, inIntro])
+
+  if (!isDesktop) return null
 
   return (
     <img
