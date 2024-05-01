@@ -57,7 +57,7 @@
 
       td {
         width: auto;
-        padding-right: 1rem;
+        padding-right: 0.5em;
         padding-bottom: 0.2em;
 
         @include mq($until: desktop) {
