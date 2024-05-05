@@ -4,7 +4,7 @@ import s from './About.module.scss'
 import cn from 'classnames'
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../lib/store';
-import { Image } from 'react-datocms/image';
+import { Image } from 'react-datocms';
 import Content from './Content';
 
 export type Props = {
@@ -27,7 +27,7 @@ export default function About({ data: { image, address, content }, modal }: Prop
         <img className={s.logo} src="/images/logo.svg" alt="Logo" />
         <div className={s.address}>{address}</div>
         {image?.responsiveImage &&
-          <figure><Image data={image.responsiveImage} /></figure>
+          <figure><Image data={image.responsiveImage} usePlaceholder={false} priority={true} /></figure>
         }
         <Content className={cn("big", s.text)} content={content} />
       </div>
