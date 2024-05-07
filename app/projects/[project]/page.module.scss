@@ -21,6 +21,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    position: relative;
 
     .left,
     .right {
@@ -33,6 +34,8 @@
       margin-top: -0.4em;
       width: 90%;
       padding-left: var(--outer-margin);
+      position: sticky;
+      top: calc(2 * var(--outer-margin) + 5vw);
     }
 
     .desc {
