@@ -85,7 +85,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
                 fadeInDuration={0}
                 usePlaceholder={false}
                 priority={true}
-                intersectionMargin="0px 0px 2000px 0px"
+                intersectionMargin="0px 0px 200% 0px"
               />
               <h2 className={cn(s.title, active && s.show)}>
                 {block.project.title}
