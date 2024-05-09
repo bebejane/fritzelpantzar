@@ -29,7 +29,6 @@ const defaultCursorStyle: CursorStyle = {
 
 export default function Footer() {
 
-
   const { width, height } = useWindowSize();
   const [style, setStyle] = useState<CursorStyle>(defaultCursorStyle);
   const [init, setInit] = useState<boolean>(false);
@@ -57,7 +56,7 @@ export default function Footer() {
 
     setStyle((s) => ({
       ...s,
-      top: bounds.top,
+      top: bounds.top - 2,
       left: bounds.left + (bounds.width * leftDotPercentage),
     }));
 
