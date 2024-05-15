@@ -12,12 +12,15 @@ export default function StaffBlock({ data: { people } }: LayoutProps) {
 			{people.map(({ id, image, firstName, lastName, phone, email, title }) =>
 				<li key={id}>
 					<figure>
-						<Image data={image?.responsiveImage} />
+						<Image
+							data={image?.responsiveImage}
+							intersectionMargin="0px 0px 200% 0px"
+						/>
 					</figure>
 					{firstName} {lastName}<br />
-					{title && <span>{title}</span>}<br />
-					{phone && <a href={`tel:${phone}`}>{phone}</a>}<br />
-					{email && <a href={`mailto:${email}`}>{email}</a>}<br />
+					{title && <><span>{title}</span><br /></>}
+					{phone && <><a href={`tel:${phone}`}>{phone}</a><br /></>}
+					{email && <a href={`mailto:${email}`}>{email}</a>}
 				</li>
 			)}
 		</ul>

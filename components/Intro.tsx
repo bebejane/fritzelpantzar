@@ -60,14 +60,12 @@ export default function Intro() {
       left: `calc(${logoPLeft}px - calc(calc(${ratio} * var(--nav-margin)))`,
     })
 
-    logo.style.opacity = !inIntro || !isDesktop ? '0' : '1'
+    logo.style.opacity = !inIntro ? '0' : '1'
   }
 
   useEffect(() => {
     updateStyles()
   }, [isDesktop, scrolledPosition, viewportHeight, width, height, inIntro, pathname])
-
-
 
   const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })
 

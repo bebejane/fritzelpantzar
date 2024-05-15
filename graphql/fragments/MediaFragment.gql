@@ -11,7 +11,7 @@ fragment MediaFragment on FileField {
 	url
 	width
 	responsiveImage(
-		imgixParams: { w: 2000, auto: format }
+		imgixParams: { w: 4000, auto: format }
 		sizes: "(max-width: 46.24em) 100vw, 50vw"
 	) {
 		alt

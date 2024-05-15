@@ -15,14 +15,18 @@ export type Props = {
 export default function About({ data: { image, address, content }, modal }: Props) {
 
   const [showAbout] = useStore(state => [state.showAbout])
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (modal)
       document.querySelector('main').classList.toggle('slided', showAbout)
+    if (showAbout)
+      ref.current.scrollTop = 0
+
   }, [modal, showAbout])
 
   return (
-    <div className={cn(s.about, modal && s.modal, showAbout && s.open, 'cursor-white')}>
+    <div className={cn(s.about, modal && s.modal, showAbout && s.open, 'cursor-white')} ref={ref}>
       <div className={s.content}>
         <img className={s.logo} src="/images/logo.svg" alt="Logo" />
         <div className={s.address}>{address}</div>
