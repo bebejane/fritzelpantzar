@@ -24,6 +24,9 @@
 	@include mq($until: desktop) {
 		--about-width: 100vw;
 		--outer-margin: 1.5rem;
+		--nav-margin: 2.2rem;
+		--nav-margin-top: 1.8rem;
+		--logo-size: 8vw;
 	}
 }
 
@@ -68,7 +71,8 @@ button {
 	border: 0;
 
 	@include mq($from: desktop) {
-		&:hover {}
+		&:hover {
+		}
 	}
 
 	&[disabled] {
@@ -105,7 +109,8 @@ select {
 	font-family: $nav-font;
 	background-color: var(--background);
 
-	&:focus {}
+	&:focus {
+	}
 
 	&::placeholder {
 		color: var(--orange);

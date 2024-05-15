@@ -24,12 +24,15 @@
   }
 
   img {
-    height: 3.75vw;
+    height: 6.75vw;
     position: absolute;
     top: 0;
     right: 0;
     transition: transform 0.2s;
     transition-timing-function: cubic-bezier(0.94, 0.08, 0.76, 0.23);
+    @include mq($from: desktop) {
+      height: 3.75vw;
+    }
   }
 
   .close {

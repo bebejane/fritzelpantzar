@@ -33,7 +33,11 @@ h2 {
 
 h2,
 p.intro {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
+
+  @include mq($from: desktop) {
+    font-size: 1.8rem;
+  }
 }
 
 h3,

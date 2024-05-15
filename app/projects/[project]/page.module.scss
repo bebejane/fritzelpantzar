@@ -19,9 +19,13 @@
     padding: var(--outer-margin);
     padding-top: calc(2 * var(--outer-margin));
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     position: relative;
+
+    @include mq($from: desktop) {
+      flex-direction: row;
+    }
 
     .left,
     .right {
@@ -32,16 +36,20 @@
 
     .left p {
       margin-top: -0.4em;
-      width: 90%;
-      padding-left: var(--outer-margin);
       position: sticky;
       top: calc(2 * var(--outer-margin) + 5vw);
+      @include mq($from: desktop) {
+        width: 90%;
+        padding-left: var(--outer-margin);
+      }
     }
 
     .desc {
-      width: 90%;
       @include mq($until: desktop) {
         order: -1;
+      }
+      @include mq($from: desktop) {
+        width: 90%;
       }
 
       p:last-of-type {
@@ -50,11 +58,11 @@
     }
 
     .meta {
-      width: 90%;
       padding-bottom: var(--outer-margin);
       display: block;
 
       @include mq($from: desktop) {
+        width: 90%;
         column-count: 2;
       }
 
@@ -71,7 +79,7 @@
       @include mq($until: desktop) {
         padding-top: 0;
         flex-direction: column;
-        column-count: 2;
+        //column-count: 2;
       }
     }
 
