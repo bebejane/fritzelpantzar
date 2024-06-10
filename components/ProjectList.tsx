@@ -28,7 +28,8 @@ export default function ProjectList({ items, position, project, onHover, ready =
   const vitems = items.concat(items).concat(items)
 
   useEffect(() => {
-    oppositeRef.current = document.getElementById(`projects-${position}`) as HTMLUListElement
+    const id = ['left', 'right'].includes(position) ? position === 'left' ? 'right' : 'left' : 'center'
+    oppositeRef.current = document.getElementById(`projects-${id}`) as HTMLUListElement
     ref.current.scrollTop = (ref.current.scrollHeight / 3)
   }, [])
 
@@ -68,7 +69,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
     const hover = (e.type === 'mouseenter' || e.type === 'mouseover' || e.type === 'scroll')
     setHover(hover)
   }
-  //console.log('ready', ready, hover)
+
   return (
     <ul
       id={`projects-${position}`}
