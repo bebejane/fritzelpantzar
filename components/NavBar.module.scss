@@ -18,18 +18,18 @@
 
   &.invert {
     img {
-      filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(2078%) hue-rotate(323deg) brightness(110%)
-        contrast(105%);
+      filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(2078%) hue-rotate(323deg) brightness(110%) contrast(105%);
     }
   }
 
   img {
-    height: 6.75vw;
+    height: 4.75vw;
     position: absolute;
     top: 0;
     right: 0;
     transition: transform 0.2s;
     transition-timing-function: cubic-bezier(0.94, 0.08, 0.76, 0.23);
+
     @include mq($from: desktop) {
       height: 3.75vw;
     }

@@ -36,8 +36,16 @@
 
 .f {
   width: 2.15vw;
+
+  @include mq($until: desktop) {
+    width: 2.6vw;
+  }
 }
 
 .p {
   width: 2.47vw;
+
+  @include mq($until: desktop) {
+    width: 3.1vw;
+  }
 }

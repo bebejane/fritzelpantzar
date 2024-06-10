@@ -2,7 +2,7 @@
 
 import s from './Intro.module.scss'
 import cn from 'classnames'
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "react-use";
 import { useScrollInfo } from "next-dato-utils/hooks";
 import { useStore } from '../lib/store';
@@ -10,8 +10,11 @@ import { usePathname } from 'next/navigation';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
 
 const symbolSpace = '2vw';
+const symbolSpaceMobile = '2.55vw'
 const logoFLeftPerc = 1.062
 const logoPLeftPerc = 1.995
+const logoFLeftPercMobile = 1.128
+const logoPLeftPercMobile = 3.04
 
 export default function Intro() {
 
@@ -33,25 +36,29 @@ export default function Intro() {
     const logoF = f.current
     const logoP = p.current
 
-    if (!logo || !logoF || !logoP) return console.error('Logo not found')
+    if (!logo || !logoF || !logoP)
+      return console.error('Logo not found')
 
     const ratio = Math.min(scrolledPosition / viewportHeight, 1)
     const bounds = logo.getBoundingClientRect()
+    const pLeftPerc = isDesktop ? logoPLeftPerc : logoPLeftPercMobile
+    const fLeftPerc = isDesktop ? logoFLeftPerc : logoFLeftPercMobile
+    const sSpace = isDesktop ? symbolSpace : symbolSpaceMobile
 
     const logoFLeftEnd = width - logoF.getBoundingClientRect().width - logoP.getBoundingClientRect().width;
     const logoFTop = (bounds.top * (1 - ratio))
-    const logoFLeft = ((logoFLeftEnd - ((bounds.left * logoFLeftPerc))) * ratio) + (bounds.left * logoFLeftPerc)
+    const logoFLeft = ((logoFLeftEnd - ((bounds.left * fLeftPerc))) * ratio) + (bounds.left * fLeftPerc)
 
     const logoPLeftEnd = width - logoP.getBoundingClientRect().width;
     const logoPTop = (bounds.top * (1 - ratio))
-    const logoPLeft = ((logoPLeftEnd - ((bounds.left * logoPLeftPerc))) * ratio) + (bounds.left * logoPLeftPerc)
+    const logoPLeft = ((logoPLeftEnd - ((bounds.left * pLeftPerc))) * ratio) + (bounds.left * pLeftPerc)
 
     const baseStyle = { transform: `rotate(${ratio * 360}deg)`, opacity: !inIntro ? 0 : 1 }
 
     setLogoFStyle({
       ...baseStyle,
       top: `calc(${logoFTop}px + calc(${ratio} * var(--nav-margin-top)))`,
-      left: `calc(${logoFLeft}px - calc(${ratio} * ${symbolSpace}) - calc(${ratio} * var(--nav-margin)))`,
+      left: `calc(${logoFLeft}px - calc(${ratio} * ${sSpace}) - calc(${ratio} * var(--nav-margin)))`,
     })
 
     setLogoPStyle({
@@ -74,7 +81,7 @@ export default function Intro() {
       <div className={s.intro} onClick={handleClick}>
         <img
           id="logo"
-          className={cn(s.logo, (!logoFStyle && isDesktop) || !inIntro && s.hidden)}
+          className={cn(s.logo, ((!logoFStyle && isDesktop) || !inIntro || !logoPStyle) && s.hidden)}
           onLoad={updateStyles}
           src={isDesktop ? '/images/logo-stripped.svg' : '/images/logo-stripped-mobile.svg'}
           alt="Logo"
