@@ -10,8 +10,8 @@ import Link from 'next/link';
 
 export type Props = {
   items: OverviewQuery['overview']['leftColumn'] | OverviewQuery['overview']['rightColumn'];
-  position: 'left' | 'right'
-  onHover: (project: ProjectRecord, position: 'left' | 'right') => void
+  position: 'left' | 'right' | 'center'
+  onHover: (project: ProjectRecord, position: 'left' | 'right' | 'center') => void
   ready: boolean
   project: ProjectRecord | null
 }
@@ -25,15 +25,15 @@ export default function ProjectList({ items, position, project, onHover, ready =
   const [showAbout, inIntro] = useStore((state) => [state.showAbout, state.inIntro])
   const isDesktop = useIsDesktop()
 
-  const vitems = isDesktop ? items.concat(items).concat(items) : items
+  const vitems = items.concat(items).concat(items)
 
   useEffect(() => {
-    oppositeRef.current = document.getElementById(`projects-${position === 'left' ? 'right' : 'left'}`) as HTMLUListElement
+    oppositeRef.current = document.getElementById(`projects-${position}`) as HTMLUListElement
     ref.current.scrollTop = (ref.current.scrollHeight / 3)
   }, [])
 
   useEffect(() => {
-    if (!isDesktop || inIntro) return
+    if (inIntro) return
     const container = ref.current;
     container.addEventListener('scroll', handleScroll)
     return () => container?.removeEventListener('scroll', handleScroll)
@@ -68,7 +68,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
     const hover = (e.type === 'mouseenter' || e.type === 'mouseover' || e.type === 'scroll')
     setHover(hover)
   }
-
+  //console.log('ready', ready, hover)
   return (
     <ul
       id={`projects-${position}`}

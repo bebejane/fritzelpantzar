@@ -8,6 +8,7 @@ import { useScrollInfo } from 'next-dato-utils/hooks';
 import { awaitElement } from 'next-dato-utils/utils';
 import ProjectList from './ProjectList';
 import { useStore } from '../lib/store';
+import useIsDesktop from '../lib/hooks/useIsDesktop';
 
 export type Props = {
   overview: OverviewQuery['overview'];
@@ -21,12 +22,13 @@ export default function Overview({ overview }: Props) {
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [project, setProject] = useState<ProjectRecord | null>(null)
   const [hideTitle, setHideTitle] = useState<boolean>(false)
-  const [titlePosition, setTitlePosition] = useState<'left' | 'right' | null>(null)
+  const [titlePosition, setTitlePosition] = useState<'left' | 'right' | 'center' | null>(null)
   const [endRatio, setEndRatio] = useState<number | null>(null)
   const [isHome, setIsHome] = useState<boolean>(pathname === '/')
+  const isDesktop = useIsDesktop()
   const ref = useRef<HTMLDivElement>(null)
 
-  const handleHover = (project: ProjectRecord, position: 'left' | 'right') => {
+  const handleHover = (project: ProjectRecord, position: 'left' | 'right' | 'center') => {
     setProject(project)
     setTitlePosition(position)
   }
@@ -107,20 +109,32 @@ export default function Overview({ overview }: Props) {
         onMouseLeave={() => isHome && setProject(null)}
         onClick={() => showAbout && setShowAbout(false)}
       >
-        <ProjectList
-          position='left'
-          items={overview.leftColumn}
-          onHover={handleHover}
-          ready={inOverview}
-          project={project}
-        />
-        <ProjectList
-          position='right'
-          items={overview.rightColumn}
-          onHover={handleHover}
-          ready={inOverview}
-          project={project}
-        />
+        {isDesktop ?
+          <>
+            <ProjectList
+              position='left'
+              items={overview.leftColumn}
+              onHover={handleHover}
+              ready={inOverview}
+              project={project}
+            />
+            <ProjectList
+              position='right'
+              items={overview.rightColumn}
+              onHover={handleHover}
+              ready={inOverview}
+              project={project}
+            />
+          </>
+          :
+          <ProjectList
+            position='center'
+            items={overview.leftColumn.concat(overview.rightColumn)}
+            onHover={handleHover}
+            ready={inOverview}
+            project={project}
+          />
+        }
         {!endRatio && <div className={cn(s.overlay, !isHome && s.active)} />}
       </div>
     </>

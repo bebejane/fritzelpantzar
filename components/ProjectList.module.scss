@@ -4,7 +4,7 @@
   background-color: var(--white);
   width: 50%;
   height: 100vh;
-  overflow-y: hidden;
+  overflow-y: scroll;
   padding-top: calc(var(--outer-margin));
   padding-left: calc(var(--outer-margin));
   padding-right: calc(var(--outer-margin));
@@ -17,12 +17,13 @@
 
   @include mq($until: desktop) {
     width: 100%;
-    height: auto;
-    overflow-y: auto;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: scroll;
     padding: 0;
   }
 
-  > li {
+  >li {
     position: relative;
 
     @include mq($until: desktop) {
@@ -33,7 +34,10 @@
     transition: opacity 0.3s ease-out;
 
     @include mq($until: desktop) {
-      padding-bottom: 0;
+
+      &:not(:last-child) {
+        padding-bottom: 0;
+      }
     }
 
     @include mq($from: desktop) {
@@ -67,8 +71,7 @@
       z-index: 1;
       padding: var(--outer-margin);
 
-      h2 {
-      }
+      h2 {}
 
       &.show {
         opacity: 1;
@@ -87,7 +90,7 @@
   a {
     pointer-events: none;
 
-    & > div {
+    &>div {
       max-width: none !important;
     }
 
@@ -115,9 +118,10 @@
     }
   }
 
+  scrollbar-width: 0;
+
   &::-webkit-scrollbar {
     display: none;
   }
 
-  scrollbar-width: none;
 }
