@@ -41,11 +41,12 @@ export default async function Page(props: Props) {
                 <div className={s.right}>
                   <table className={s.meta}>
                     <tbody>
-                      {commisioner && <><tr><td><h4>Kund:</h4></td><td> {commisioner}</td></tr></>}
-                      {year && <><tr><td><h4>År:</h4></td><td> {year}</td></tr></>}
-                      {size && <><tr><td><h4>Storlek:</h4></td><td> {size}</td></tr></>}
-                      {projectStatus && <><tr><td><h4>Status:</h4></td><td> {projectStatus}</td></tr></>}
+                      <tr><td><h4>Projekt:</h4></td><td> {title}</td></tr>
                       {program && <><tr><td><h4>Typ:</h4></td><td> {program}</td></tr></>}
+                      {projectStatus && <><tr><td><h4>Status:</h4></td><td> {projectStatus}</td></tr></>}
+                      {size && <><tr><td><h4>Storlek:</h4></td><td> {size}</td></tr></>}
+                      {year && <><tr><td><h4>År:</h4></td><td> {year}</td></tr></>}
+                      {commisioner && <><tr><td><h4>Kund:</h4></td><td> {commisioner}</td></tr></>}
                       {credits && <><tr><td><h4>Samarbete:</h4></td><td> {credits}</td></tr></>}
                     </tbody>
                   </table>
