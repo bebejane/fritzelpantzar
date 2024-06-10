@@ -18,12 +18,11 @@ export type Props = {
 
 export default function ProjectList({ items, position, project, onHover, ready = false }: Props) {
 
-
   const ref = useRef<HTMLUListElement>(null)
   const oppositeRef = useRef<HTMLUListElement>(null)
   const lastScrollRef = useRef<number>(null)
   const [hover, setHover] = useState(false)
-  const [showAbout] = useStore((state) => [state.showAbout])
+  const [showAbout, inIntro] = useStore((state) => [state.showAbout, state.inIntro])
   const isDesktop = useIsDesktop()
 
   const vitems = isDesktop ? items.concat(items).concat(items) : items
@@ -34,9 +33,10 @@ export default function ProjectList({ items, position, project, onHover, ready =
   }, [])
 
   useEffect(() => {
-    if (!isDesktop) return
-    ref.current.addEventListener('scroll', handleScroll)
-    return () => ref.current?.removeEventListener('scroll', handleScroll)
+    if (!isDesktop || inIntro) return
+    const container = ref.current;
+    container.addEventListener('scroll', handleScroll)
+    return () => container?.removeEventListener('scroll', handleScroll)
   }, [hover, isDesktop])
 
   const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
@@ -60,14 +60,21 @@ export default function ProjectList({ items, position, project, onHover, ready =
       oppositeRef.current.scrollTop = oppositeRef.current.scrollTop - (scrollTop - lastScrollRef.current)
       lastScrollRef.current = (bottom || top) ? target.scrollTop : scrollTop
     }
+    setHover(true)
+  }
+
+  const handleMouse = (e: React.MouseEvent<HTMLUListElement>) => {
+    if (!isDesktop) return
+    const hover = (e.type === 'mouseenter' || e.type === 'mouseover' || e.type === 'scroll')
+    setHover(hover)
   }
 
   return (
     <ul
       id={`projects-${position}`}
       className={cn(s.projects, ready && s.ready, showAbout && s.inactive)}
-      onMouseEnter={() => isDesktop && setHover(true)}
-      onMouseLeave={() => isDesktop && setHover(false)}
+      onMouseEnter={handleMouse}
+      onMouseLeave={handleMouse}
       ref={ref}
     >
       {vitems.map((block, index) => {
@@ -91,7 +98,8 @@ export default function ProjectList({ items, position, project, onHover, ready =
                 {block.project.title}
               </h2>
             </Link>
-          </li>)
+          </li>
+        )
       }
       )}
     </ul>
