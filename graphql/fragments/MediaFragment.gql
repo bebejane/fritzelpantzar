@@ -12,7 +12,7 @@ fragment MediaFragment on FileField {
 	width
 	responsiveImage(
 		imgixParams: { w: 4000, auto: format }
-		sizes: "(max-width: 46.24em) 100vw, 50vw"
+		sizes: "(max-width: 46.24em) 100vw, 100vw"
 	) {
 		alt
 		aspectRatio
