@@ -26,13 +26,16 @@
     transition: opacity 0.3s ease-out;
 
     @include mq($until: desktop) {
-      &:not(:last-child) {
-        //padding-bottom: 0;
-      }
+      padding-bottom: var(--outer-margin);
     }
 
     @include mq($from: desktop) {
       opacity: 1;
+      padding: calc(var(--outer-margin) / 2);
+
+      &:not(:last-child) {
+        padding-bottom: 0;
+      }
     }
 
     &:hover {
@@ -68,8 +71,10 @@
     }
   }
 
-  &:first-of-type {
-    //padding-right: 0;
+  @include mq($from: desktop) {
+    &:first-of-type {
+      padding-right: 0;
+    }
   }
 
   &:not(:first-of-type) {
