@@ -34,7 +34,7 @@ export default function NavBar() {
     else
       setTimeout(() => setInvert(showAbout), 300);
   }, [showAbout, pathname]);
-
+  console.log(s.close)
   return (
     <nav className={cn(s.navbar, inIntro && s.inactive, isClose && s.closed)}>
       <img
@@ -46,7 +46,9 @@ export default function NavBar() {
         onMouseEnter={() => setHoverAbout(true)}
         onMouseLeave={() => setHoverAbout(false)}
       />
-      <img id="close" src={`/images/close${invert ? '-white' : ''}.svg`} alt="Close" onClick={handleClick} className={s.close} />
+
+      <img src={`/images/close${invert ? '-white' : ''}.svg`} alt="Close" className={s.close} onClick={handleClick} />
+
     </nav>
   );
 }
