@@ -5,7 +5,7 @@ h2,
 p,
 nav,
 ul {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: normal;
   line-height: var(--line-height);
   font-family: $body-font, Arial, Helvetica, sans-serif !important;
@@ -26,8 +26,10 @@ ul {
 
 h1,
 h2 {
-  //letter-spacing: -0.005em;
-  font-size: 5vw;
+  font-size: 7vw;
+  @include mq($from: desktop) {
+    font-size: 5vw;
+  }
   font-weight: bold;
 }
 

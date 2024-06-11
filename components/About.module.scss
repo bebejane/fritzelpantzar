@@ -2,6 +2,7 @@
   color: var(--white);
   background-color: var(--blue);
   padding: var(--outer-margin);
+  padding-bottom: 4rem;
 
   @include mq($from: desktop) {
     padding-left: calc(2 * var(--outer-margin));
@@ -46,7 +47,19 @@
     }
 
     h3 {
-      padding-top: 1rem;
+      padding-top: 2rem;
+    }
+
+    h3 + p {
+      text-indent: 0 !important;
+    }
+
+    p {
+      text-indent: 3rem;
+      margin-bottom: 0;
+      &:first-of-type {
+        text-indent: 0;
+      }
     }
   }
 

@@ -5,7 +5,6 @@
 
   h1 {
     position: absolute;
-    top: 2.5rem;
     left: var(--nav-margin);
     line-height: 1;
     display: flex;
@@ -13,6 +12,10 @@
     width: 100%;
     color: var(--blue);
     z-index: var(--z-title);
+    top: 1.5rem;
+    @include mq($from: desktop) {
+      top: 2.5rem;
+    }
   }
 
   section.text {
