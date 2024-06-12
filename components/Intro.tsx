@@ -39,7 +39,7 @@ export default function Intro() {
     if (!logo || !logoF || !logoP)
       return console.error('Logo not found')
 
-    const ratio = Math.min(scrolledPosition / viewportHeight, 1)
+    const ratio = Math.max(0, Math.min(scrolledPosition / viewportHeight, 1))
     const bounds = logo.getBoundingClientRect()
     const pLeftPerc = isDesktop ? logoPLeftPerc : logoPLeftPercMobile
     const fLeftPerc = isDesktop ? logoFLeftPerc : logoFLeftPercMobile
