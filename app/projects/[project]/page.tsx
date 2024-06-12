@@ -50,7 +50,7 @@ export default async function Page(props: Props) {
                       {credits && <><tr><td><h4>Samarbete:</h4></td><td> {credits}</td></tr></>}
                     </tbody>
                   </table>
-                  <div className={s.desc}>
+                  <div className={cn(s.desc, "big")}>
                     <Content content={description} />
                   </div>
                 </div >
