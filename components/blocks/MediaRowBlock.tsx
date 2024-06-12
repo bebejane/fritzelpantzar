@@ -20,7 +20,11 @@ export default function MediaRowBlock({ data: { mediaAsset } }: LayoutProps) {
 						/>
 					</figure>
 					: asset.video ?
-						<VideoPlayer key={i} data={asset as FileField} className={mediaAsset.length > 1 ? s.multi : s.single} />
+						<VideoPlayer
+							key={i}
+							data={asset as FileField}
+							className={mediaAsset.length > 1 ? s.multi : s.single}
+						/>
 						: null
 			))}
 		</section>
