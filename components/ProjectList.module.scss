@@ -67,8 +67,8 @@
       z-index: 1;
       padding: var(--outer-margin);
 
-      h2 {
-        margin-top: -0.2em;
+      @include mq($from: desktop) {
+        top: -0.2em;
       }
 
       &.show {
