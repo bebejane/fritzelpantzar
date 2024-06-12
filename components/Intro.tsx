@@ -68,6 +68,7 @@ export default function Intro() {
     })
 
     logo.style.opacity = !inIntro ? '0' : '1'
+    console.log(ratio)
   }
 
   useEffect(() => {
