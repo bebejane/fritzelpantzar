@@ -34,11 +34,12 @@ export default function ProjectList({ items, position, project, onHover, ready =
   }, [])
 
   useEffect(() => {
+
     if (inIntro) return
     const container = ref.current;
     container.addEventListener('scroll', handleScroll)
     return () => container?.removeEventListener('scroll', handleScroll)
-  }, [hover, isDesktop])
+  }, [inIntro, hover, isDesktop])
 
   const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
 
