@@ -9,10 +9,11 @@
     line-height: 1;
     display: flex;
     //justify-content: center;
-    width: 100%;
+    //width: 100%;
     color: var(--blue);
     z-index: var(--z-title);
     top: 1.5rem;
+
     @include mq($from: desktop) {
       top: 2.5rem;
     }
@@ -41,6 +42,7 @@
       margin-top: -0.4em;
       position: sticky;
       top: var(--outer-margin);
+
       @include mq($from: desktop) {
         width: 90%;
         padding-left: var(--outer-margin);
@@ -51,6 +53,7 @@
       @include mq($until: desktop) {
         order: -1;
       }
+
       @include mq($from: desktop) {
         width: 90%;
       }
@@ -59,13 +62,14 @@
         padding-top: 1rem;
       }
 
-      h3 + p {
+      h3+p {
         text-indent: 0 !important;
       }
 
       p {
         text-indent: 3rem;
         margin-bottom: 0;
+
         &:first-of-type {
           text-indent: 0;
         }
@@ -93,7 +97,6 @@
       }
     }
 
-    .credits {
-    }
+    .credits {}
   }
 }

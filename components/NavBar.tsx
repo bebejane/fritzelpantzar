@@ -9,7 +9,7 @@ import path from 'path';
 
 export default function NavBar() {
 
-  const [showAbout, setShowAbout, setHoverAbout, inIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.setHoverAbout, state.inIntro])
+  const [showAbout, setShowAbout, setHoverAbout, hoverAbout, inIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.setHoverAbout, state.hoverAbout, state.inIntro])
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname === '/';
@@ -34,22 +34,27 @@ export default function NavBar() {
     else
       setTimeout(() => setInvert(showAbout), 300);
   }, [showAbout, pathname]);
-  console.log(s.close)
+
   return (
-    <nav className={cn(s.navbar, inIntro && s.inactive, isClose && s.closed)}>
-      <img
-        id="menu"
-        src="/images/fp.svg"
-        alt="Menu"
-        onClick={handleClick}
-        className={s.menu}
-        onMouseEnter={() => setHoverAbout(true)}
-        onMouseLeave={() => setHoverAbout(false)}
-      />
+    <>
+      <nav className={cn(s.navbar, inIntro && s.inactive, isClose && s.closed)}>
+        <img
+          id="menu"
+          src="/images/fp.svg"
+          alt="Menu"
+          onClick={handleClick}
+          className={s.menu}
+          onMouseEnter={() => setHoverAbout(true)}
+          onMouseLeave={() => setHoverAbout(false)}
+        />
 
-      <img src={`/images/close${invert ? '-white' : ''}.svg`} alt="Close" className={s.close} onClick={handleClick} />
+        <img src={`/images/close${invert ? '-white' : ''}.svg`} alt="Close" className={s.close} onClick={handleClick} />
 
-    </nav>
+      </nav>
+      <div className={cn(s.tooltip, (hoverAbout && !showAbout) && s.show)}>
+        Om oss & Kontakt
+      </div>
+    </>
   );
 }
 

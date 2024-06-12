@@ -55,4 +55,27 @@
       transition-delay: 0s;
     }
   }
+
+
+}
+
+.tooltip {
+
+  position: fixed;
+  top: 50px;
+  right: 0;
+  margin: var(--nav-margin);
+  margin-top: var(--nav-margin-top);
+  z-index: var(--z-navbar);
+  padding: 0;
+  opacity: 0;
+  white-space: nowrap;
+  color: var(--black);
+  z-index: var(--z-navbar);
+  pointer-events: none;
+
+  &.show {
+    opacity: 1;
+
+  }
 }
