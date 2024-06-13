@@ -52,7 +52,7 @@ export default function NavBar() {
 
       </nav>
       <div className={cn(s.tooltip, (hoverAbout && !showAbout) && s.show)}>
-        Om oss & Kontakt
+        <h2>Info & Kontakt</h2>
       </div>
     </>
   );

@@ -18,7 +18,8 @@
 
   &.invert {
     img {
-      filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(2078%) hue-rotate(323deg) brightness(110%) contrast(105%);
+      filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(2078%) hue-rotate(323deg) brightness(110%)
+        contrast(105%);
     }
   }
 
@@ -55,15 +56,12 @@
       transition-delay: 0s;
     }
   }
-
-
 }
 
 .tooltip {
-
   position: fixed;
-  top: 50px;
-  right: 0;
+  top: 0;
+  right: 8rem;
   margin: var(--nav-margin);
   margin-top: var(--nav-margin-top);
   z-index: var(--z-navbar);
@@ -76,6 +74,5 @@
 
   &.show {
     opacity: 1;
-
   }
 }

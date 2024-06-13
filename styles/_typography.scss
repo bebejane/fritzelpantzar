@@ -27,6 +27,7 @@ ul {
 h1,
 h2 {
   font-size: 7vw;
+  letter-spacing: -0.01em;
   @include mq($from: desktop) {
     font-size: 5vw;
   }
@@ -37,6 +38,7 @@ h2,
 p.intro {
   font-size: 1.4rem;
   font-weight: bold;
+  letter-spacing: -0.01em;
 
   @include mq($from: desktop) {
     font-size: 3rem;
