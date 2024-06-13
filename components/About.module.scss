@@ -2,11 +2,12 @@
   color: var(--white);
   background-color: var(--blue);
   padding: var(--outer-margin);
-  padding-bottom: 4rem;
+  padding-bottom: 10rem;
 
   @include mq($from: desktop) {
     padding-left: calc(2 * var(--outer-margin));
     padding-right: calc(2 * var(--outer-margin));
+    padding-bottom: 4rem;
   }
 
   &.modal {
