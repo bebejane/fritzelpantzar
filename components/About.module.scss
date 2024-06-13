@@ -56,8 +56,11 @@
     }
 
     p {
-      text-indent: 3rem;
+      text-indent: 2rem;
       margin-bottom: 0;
+      @include mq($from: desktop) {
+        text-indent: 3rem;
+      }
       &:first-of-type {
         text-indent: 0;
       }

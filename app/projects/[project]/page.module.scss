@@ -62,13 +62,17 @@
         padding-top: 1rem;
       }
 
-      h3+p {
+      h3 + p {
         text-indent: 0 !important;
       }
 
       p {
-        text-indent: 3rem;
+        text-indent: 2rem;
         margin-bottom: 0;
+
+        @include mq($from: desktop) {
+          text-indent: 3rem;
+        }
 
         &:first-of-type {
           text-indent: 0;
@@ -97,6 +101,7 @@
       }
     }
 
-    .credits {}
+    .credits {
+    }
   }
 }
