@@ -25,8 +25,6 @@ export default async function Page() {
 
 export async function generateMetadata() {
 
-  const { about } = await apiQuery<AboutQuery, AboutQueryVariables>(AboutDocument)
-
   return {
     title: 'About',
   } as Metadata
