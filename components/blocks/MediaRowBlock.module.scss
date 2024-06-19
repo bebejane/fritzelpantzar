@@ -1,6 +1,9 @@
 .mediaRow {
   display: flex;
   justify-content: space-between;
+  @include mq($until: desktop) {
+    flex-wrap: wrap;
+  }
 
   &:not(:first-of-type) {
     padding: var(--outer-margin);
@@ -23,7 +26,12 @@
     }
 
     &.multi {
-      width: calc(50% - (var(--outer-margin) / 2));
+      @include mq($from: desktop) {
+        width: calc(50% - (var(--outer-margin) / 2));
+      }
+      @include mq($until: desktop) {
+        margin-bottom: var(--outer-margin);
+      }
     }
   }
 }
