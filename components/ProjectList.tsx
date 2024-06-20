@@ -83,7 +83,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
         const active = project && block.project?.id === project?.id && hover
         return (
           <li
-            id={`${position}.${index - items.length}`}
+            id={`${position}_${index - items.length}`}
             key={index}
             className={cn(!active && s.unfocused)}
             onMouseEnter={() => isDesktop && onHover(block.project as ProjectRecord, position)}

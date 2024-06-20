@@ -9,13 +9,13 @@ import useIsDesktop from '@lib/hooks/useIsDesktop';
 
 export default function NavBar() {
 
-  const [showAbout, setShowAbout, setHoverAbout, hoverAbout, inIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.setHoverAbout, state.hoverAbout, state.inIntro])
+  const [showAbout, setShowAbout, setHoverAbout, hoverAbout, inOverview] = useStore(state => [state.showAbout, state.setShowAbout, state.setHoverAbout, state.hoverAbout, state.inOverview])
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname === '/';
   const isDesktop = useIsDesktop();
   const isClose = !isHome || showAbout;
-  const [invert, setInvert] = useState(false);
+  const [invert, setInvert] = useState(true);
 
   const handleClick = () => {
 
@@ -39,20 +39,21 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className={cn(s.navbar, inIntro && s.inactive, isClose && s.closed)}>
+      <nav className={cn(s.navbar, (!inOverview && !showAbout) && s.inactive, isClose && s.closed)} key={pathname}>
         <img
           id="menu"
           src="/images/fp.svg"
           alt="Menu"
           onClick={handleClick}
-          className={s.menu}
+          className={cn(s.icon, s.menu)}
           onMouseEnter={() => isDesktop && setHoverAbout(true)}
           onMouseLeave={() => isDesktop && setHoverAbout(false)}
         />
         <img
+          key={`${invert}`}
           src={`/images/close${invert ? '-white' : ''}.svg`}
           alt="Close"
-          className={s.close}
+          className={cn(s.icon, s.close)}
           onClick={handleClick}
         />
       </nav>

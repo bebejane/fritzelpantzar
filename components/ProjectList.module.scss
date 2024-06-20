@@ -86,7 +86,7 @@
   }
 
   a {
-    pointer-events: none;
+    //pointer-events: none;
 
     &>div {
       max-width: none !important;
@@ -101,7 +101,7 @@
     overflow-y: scroll;
 
     a {
-      pointer-events: all;
+      //pointer-events: all;
 
       img {
         opacity: 1 !important;
@@ -120,5 +120,5 @@
     display: none;
   }
 
-  scrollbar-width: none;
+  scrollbar-width: 0;
 }

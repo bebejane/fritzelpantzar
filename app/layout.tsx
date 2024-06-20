@@ -22,12 +22,12 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
     <html lang={'sv'}>
       <body id="root">
         {modal}
-        <main>
-          {children}
-        </main>
         <NavBar />
         <About data={about} modal={true} />
         <Cursor />
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );

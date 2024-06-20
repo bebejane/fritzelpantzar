@@ -6,30 +6,32 @@
   margin-top: var(--nav-margin-top);
   z-index: var(--z-navbar);
   cursor: pointer;
+  //pointer-events: none;
 
   &.inactive {
     pointer-events: none;
     display: none;
 
-    img {
+    .icon {
       pointer-events: none;
     }
   }
 
   &.invert {
-    img {
-      filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(2078%) hue-rotate(323deg) brightness(110%)
-        contrast(105%);
+    .icon {
+      filter: brightness(0) saturate(100%) invert(92%) sepia(4%) saturate(2078%) hue-rotate(323deg) brightness(110%) contrast(105%);
     }
   }
 
-  img {
+  .icon {
     height: 4.75vw;
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 2;
     transition: transform 0.2s;
     transition-timing-function: cubic-bezier(0.94, 0.08, 0.76, 0.23);
+
 
     @include mq($from: desktop) {
       height: 3.75vw;
@@ -37,7 +39,8 @@
   }
 
   .close {
-    transform: rotateY(90deg);
+    transition: opacity 0.2s linear;
+    opacity: 0;
   }
 
   .menu {
@@ -47,8 +50,8 @@
 
   &.closed {
     .close {
-      transform: rotateY(0deg);
-      transition-delay: 0.2s;
+      transition: opacity 0.2s linear;
+      opacity: 1;
     }
 
     .menu {
