@@ -38,7 +38,7 @@ export default function Overview({ overview }: Props) {
   }, [])
 
   useEffect(() => {
-    setInIntro(pathname === '/' && scrolledPosition < viewportHeight)
+    setInIntro(pathname === '/' && scrolledPosition <= viewportHeight)
     setIsHome(pathname === '/')
   }, [pathname, scrolledPosition, viewportHeight])
 
@@ -54,7 +54,7 @@ export default function Overview({ overview }: Props) {
   }, [showAbout, scrolledPosition, viewportHeight])
 
   useEffect(() => {
-    const ready = ((scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout) ? true : false
+    const ready = ((scrolledPosition && scrolledPosition - 1 >= viewportHeight) && !showAbout) ? true : false
     setInOverview(ready)
   }, [showAbout, scrolledPosition, viewportHeight, pathname])
 
@@ -98,6 +98,7 @@ export default function Overview({ overview }: Props) {
     showAbout ? setHideTitle(true) : setTimeout(() => setHideTitle(false), 300)
     setInOverview(!showAbout)
   }, [showAbout])
+
 
   return (
     <>
