@@ -22,7 +22,7 @@ const useStore = create<StoreState>((set) => ({
   showAbout: false,
   hoverAbout: false,
   inOverview: false,
-  inIntro: false,
+  inIntro: true,
   setInIntro: (inIntro: boolean) => {
     set((state) => ({ inIntro }))
   },

@@ -19,7 +19,7 @@ export default function Overview({ overview }: Props) {
   const router = useRouter()
   const pathname = usePathname()
   const [showAbout, setShowAbout, hoverAbout, inOverview, setInOverview, setInIntro, inIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout, state.inOverview, state.setInOverview, state.setInIntro, state.inIntro])
-  const { scrolledPosition, viewportHeight } = useScrollInfo()
+  const { scrolledPosition, viewportHeight, isScrolling } = useScrollInfo()
   const [project, setProject] = useState<ProjectRecord | null>(null)
   const [hideTitle, setHideTitle] = useState<boolean>(false)
   const [titlePosition, setTitlePosition] = useState<'left' | 'right' | 'center' | null>(null)
@@ -41,7 +41,7 @@ export default function Overview({ overview }: Props) {
 
     setInIntro(pathname === '/' && (scrolledPosition < viewportHeight))
     setIsHome(pathname === '/')
-  }, [pathname, scrolledPosition, viewportHeight])
+  }, [pathname, scrolledPosition, viewportHeight, isScrolling])
 
   useEffect(() => {
     document.body.style.overflow = showAbout ? 'hidden' : 'auto'
@@ -52,12 +52,12 @@ export default function Overview({ overview }: Props) {
   useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
       setProject(null)
-  }, [showAbout, scrolledPosition, viewportHeight])
+  }, [showAbout, scrolledPosition, viewportHeight, isScrolling])
 
   useEffect(() => {
     const ready = ((scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout) ? true : false
     setInOverview(ready)
-  }, [showAbout, scrolledPosition, viewportHeight, pathname])
+  }, [showAbout, scrolledPosition, viewportHeight, pathname, isScrolling])
 
   useEffect(() => {
 
@@ -97,8 +97,10 @@ export default function Overview({ overview }: Props) {
 
   useEffect(() => {
     showAbout ? setHideTitle(true) : setTimeout(() => setHideTitle(false), 300)
-    setInOverview(!showAbout)
+    //setInOverview(!showAbout)
   }, [showAbout])
+
+  //console.log(inOverview, inIntro, viewportHeight, scrolledPosition)
 
   return (
     <>

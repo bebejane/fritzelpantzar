@@ -27,7 +27,7 @@ export default function Intro() {
   const [logoFStyle, setLogoFStyle] = useState<any | null>(null)
   const [logoPStyle, setLogoPStyle] = useState<any | null>(null)
   const { width, height } = useWindowSize()
-  const { scrolledPosition, viewportHeight } = useScrollInfo()
+  const { scrolledPosition, viewportHeight, isScrolling } = useScrollInfo()
   const isDesktop = useIsDesktop()
 
   const updateStyles = async () => {
@@ -72,7 +72,7 @@ export default function Intro() {
 
   useEffect(() => {
     updateStyles()
-  }, [isDesktop, scrolledPosition, viewportHeight, width, height, inIntro, pathname])
+  }, [isDesktop, scrolledPosition, viewportHeight, width, height, inIntro, pathname, isScrolling])
 
   const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })
 
