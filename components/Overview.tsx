@@ -9,6 +9,7 @@ import { awaitElement } from 'next-dato-utils/utils';
 import ProjectList from './ProjectList';
 import { useStore } from '../lib/store';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
+import { useWindowSize } from 'react-use';
 
 export type Props = {
   overview: OverviewQuery['overview'];
@@ -20,6 +21,7 @@ export default function Overview({ overview }: Props) {
   const pathname = usePathname()
   const [showAbout, setShowAbout, hoverAbout, inOverview, setInOverview, setInIntro, inIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout, state.inOverview, state.setInOverview, state.setInIntro, state.inIntro])
   const { scrolledPosition, viewportHeight, isScrolling } = useScrollInfo()
+  const { width, height } = useWindowSize()
   const [project, setProject] = useState<ProjectRecord | null>(null)
   const [hideTitle, setHideTitle] = useState<boolean>(false)
   const [titlePosition, setTitlePosition] = useState<'left' | 'right' | 'center' | null>(null)
@@ -52,12 +54,12 @@ export default function Overview({ overview }: Props) {
   useEffect(() => {
     if (scrolledPosition < (viewportHeight / 2))
       setProject(null)
-  }, [showAbout, scrolledPosition, viewportHeight, isScrolling])
+  }, [showAbout, scrolledPosition, viewportHeight, isScrolling, width, height])
 
   useEffect(() => {
     const ready = ((scrolledPosition && scrolledPosition >= viewportHeight) && !showAbout) ? true : false
     setInOverview(ready)
-  }, [showAbout, scrolledPosition, viewportHeight, pathname, isScrolling])
+  }, [showAbout, scrolledPosition, viewportHeight, pathname, isScrolling, width, height])
 
   useEffect(() => {
 
@@ -97,10 +99,8 @@ export default function Overview({ overview }: Props) {
 
   useEffect(() => {
     showAbout ? setHideTitle(true) : setTimeout(() => setHideTitle(false), 300)
-    //setInOverview(!showAbout)
+    setInOverview(!showAbout)
   }, [showAbout])
-
-  //console.log(inOverview, inIntro, viewportHeight, scrolledPosition)
 
   return (
     <>
