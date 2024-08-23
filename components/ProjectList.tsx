@@ -43,7 +43,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
 
   const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
 
-    if (!hover) return console.log('block scroll: not hover')
+
 
     const target = ref.current
     const { scrollTop, scrollHeight } = target
@@ -56,7 +56,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
     else if (top)
       target.scrollTop = scrollTop + originalScrollHeight
 
-
+    if (!hover) return console.log('block handleScroll: not hover', position)
 
     if (lastScrollRef.current === null)
       lastScrollRef.current = scrollTop
