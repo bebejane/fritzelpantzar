@@ -55,7 +55,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
     else if (top)
       target.scrollTop = scrollTop + originalScrollHeight
 
-    if (!hover) return
+    if (!hover) return console.log('block scroll: not hover')
 
     if (lastScrollRef.current === null)
       lastScrollRef.current = scrollTop
