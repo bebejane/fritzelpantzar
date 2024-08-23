@@ -36,9 +36,11 @@ export default function ProjectList({ items, position, project, onHover, ready =
   useEffect(() => {
 
     if (inIntro) return console.log('block scroll: inIntro')
-
     const container = ref.current;
     container.addEventListener('scroll', handleScroll)
+
+    setHover(!inIntro)
+
     return () => container?.removeEventListener('scroll', handleScroll)
   }, [inIntro, hover, isDesktop])
 
