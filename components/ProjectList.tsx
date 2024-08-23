@@ -71,7 +71,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
     console.log(e.type)
     if (!isDesktop) return
     //const hover = (e.type === 'mouseenter' | e.type === 'scroll')
-    setHover(e.type === 'mouseenter')
+    setHover(e.type === 'mouseenter' || e.type === 'mousemove' || e.type === 'scroll')
   }
 
   return (
@@ -80,6 +80,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
       className={cn(s.projects, ready && s.ready, showAbout && s.inactive)}
       onMouseEnter={handleMouse}
       onMouseLeave={handleMouse}
+      onMouseMove={handleMouse}
       ref={ref}
     >
       {vitems.map((block, index) => {
