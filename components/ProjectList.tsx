@@ -38,13 +38,12 @@ export default function ProjectList({ items, position, project, onHover, ready =
     if (inIntro) return console.log('block scroll: inIntro')
     const container = ref.current;
     container.addEventListener('scroll', handleScroll)
-
-    setHover(!inIntro)
-
     return () => container?.removeEventListener('scroll', handleScroll)
   }, [inIntro, hover, isDesktop])
 
   const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
+
+    if (!hover) return console.log('block scroll: not hover')
 
     const target = ref.current
     const { scrollTop, scrollHeight } = target
@@ -57,7 +56,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
     else if (top)
       target.scrollTop = scrollTop + originalScrollHeight
 
-    if (!hover) return console.log('block scroll: not hover')
+
 
     if (lastScrollRef.current === null)
       lastScrollRef.current = scrollTop
@@ -69,9 +68,10 @@ export default function ProjectList({ items, position, project, onHover, ready =
   }
 
   const handleMouse = (e: React.MouseEvent<HTMLUListElement>) => {
+    console.log(e.type)
     if (!isDesktop) return
-    const hover = (e.type === 'mouseenter' || e.type === 'mouseover' || e.type === 'scroll')
-    setHover(hover)
+    //const hover = (e.type === 'mouseenter' | e.type === 'scroll')
+    setHover(e.type === 'mouseenter')
   }
 
   return (
