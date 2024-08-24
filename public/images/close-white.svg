@@ -1,42 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 177.2 104.3">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: #fffceb;
-      }
-
-      .cls-1, .cls-2, .cls-3 {
-        stroke-width: 0px;
-      }
-
-      .cls-2 {
-        fill: #0026ff;
-      }
-
-      .cls-3 {
-        fill: #fff;
-      }
-
-      .cls-4 {
-        display: none;
-      }
-    </style>
-  </defs>
-  <g id="Layer_1_copy" data-name="Layer 1 copy" class="cls-4">
-    <rect class="cls-2" x="53.9" y="1.1" width="27.8" height="59.7" transform="translate(-2 57) rotate(-45)"/>
-    <rect class="cls-2" x="37.9" y="59.4" width="59.7" height="27.8" transform="translate(-32 69.4) rotate(-45)"/>
-    <path class="cls-2" d="M71.3,52.4c0,15,6.4,28.6,16.4,38.1,11.2,10.6,27.4,13.8,46.4,13.8h6.3v-27.7h-9.9c-6.7,0-17.9-.4-24.6-7.1s-6.9-10.4-6.9-17.1,2.5-12.8,6.9-17.1c6.8-6.8,18-7.1,24.6-7.1h9.9V.5h-6.3c-18.9,0-35.2,3.2-46.4,13.8-10,9.5-16.4,23-16.4,38.1"/>
-  </g>
-  <g id="Layer_2" data-name="Layer 2" class="cls-4">
-    <rect class="cls-3" y=".5" width="177.2" height="103.8"/>
-    <g>
-      <rect class="cls-2" y="0" width="59.7" height="27.8"/>
-      <rect class="cls-2" y="76.1" width="59.7" height="27.8"/>
-      <path class="cls-2" d="M177.2,52.4c0,15-6.4,28.6-16.4,38.1-11.2,10.6-27.4,13.8-46.4,13.8h-6.3v-27.7h9.9c6.7,0,17.9-.4,24.6-7.1,4.3-4.3,6.9-10.4,6.9-17.1s-2.5-12.8-6.9-17.1c-6.8-6.8-18-7.1-24.6-7.1h-9.9V.5h6.3c18.9,0,35.2,3.2,46.4,13.8,10,9.5,16.4,23,16.4,38.1"/>
+<svg width="104px" height="105px" viewBox="0 0 104 105" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Untitled</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="close-white" transform="translate(-36.1985, 0.0072)" fill="#FFFCEB" fill-rule="nonzero">
+            <rect id="Rectangle" transform="translate(88.3746, 52.2094) rotate(-45) translate(-88.3746, -52.2094)" x="74.3746085" y="-7.04063312" width="28" height="118.5"></rect>
+            <rect id="Rectangle" transform="translate(59.1332, 81.3337) rotate(-45) translate(-59.1332, -81.3337)" x="41.1831872" y="67.3336922" width="35.9" height="28"></rect>
+            <rect id="Rectangle" transform="translate(117.8039, 22.6901) rotate(-45) translate(-117.8039, -22.6901)" x="99.8538978" y="8.69006679" width="35.9" height="28"></rect>
+        </g>
     </g>
-  </g>
-  <rect class="cls-1" x="111.2" y="-7" width="28" height="118.5" transform="translate(-.3 103.8) rotate(-45)"/>
-  <rect class="cls-1" x="78" y="67.3" width="35.9" height="28" transform="translate(-29.4 91.7) rotate(-45)"/>
-  <rect class="cls-1" x="136.7" y="8.7" width="35.9" height="28" transform="translate(29.2 116) rotate(-45)"/>
 </svg>

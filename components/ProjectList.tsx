@@ -43,8 +43,6 @@ export default function ProjectList({ items, position, project, onHover, ready =
 
   const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
 
-
-
     const target = ref.current
     const { scrollTop, scrollHeight } = target
     const originalScrollHeight = (scrollHeight / 3)
@@ -56,7 +54,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
     else if (top)
       target.scrollTop = scrollTop + originalScrollHeight
 
-    if (!hover) return console.log('block handleScroll: not hover', position)
+    if (!hover) return
 
     if (lastScrollRef.current === null)
       lastScrollRef.current = scrollTop
@@ -67,20 +65,19 @@ export default function ProjectList({ items, position, project, onHover, ready =
     setHover(true)
   }
 
-  const handleMouse = (e: React.MouseEvent<HTMLUListElement>) => {
-    console.log(e.type)
+  const handleMouseOver = (e: React.MouseEvent<HTMLUListElement>) => {
     if (!isDesktop) return
-    //const hover = (e.type === 'mouseenter' | e.type === 'scroll')
-    setHover(e.type === 'mouseenter' || e.type === 'mousemove' || e.type === 'scroll')
+    setHover(true)
   }
 
   return (
     <ul
       id={`projects-${position}`}
       className={cn(s.projects, ready && s.ready, showAbout && s.inactive)}
-      onMouseEnter={handleMouse}
-      onMouseLeave={handleMouse}
-      onMouseMove={handleMouse}
+      onMouseEnter={handleMouseOver}
+      onMouseMove={handleMouseOver}
+      onWheel={handleMouseOver}
+      onMouseLeave={() => setHover(false)}
       ref={ref}
     >
       {vitems.map((block, index) => {

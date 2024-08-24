@@ -23,8 +23,8 @@
     }
   }
 
-  .icon {
-    height: 4.75vw;
+  button {
+    all: unset;
     position: absolute;
     top: 0;
     right: 0;
@@ -32,11 +32,22 @@
     transition: transform 0.2s;
     transition-timing-function: cubic-bezier(0.94, 0.08, 0.76, 0.23);
 
+    @include mq($until: desktop) {
+      padding: 15px;
+      top: calc(-0.5 * var(--nav-margin-top));
+      right: calc(-0.5 * var(--nav-margin));
+    }
 
-    @include mq($from: desktop) {
-      height: 3.75vw;
+    .icon {
+      height: 4.75vw;
+
+      @include mq($from: desktop) {
+        height: 3.75vw;
+      }
+
     }
   }
+
 
   .close {
     transition: opacity 0.2s linear;

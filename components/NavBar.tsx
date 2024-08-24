@@ -40,22 +40,26 @@ export default function NavBar() {
   return (
     <>
       <nav className={cn(s.navbar, (!inOverview && !showAbout) && s.inactive, isClose && s.closed)} key={pathname}>
-        <img
-          id="menu"
-          src="/images/fp.svg"
-          alt="Menu"
-          onClick={handleClick}
-          className={cn(s.icon, s.menu)}
+        <button
           onMouseEnter={() => isDesktop && setHoverAbout(true)}
           onMouseLeave={() => isDesktop && setHoverAbout(false)}
-        />
-        <img
-          key={`${invert}`}
-          src={`/images/close${invert ? '-white' : ''}.svg`}
-          alt="Close"
-          className={cn(s.icon, s.close)}
           onClick={handleClick}
-        />
+        >
+          <img
+            id="menu"
+            src="/images/fp.svg"
+            alt="Menu"
+            className={cn(s.icon, s.menu)}
+          />
+        </button>
+        <button onClick={handleClick}>
+          <img
+            key={`${invert}`}
+            src={`/images/close${invert ? '-white' : ''}.svg`}
+            alt="Close"
+            className={cn(s.icon, s.close)}
+          />
+        </button>
       </nav>
       <div className={cn(s.tooltip, (hoverAbout && !showAbout) && s.show)}>
         <h2>Info & Kontakt</h2>
