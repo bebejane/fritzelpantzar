@@ -41,9 +41,9 @@ export default function Overview({ overview }: Props) {
 
   useEffect(() => {
 
-    setInIntro(pathname === '/' && (scrolledPosition < viewportHeight))
+    setInIntro(pathname === '/' && (scrolledPosition < height))
     setIsHome(pathname === '/')
-  }, [pathname, scrolledPosition, viewportHeight, isScrolling])
+  }, [pathname, scrolledPosition, viewportHeight, isScrolling, width, height])
 
   useEffect(() => {
     document.body.style.overflow = showAbout ? 'hidden' : 'auto'
@@ -101,6 +101,7 @@ export default function Overview({ overview }: Props) {
     showAbout ? setHideTitle(true) : setTimeout(() => setHideTitle(false), 300)
     setInOverview(!showAbout)
   }, [showAbout])
+
 
   return (
     <>
