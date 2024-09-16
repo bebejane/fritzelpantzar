@@ -23,8 +23,6 @@ export default function Overview({ overview }: Props) {
   const { scrolledPosition, viewportHeight, isScrolling } = useScrollInfo()
   const { width, height } = useWindowSize()
   const [project, setProject] = useState<ProjectRecord | null>(null)
-  const [hideTitle, setHideTitle] = useState<boolean>(false)
-  const [titlePosition, setTitlePosition] = useState<'left' | 'right' | 'center' | null>(null)
   const [endRatio, setEndRatio] = useState<number | null>(null)
   const [isHome, setIsHome] = useState<boolean>(pathname === '/')
   const isDesktop = useIsDesktop()
@@ -32,7 +30,6 @@ export default function Overview({ overview }: Props) {
 
   const handleHover = (project: ProjectRecord, position: 'left' | 'right' | 'center') => {
     setProject(project)
-    setTitlePosition(position)
   }
 
   useEffect(() => {
@@ -97,10 +94,8 @@ export default function Overview({ overview }: Props) {
   }, [pathname])
 
   useEffect(() => {
-    showAbout ? setHideTitle(true) : setTimeout(() => setHideTitle(false), 300)
     setInOverview(!showAbout)
   }, [showAbout])
-
 
   return (
     <>

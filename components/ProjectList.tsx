@@ -2,7 +2,7 @@
 
 import s from './ProjectList.module.scss'
 import cn from 'classnames'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
 import { useStore } from '../lib/store';
 import { Image } from 'react-datocms';
@@ -21,10 +21,9 @@ export default function ProjectList({ items, position, project, onHover, ready =
   const ref = useRef<HTMLUListElement>(null)
   const oppositeRef = useRef<HTMLUListElement>(null)
   const lastScrollRef = useRef<number>(null)
-  const [hover, setHover] = useState(false)
-  const [showAbout, inIntro] = useStore((state) => [state.showAbout, state.inIntro])
+  const [showAbout, inIntro, hoverPosition, setHoverPosition] = useStore((state) => [state.showAbout, state.inIntro, state.hoverPosition, state.setHoverPosition])
   const isDesktop = useIsDesktop()
-
+  const isHovering = hoverPosition === position
   const vitems = items.concat(items).concat(items)
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
     const container = ref.current;
     container.addEventListener('scroll', handleScroll)
     return () => container?.removeEventListener('scroll', handleScroll)
-  }, [inIntro, hover, isDesktop])
+  }, [inIntro, isHovering, isDesktop])
 
   const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
 
@@ -56,7 +55,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
     else if (top)
       target.scrollTop = scrollTop + originalScrollHeight
 
-    if (!hover) return
+    if (!isHovering) return
 
     if (lastScrollRef.current === null)
       lastScrollRef.current = scrollTop
@@ -64,19 +63,12 @@ export default function ProjectList({ items, position, project, onHover, ready =
       oppositeRef.current.scrollTop = oppositeRef.current.scrollTop - (scrollTop - lastScrollRef.current)
       lastScrollRef.current = (bottom || top) ? target.scrollTop : scrollTop
     }
-    setHover(true)
   }
 
   const handleMouseOver = (e: React.MouseEvent<HTMLUListElement>) => {
-    const isOppositeHover = oppositeRef.current.getAttribute('data-hover') === 'true';
-    if (isOppositeHover) return setHover(false)
     if (!isDesktop || !ready) return
-    setHover(true)
+    setHoverPosition(position)
   }
-
-  useEffect(() => {
-    ref.current.setAttribute('data-hover', hover ? 'true' : 'false')
-  }, [hover, position])
 
   return (
     <ul
@@ -85,11 +77,11 @@ export default function ProjectList({ items, position, project, onHover, ready =
       onMouseEnter={handleMouseOver}
       onMouseMove={handleMouseOver}
       onWheel={handleMouseOver}
-      onMouseLeave={() => setHover(false)}
+      onMouseLeave={() => setHoverPosition(null)}
       ref={ref}
     >
       {vitems.map((block, index) => {
-        const active = project && block.project?.id === project?.id && hover
+        const active = project && block.project?.id === project?.id && isHovering
         return (
           <li
             id={`${position}_${index - items.length}`}

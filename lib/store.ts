@@ -6,6 +6,7 @@ export interface StoreState {
   showMobileMenu: boolean,
   showAbout: boolean,
   hoverAbout: boolean,
+  hoverPosition: 'left' | 'right' | 'center' | null,
   inOverview: boolean,
   inIntro: boolean,
   setInIntro: (inIntro: boolean) => void,
@@ -13,7 +14,8 @@ export interface StoreState {
   setHoverAbout: (hoverAbout: boolean) => void,
   setShowAbout: (showAbout: boolean) => void,
   setShowMobileMenu: (showMobileMenu: boolean) => void,
-  setDesktop: (desktop: boolean) => void
+  setDesktop: (desktop: boolean) => void,
+  setHoverPosition: (hoverPosition: 'left' | 'right' | 'center' | null) => void,
 }
 
 const useStore = create<StoreState>((set) => ({
@@ -23,6 +25,7 @@ const useStore = create<StoreState>((set) => ({
   hoverAbout: false,
   inOverview: false,
   inIntro: true,
+  hoverPosition: null,
   setInIntro: (inIntro: boolean) => {
     set((state) => ({ inIntro }))
   },
@@ -40,6 +43,9 @@ const useStore = create<StoreState>((set) => ({
   },
   setDesktop: (desktop: boolean) => {
     set((state) => ({ desktop }))
+  },
+  setHoverPosition: (hoverPosition: 'left' | 'right' | 'center') => {
+    set((state) => ({ hoverPosition }))
   },
 }));
 

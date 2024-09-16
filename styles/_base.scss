@@ -36,9 +36,7 @@ html {
 
 html,
 body {
-	@include mq($until: desktop) {
-		overscroll-behavior: none !important;
-	}
+	overscroll-behavior: none !important;
 }
 
 body {
