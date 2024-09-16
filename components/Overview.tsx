@@ -19,7 +19,7 @@ export default function Overview({ overview }: Props) {
 
   const router = useRouter()
   const pathname = usePathname()
-  const [showAbout, setShowAbout, hoverAbout, inOverview, setInOverview, setInIntro, inIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout, state.inOverview, state.setInOverview, state.setInIntro, state.inIntro])
+  const [showAbout, setShowAbout, hoverAbout, inOverview, setInOverview, setInIntro] = useStore(state => [state.showAbout, state.setShowAbout, state.hoverAbout, state.inOverview, state.setInOverview, state.setInIntro])
   const { scrolledPosition, viewportHeight, isScrolling } = useScrollInfo()
   const { width, height } = useWindowSize()
   const [project, setProject] = useState<ProjectRecord | null>(null)
@@ -40,7 +40,6 @@ export default function Overview({ overview }: Props) {
   }, [])
 
   useEffect(() => {
-
     setInIntro(pathname === '/' && (scrolledPosition < height))
     setIsHome(pathname === '/')
   }, [pathname, scrolledPosition, viewportHeight, isScrolling, width, height])

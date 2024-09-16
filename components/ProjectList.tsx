@@ -35,7 +35,9 @@ export default function ProjectList({ items, position, project, onHover, ready =
 
   useEffect(() => {
 
-    if (inIntro) return console.log('block scroll: inIntro')
+    if (inIntro)
+      return
+
     const container = ref.current;
     container.addEventListener('scroll', handleScroll)
     return () => container?.removeEventListener('scroll', handleScroll)
@@ -66,9 +68,15 @@ export default function ProjectList({ items, position, project, onHover, ready =
   }
 
   const handleMouseOver = (e: React.MouseEvent<HTMLUListElement>) => {
-    if (!isDesktop) return
+    const isOppositeHover = oppositeRef.current.getAttribute('data-hover') === 'true';
+    if (isOppositeHover) return setHover(false)
+    if (!isDesktop || !ready) return
     setHover(true)
   }
+
+  useEffect(() => {
+    ref.current.setAttribute('data-hover', hover ? 'true' : 'false')
+  }, [hover, position])
 
   return (
     <ul
@@ -103,8 +111,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
             </Link>
           </li>
         )
-      }
-      )}
+      })}
     </ul>
   )
 }

@@ -30,6 +30,17 @@
 	}
 }
 
+html {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	@include mq($until: desktop) {
+		overscroll-behavior: none !important;
+	}
+}
+
 body {
 	width: 100%;
 	font-size: 100%;
@@ -39,10 +50,6 @@ body {
 	font-family: $body-font;
 	-webkit-font-smoothing: antialiased;
 	font-feature-settings: "liga", "kern";
-}
-
-html {
-	box-sizing: border-box;
 }
 
 * {
