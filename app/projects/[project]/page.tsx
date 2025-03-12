@@ -48,7 +48,6 @@ export default async function Page(props: Props) {
 				{gallery.map((block, index) => (
 					<React.Fragment key={index}>
 						<Block data={block} components={Blocks} />
-
 						{index === 0 && (
 							<section className={cn(s.text)}>
 								<div className={s.left}>

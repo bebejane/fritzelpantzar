@@ -37,5 +37,18 @@ fragment ProjectFragment on ProjectRecord {
 				...MediaFragment
 			}
 		}
+		... on TextRowBlockRecord {
+			id
+			leftColumn {
+				blocks
+				links
+				value
+			}
+			rightColumn {
+				blocks
+				links
+				value
+			}
+		}
 	}
 }
