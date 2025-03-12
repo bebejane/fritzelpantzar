@@ -66,7 +66,7 @@ export default async function Page(props: Props) {
           <tbody>
             <tr>
               <td>
-                <h4>Projekt:</h4>
+                <h4>Projekt</h4>
               </td>
               <td> {title}</td>
             </tr>
@@ -74,7 +74,7 @@ export default async function Page(props: Props) {
               <>
                 <tr>
                   <td>
-                    <h4>Typ:</h4>
+                    <h4>Typ</h4>
                   </td>
                   <td> {program}</td>
                 </tr>
@@ -84,7 +84,7 @@ export default async function Page(props: Props) {
               <>
                 <tr>
                   <td>
-                    <h4>Status:</h4>
+                    <h4>Status</h4>
                   </td>
                   <td> {projectStatus}</td>
                 </tr>
@@ -94,7 +94,7 @@ export default async function Page(props: Props) {
               <>
                 <tr>
                   <td>
-                    <h4>Storlek:</h4>
+                    <h4>Storlek</h4>
                   </td>
                   <td> {size}</td>
                 </tr>
@@ -114,7 +114,7 @@ export default async function Page(props: Props) {
               <>
                 <tr>
                   <td>
-                    <h4>Kund:</h4>
+                    <h4>Kund</h4>
                   </td>
                   <td> {commisioner}</td>
                 </tr>
@@ -124,7 +124,7 @@ export default async function Page(props: Props) {
               <>
                 <tr>
                   <td>
-                    <h4>Samarbete:</h4>
+                    <h4>Samarbete</h4>
                   </td>
                   <td> {credits}</td>
                 </tr>
