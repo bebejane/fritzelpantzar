@@ -10,7 +10,7 @@
     display: flex;
     //justify-content: center;
     //width: 100%;
-    color: var(--blue);
+    //color: var(--black);
     z-index: var(--z-title);
     top: 1.5rem;
 
@@ -26,6 +26,15 @@
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    //color: var(--black);
+
+    p {
+      //color: var(--black);
+    }
+
+    p.intro {
+      color: var(--blue);
+    }
 
     @include mq($from: desktop) {
       flex-direction: row;
@@ -42,11 +51,16 @@
       margin-top: -0.4em;
       position: sticky;
       top: var(--outer-margin);
+      color: var(--blue);
 
       @include mq($from: desktop) {
         width: 90%;
         padding-left: var(--outer-margin);
       }
+    }
+
+    .right p {
+      padding-right: calc(2 * var(--outer-margin));
     }
 
     .desc {
@@ -67,11 +81,11 @@
       }
 
       p {
-        text-indent: 2rem;
-        margin-bottom: 0;
+        text-indent: 1rem;
+        margin-bottom: 0.5em;
 
         @include mq($from: desktop) {
-          text-indent: 3rem;
+          text-indent: 0rem;
         }
 
         &:first-of-type {

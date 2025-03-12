@@ -1,5 +1,5 @@
 :root {
-	--black: #161616;
+	--black: #212121;
 	--white: #fffceb;
 	--red: #bf0000;
 	--blue: #0026ff;
@@ -76,7 +76,8 @@ button {
 	border: 0;
 
 	@include mq($from: desktop) {
-		&:hover {}
+		&:hover {
+		}
 	}
 
 	&[disabled] {
@@ -113,7 +114,8 @@ select {
 	font-family: $nav-font;
 	background-color: var(--background);
 
-	&:focus {}
+	&:focus {
+	}
 
 	&::placeholder {
 		color: var(--orange);
