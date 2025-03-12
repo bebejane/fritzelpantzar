@@ -94,28 +94,34 @@
       }
     }
 
-    .meta {
-      padding-bottom: var(--outer-margin);
-      display: block;
-
-      td {
-        width: auto;
-        padding-right: 1em;
-        padding-bottom: 0.2em;
-
-        @include mq($until: desktop) {
-          padding-bottom: 0.5em;
-        }
-      }
-
-      @include mq($until: desktop) {
-        padding-top: 0;
-        flex-direction: column;
-        //column-count: 2;
-      }
-    }
-
     .credits {
     }
+  }
+}
+
+.meta {
+  margin-left: calc(1 * var(--outer-margin));
+  margin-top: calc(2 * var(--outer-margin));
+  padding-bottom: var(--outer-margin);
+  display: block;
+
+  td {
+    width: auto;
+    padding-right: 1em;
+    padding-bottom: 0.4em;
+
+    @include mq($until: desktop) {
+      padding-bottom: 0.5em;
+    }
+  }
+
+  @include mq($until: desktop) {
+    padding-top: 0;
+    flex-direction: column;
+  }
+
+  @include mq($from: desktop) {
+    column-count: 2;
+    width: calc(50% - (2 * var(--outer-margin)));
   }
 }
