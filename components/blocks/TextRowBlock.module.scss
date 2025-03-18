@@ -1,16 +1,33 @@
 .textRow {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   margin-left: var(--outer-margin);
   margin-right: var(--outer-margin);
   margin-top: var(--outer-margin);
-  margin-bottom: var(--outer-margin);
+  //margin-bottom: var(--outer-margin);
+
+  @include mq($from: desktop) {
+    flex-direction: row;
+  }
 
   & > div {
-    width: calc(50% - calc(0.5 * var(--outer-margin)));
+    @include mq($from: desktop) {
+      width: calc(50% - calc(0.5 * var(--outer-margin)));
+    }
+
+    &:first-of-type {
+      @include mq($until: desktop) {
+        margin-bottom: 1rem;
+      }
+    }
   }
 
   p {
     padding-right: calc(1 * var(--outer-margin));
+  }
+
+  p:last-of-type {
+    margin-bottom: 0;
   }
 }

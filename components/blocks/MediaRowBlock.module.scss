@@ -30,7 +30,9 @@
         width: calc(50% - (var(--outer-margin) / 2));
       }
       @include mq($until: desktop) {
-        margin-bottom: var(--outer-margin);
+        &:first-of-type {
+          margin-bottom: var(--outer-margin);
+        }
       }
     }
   }

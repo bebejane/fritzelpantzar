@@ -104,7 +104,7 @@ export default async function Page(props: Props) {
               <>
                 <tr>
                   <td>
-                    <h4>År:</h4>
+                    <h4>År</h4>
                   </td>
                   <td> {year}</td>
                 </tr>

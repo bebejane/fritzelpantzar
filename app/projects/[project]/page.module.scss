@@ -103,8 +103,9 @@
 
 .meta {
   margin-left: calc(1 * var(--outer-margin));
-  margin-top: calc(2 * var(--outer-margin));
   padding-bottom: var(--outer-margin);
+  margin-top: calc(1 * var(--outer-margin));
+
   display: block;
 
   td {
@@ -123,6 +124,7 @@
   }
 
   @include mq($from: desktop) {
+    margin-top: calc(2 * var(--outer-margin));
     column-count: 2;
     width: calc(50% - (2 * var(--outer-margin)));
   }
