@@ -13,150 +13,150 @@ import Content from '@components/Content';
 import React from 'react';
 
 export type Props = {
-  params: { project: string };
-  modal: boolean;
+	params: { project: string };
+	modal: boolean;
 };
 
 export default async function Page(props: Props) {
-  const { project, draftUrl } = await apiQuery<ProjectQuery, ProjectQueryVariables>(
-    ProjectDocument,
-    {
-      variables: { slug: props.params.project },
-    }
-  );
+	const { project, draftUrl } = await apiQuery<ProjectQuery, ProjectQueryVariables>(
+		ProjectDocument,
+		{
+			variables: { slug: props.params.project },
+		}
+	);
 
-  if (!project) return notFound();
+	if (!project) return notFound();
 
-  const {
-    id,
-    title,
-    summary,
-    description,
-    gallery,
-    commisioner,
-    year,
-    size,
-    projectStatus,
-    program,
-    credits,
-  } = project;
+	const {
+		id,
+		title,
+		summary,
+		description,
+		gallery,
+		commisioner,
+		year,
+		size,
+		projectStatus,
+		program,
+		credits,
+	} = project;
 
-  return (
-    <>
-      <article className={cn(s.project, props.modal && s.modal)}>
-        <h1>{title}</h1>
-        {gallery.map((block, index) => (
-          <React.Fragment key={index}>
-            <Block data={block} components={Blocks} />
-            {index === 0 && (
-              <section className={cn(s.text)}>
-                <div className={s.left}>
-                  <p className='intro'>{summary}</p>
-                </div>
-                <div className={s.right}>
-                  <div className={cn(s.desc, 'big')}>
-                    <Content content={description} />
-                  </div>
-                </div>
-              </section>
-            )}
-          </React.Fragment>
-        ))}
-        <table className={s.meta}>
-          <tbody>
-            <tr>
-              <td>
-                <h4>Projekt</h4>
-              </td>
-              <td> {title}</td>
-            </tr>
-            {program && (
-              <>
-                <tr>
-                  <td>
-                    <h4>Typ</h4>
-                  </td>
-                  <td> {program}</td>
-                </tr>
-              </>
-            )}
-            {projectStatus && (
-              <>
-                <tr>
-                  <td>
-                    <h4>Status</h4>
-                  </td>
-                  <td> {projectStatus}</td>
-                </tr>
-              </>
-            )}
-            {size && (
-              <>
-                <tr>
-                  <td>
-                    <h4>Storlek</h4>
-                  </td>
-                  <td> {size}</td>
-                </tr>
-              </>
-            )}
-            {year && (
-              <>
-                <tr>
-                  <td>
-                    <h4>År</h4>
-                  </td>
-                  <td> {year}</td>
-                </tr>
-              </>
-            )}
-            {commisioner && (
-              <>
-                <tr>
-                  <td>
-                    <h4>Kund</h4>
-                  </td>
-                  <td> {commisioner}</td>
-                </tr>
-              </>
-            )}
-            {credits && (
-              <>
-                <tr>
-                  <td>
-                    <h4>Samarbete</h4>
-                  </td>
-                  <td> {credits}</td>
-                </tr>
-              </>
-            )}
-          </tbody>
-        </table>
-      </article>
-      <DraftMode url={draftUrl} tag={id} />
-    </>
-  );
+	return (
+		<>
+			<article className={cn(s.project, props.modal && s.modal)}>
+				<h1>{title}</h1>
+				{gallery.map((block, index) => (
+					<React.Fragment key={index}>
+						<Block data={block} components={Blocks} />
+						{index === 0 && (
+							<section className={cn(s.text)}>
+								<div className={s.left}>
+									<p className='intro'>{summary}</p>
+								</div>
+								<div className={s.right}>
+									<div className={cn(s.desc, 'big')}>
+										<Content content={description} />
+									</div>
+								</div>
+							</section>
+						)}
+					</React.Fragment>
+				))}
+				<table className={s.meta}>
+					<tbody>
+						<tr>
+							<td>
+								<h4>Projekt</h4>
+							</td>
+							<td> {title}</td>
+						</tr>
+						{program && (
+							<>
+								<tr>
+									<td>
+										<h4>Typ</h4>
+									</td>
+									<td> {program}</td>
+								</tr>
+							</>
+						)}
+						{projectStatus && (
+							<>
+								<tr>
+									<td>
+										<h4>Status</h4>
+									</td>
+									<td> {projectStatus}</td>
+								</tr>
+							</>
+						)}
+						{size && (
+							<>
+								<tr>
+									<td>
+										<h4>Storlek</h4>
+									</td>
+									<td> {size}</td>
+								</tr>
+							</>
+						)}
+						{year && (
+							<>
+								<tr>
+									<td>
+										<h4>År</h4>
+									</td>
+									<td> {year}</td>
+								</tr>
+							</>
+						)}
+						{commisioner && (
+							<>
+								<tr>
+									<td>
+										<h4>Kund</h4>
+									</td>
+									<td> {commisioner}</td>
+								</tr>
+							</>
+						)}
+						{credits && (
+							<>
+								<tr>
+									<td>
+										<h4>Samarbete</h4>
+									</td>
+									<td> {credits}</td>
+								</tr>
+							</>
+						)}
+					</tbody>
+				</table>
+			</article>
+			<DraftMode url={draftUrl} tag={id} />
+		</>
+	);
 }
 
 export async function generateStaticParams() {
-  const { allProjects } = await apiQuery<AllProjectsQuery, AllProjectsQueryVariables>(
-    AllProjectsDocument,
-    {
-      all: true,
-      tags: ['project'],
-    }
-  );
-  return allProjects.map(({ slug: project }) => ({ project }));
+	const { allProjects } = await apiQuery<AllProjectsQuery, AllProjectsQueryVariables>(
+		AllProjectsDocument,
+		{
+			all: true,
+			tags: ['project'],
+		}
+	);
+	return allProjects.map(({ slug: project }) => ({ project }));
 }
 
 export async function generateMetadata({ params }) {
-  const { project } = await apiQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, {
-    variables: { slug: params.project },
-  });
+	const { project } = await apiQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, {
+		variables: { slug: params.project },
+	});
 
-  if (!project) return notFound();
+	if (!project) return notFound();
 
-  return {
-    title: project.title,
-  } as Metadata;
+	return {
+		title: project.title,
+	} as Metadata;
 }
