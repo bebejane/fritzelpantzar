@@ -1,13 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 37.8 65.3">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: #fffcec;
-        stroke-width: 0px;
-      }
-    </style>
-  </defs>
-  <path class="cls-1" d="M37.8,0H0v17.5h37.8V0Z"/>
-  <path class="cls-1" d="M37.8,47.8H0v17.5h37.8v-17.5Z"/>
+<svg width="65px" height="65px" viewBox="0 0 65 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="logo-f" transform="translate(14, 0)" fill="#FFFCEC" fill-rule="nonzero">
+            <polygon id="Path" points="38 0 0 0 0 17 38 17"></polygon>
+            <polygon id="Path" points="38 48 0 48 0 65 38 65"></polygon>
+        </g>
+        <rect id="Rectangle" x="0" y="0" width="65" height="65"></rect>
+    </g>
 </svg>

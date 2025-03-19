@@ -11,20 +11,17 @@ import useIsDesktop from '../lib/hooks/useIsDesktop';
 
 const symbolSpace = '2vw';
 const symbolSpaceMobile = '2.55vw';
-const logoFLeftPerc = 1.062;
+const logoFLeftPerc = 1.032;
 const logoPLeftPerc = 1.995;
-const logoFLeftPercMobile = 1.128;
-const logoPLeftPercMobile = 3.04;
-
-const logoPWidthMobileOrg = 0.0247;
-const logoFWidthMobileOrg = 0.0215;
-const logoPWidthOrg = 0.026;
-const logoFWidthOrg = 0.0255;
+const logoFLeftPercMobile = 1.06;
+const logoPLeftPercMobile = 3.0;
 
 export default function Intro() {
 	const ref = useRef<HTMLImageElement>(null);
 	const f = useRef<HTMLImageElement>(null);
 	const p = useRef<HTMLImageElement>(null);
+	const fHeight = useRef<number>(null);
+	const pHeight = useRef<number>(null);
 
 	const pathname = usePathname();
 	const [inIntro] = useStore((state) => [state.inIntro]);
@@ -41,25 +38,39 @@ export default function Intro() {
 
 		if (!logo || !logoF || !logoP) return console.error('Logo not found');
 
+		pHeight.current = pHeight.current ?? logoP.getBoundingClientRect().height;
+		fHeight.current = fHeight.current ?? logoF.getBoundingClientRect().height;
+
 		const ratio = Math.max(0, Math.min(scrolledPosition / viewportHeight, 1));
 		const bounds = logo.getBoundingClientRect();
+		const boundsF = logoF.getBoundingClientRect();
+		const boundsP = logoP.getBoundingClientRect();
 		const pLeftPerc = isDesktop ? logoPLeftPerc : logoPLeftPercMobile;
 		const fLeftPerc = isDesktop ? logoFLeftPerc : logoFLeftPercMobile;
 		const sSpace = isDesktop ? symbolSpace : symbolSpaceMobile;
 
-		const logoFLeftEnd =
-			width - logoF.getBoundingClientRect().width - logoP.getBoundingClientRect().width;
+		const sizeScaled = isDesktop
+			? pHeight.current
+			: (bounds.height - pHeight.current) * ratio + pHeight.current;
+		const logoFLeftEnd = width - boundsF.width - boundsP.width;
 		const logoFTop = bounds.top * (1 - ratio);
 		const logoFLeft = (logoFLeftEnd - bounds.left * fLeftPerc) * ratio + bounds.left * fLeftPerc;
 
-		const logoPLeftEnd = width - logoP.getBoundingClientRect().width;
+		const logoPLeftEnd = width - boundsP.width;
 		const logoPTop = bounds.top * (1 - ratio);
 		const logoPLeft = (logoPLeftEnd - bounds.left * pLeftPerc) * ratio + bounds.left * pLeftPerc;
-
-		const baseStyle = { transform: `rotate(${ratio * 360}deg)`, opacity: !inIntro ? 0 : 1 };
+		//console.log(pHeightScale, bounds.height);
+		const baseStyle = {
+			transform: `rotate(${ratio * 360}deg)`,
+			transformOrigin: '50% 50%',
+			height: `${sizeScaled}px`,
+			width: `${sizeScaled}px`,
+			opacity: !inIntro ? 0 : 1,
+		};
 
 		setLogoFStyle({
 			...baseStyle,
+
 			top: `calc(${logoFTop}px + calc(${ratio} * var(--nav-margin-top)))`,
 			left: `calc(${logoFLeft}px - calc(${ratio} * ${sSpace}) - calc(${ratio} * var(--nav-margin)))`,
 		});
