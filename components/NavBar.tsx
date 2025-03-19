@@ -58,7 +58,7 @@ export default function NavBar() {
 					/>
 				</button>
 			</nav>
-			<div className={cn(s.tooltip, hoverAbout && !showAbout && s.show)}>
+			<div className={cn(s.tooltip, hoverAbout && !showAbout && isHome && s.show)}>
 				<h2>Info & Kontakt</h2>
 			</div>
 		</>
