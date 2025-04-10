@@ -17,7 +17,7 @@ export default function ImageAndTextRowBlock({
 					{imageRight ? <Content content={text} /> : <Image data={image.responsiveImage} />}
 				</div>
 			</div>
-			<div className={s.right}>
+			<div className={cn(s.right, 'big')}>
 				{!imageRight ? <Content content={text} /> : <Image data={image.responsiveImage} />}
 			</div>
 		</section>
