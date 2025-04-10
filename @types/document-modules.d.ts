@@ -35,6 +35,15 @@ declare module '*/MediaFragment.gql' {
 }
     
 
+declare module '*/MediaThumbnailFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const MediaThumbnailFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/SEOFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

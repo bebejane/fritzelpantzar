@@ -22,7 +22,7 @@
     padding: 0;
   }
 
-  > li {
+  >li {
     position: relative;
 
     @include mq($until: desktop) {
@@ -42,6 +42,12 @@
 
     div {
       //background-color: var(--blue);
+    }
+
+    .video {
+      object-fit: cover;
+      width: 100%;
+      aspect-ratio: 4/3;
     }
 
     &:hover {
@@ -96,7 +102,7 @@
   a {
     //pointer-events: none;
 
-    & > div {
+    &>div {
       max-width: none !important;
     }
 
