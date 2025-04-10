@@ -50,5 +50,17 @@ fragment ProjectFragment on ProjectRecord {
 				value
 			}
 		}
+		... on ImageAndTextRowBlockRecord {
+			id
+			image {
+				...ImageFragment
+			}
+			imageRight
+			text {
+				blocks
+				value
+				links
+			}
+		}
 	}
 }
