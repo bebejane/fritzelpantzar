@@ -21,6 +21,17 @@ const logoFWidthMobileOrg = 0.0215;
 const logoPWidthOrg = 0.026;
 const logoFWidthOrg = 0.0255;
 
+function getOffset(el: any) {
+	var _x = 0;
+	var _y = 0;
+	while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+		_x += el.offsetLeft - el.scrollLeft;
+		_y += el.offsetTop - el.scrollTop;
+		el = el.offsetParent;
+	}
+	return { top: _y, left: _x };
+}
+
 export default function Intro() {
 	const ref = useRef<HTMLImageElement>(null);
 	const f = useRef<HTMLImageElement>(null);
@@ -33,6 +44,8 @@ export default function Intro() {
 	const { width, height } = useWindowSize();
 	const { scrolledPosition, viewportHeight, isScrolling } = useScrollInfo();
 	const isDesktop = useIsDesktop();
+	const logoFHeight = useRef<number | null>(null);
+	const logoPHeight = useRef<number | null>(null);
 
 	const updateStyles = async () => {
 		const logo = ref.current;
@@ -41,33 +54,51 @@ export default function Intro() {
 
 		if (!logo || !logoF || !logoP) return console.error('Logo not found');
 
+		const logoFBounds = logoF.getBoundingClientRect();
+		const logoPBounds = logoP.getBoundingClientRect();
+		const menu = document.getElementById('menu');
+		const menuF = document.getElementById('menu-f');
+		const menuP = document.getElementById('menu-p');
+		const menuFBounds = menuF.getBoundingClientRect();
+		const menuPBounds = menuP.getBoundingClientRect();
+		const menuFTop = menuFBounds.top;
+		const menuPTop = menuPBounds.top;
+
 		const ratio = Math.max(0, Math.min(scrolledPosition / viewportHeight, 1));
 		const bounds = logo.getBoundingClientRect();
 		const pLeftPerc = isDesktop ? logoPLeftPerc : logoPLeftPercMobile;
 		const fLeftPerc = isDesktop ? logoFLeftPerc : logoFLeftPercMobile;
-		const sSpace = isDesktop ? symbolSpace : symbolSpaceMobile;
 
-		const logoFLeftEnd =
-			width - logoF.getBoundingClientRect().width - logoP.getBoundingClientRect().width;
-		const logoFTop = bounds.top * (1 - ratio);
-		const logoFLeft = (logoFLeftEnd - bounds.left * fLeftPerc) * ratio + bounds.left * fLeftPerc;
+		logoFHeight.current = logoFHeight.current ?? logoFBounds.height;
+		logoPHeight.current = logoPHeight.current ?? logoPBounds.height;
 
-		const logoPLeftEnd = width - logoP.getBoundingClientRect().width;
-		const logoPTop = bounds.top * (1 - ratio);
-		const logoPLeft = (logoPLeftEnd - bounds.left * pLeftPerc) * ratio + bounds.left * pLeftPerc;
+		const scale = 1 + ((menuFBounds.height - logoFHeight.current) / logoFHeight.current) * ratio;
+		const logoFLeftEnd = menuFBounds.left;
+		const logoPLeftEnd = menuPBounds.left;
+		const padTop = isDesktop ? 0 : 10;
+		const padLeft = isDesktop ? 0 : 6;
+		const logoFTop = bounds.top + (menuFTop - bounds.top + padTop) * ratio;
+		const logoPTop = bounds.top + (menuPTop - bounds.top + padTop) * ratio;
+		const logoFLeft =
+			(logoFLeftEnd - bounds.left * fLeftPerc + padLeft) * ratio + bounds.left * fLeftPerc;
+		const logoPLeft =
+			(logoPLeftEnd - bounds.left * pLeftPerc + padLeft) * ratio + bounds.left * pLeftPerc;
 
-		const baseStyle = { transform: `rotate(${ratio * 360}deg)`, opacity: !inIntro ? 0 : 1 };
+		const baseStyle = {
+			transform: `rotate(${ratio * 360}deg) scale(${scale})`,
+			opacity: !inIntro ? 0 : 1,
+		};
 
 		setLogoFStyle({
 			...baseStyle,
-			top: `calc(${logoFTop}px + calc(${ratio} * var(--nav-margin-top)))`,
-			left: `calc(${logoFLeft}px - calc(${ratio} * ${sSpace}) - calc(${ratio} * var(--nav-margin)))`,
+			top: `${logoFTop}px`,
+			left: `${logoFLeft}px`,
 		});
 
 		setLogoPStyle({
 			...baseStyle,
-			top: `calc(${logoPTop}px + calc(${ratio} * var(--nav-margin-top)))`,
-			left: `calc(${logoPLeft}px - calc(calc(${ratio} * var(--nav-margin)))`,
+			top: `${logoPTop}px`,
+			left: `${logoPLeft}px`,
 		});
 
 		logo.style.opacity = !inIntro ? '0' : '1';

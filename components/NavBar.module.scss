@@ -24,27 +24,38 @@
   }
 
   button {
+
     all: unset;
     position: absolute;
+    display: flex;
+    flex-direction: row;
     top: 0;
     right: 0;
     z-index: 2;
-    transition: transform 0.2s;
+    transition: transform 0.2s opacity 0.2s;
     transition-timing-function: cubic-bezier(0.94, 0.08, 0.76, 0.23);
 
+    &.intro {
+      opacity: 0;
+    }
+
     @include mq($until: desktop) {
-      padding: 15px;
-      top: calc(-0.5 * var(--nav-margin-top));
-      right: calc(-0.5 * var(--nav-margin));
+      //margin: 15px;
+      //top: calc(-0.5 * var(--nav-margin-top));
+      //right: calc(-0.5 * var(--nav-margin));
     }
 
     .icon {
-      height: 4.75vw;
+      display: inline;
+      height: calc(4.75vw *2);
 
       @include mq($from: desktop) {
         height: 3.75vw;
       }
 
+      &:first-child {
+        margin-right: 0.7rem;
+      }
     }
   }
 

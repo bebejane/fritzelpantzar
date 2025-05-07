@@ -55,8 +55,19 @@ export default function NavBar() {
 				onMouseEnter={() => isDesktop && setHoverAbout(true)}
 				onMouseLeave={() => isDesktop && setHoverAbout(false)}
 			>
-				<button onClick={handleClick}>
-					<img id='menu' src='/images/fp.svg' alt='Menu' className={cn(s.icon, s.menu)} />
+				<button onClick={handleClick} id='menu' className={cn(inIntro && s.intro)}>
+					<img
+						id='menu-f'
+						src='/images/logo-f-blue.svg'
+						alt='Menu'
+						className={cn(s.icon, s.menu)}
+					/>
+					<img
+						id='menu-p'
+						src='/images/logo-p-blue.svg'
+						alt='Menu'
+						className={cn(s.icon, s.menu)}
+					/>
 				</button>
 				<button onClick={handleClick}>
 					<img
