@@ -69,7 +69,7 @@ export default function NavBar() {
 						className={cn(s.icon, s.menu)}
 					/>
 				</button>
-				<button onClick={handleClick}>
+				<button onClick={handleClick} className={cn(inIntro && s.intro)}>
 					<img
 						key={`${invert}`}
 						src={`/images/close${invert ? '-white' : ''}.svg`}

@@ -37,12 +37,7 @@
 
     &.intro {
       opacity: 0;
-    }
-
-    @include mq($until: desktop) {
-      //margin: 15px;
-      //top: calc(-0.5 * var(--nav-margin-top));
-      //right: calc(-0.5 * var(--nav-margin));
+      pointer-events: none;
     }
 
     .icon {
