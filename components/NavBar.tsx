@@ -6,6 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useStore } from '../lib/store';
 import { useEffect, useState } from 'react';
 import useIsDesktop from '@lib/hooks/useIsDesktop';
+import { awaitElement } from '@/lib/utils';
 
 export default function NavBar() {
 	const [showAbout, setShowAbout, setHoverAbout, hoverAbout, inOverview, inIntro] = useStore(
@@ -23,25 +24,33 @@ export default function NavBar() {
 	const isHome = pathname === '/';
 	const isDesktop = useIsDesktop();
 	const isClose = !isHome || showAbout;
-	const [invert, setInvert] = useState(true);
+	const [invert, setInvert] = useState(false);
+	const [isModal, setIsModal] = useState(false);
 
 	const handleClick = () => {
-		if (pathname === '/about') router.push('/');
+		if (pathname === '/about' || (!isModal && !isHome)) router.push('/');
 		else if (!isHome) router.back();
 		else setShowAbout(!showAbout);
 	};
 
 	useEffect(() => {
 		if (pathname === '/about') return setInvert(true);
-
 		if (showAbout) setInvert(showAbout);
 		else setTimeout(() => setInvert(showAbout), 300);
 	}, [showAbout, pathname]);
 
+	useEffect(() => {
+		const checkModal = async () => {
+			const m = await awaitElement('#modal', 300);
+			setIsModal(m ? true : false);
+		};
+		checkModal();
+	}, [pathname]);
+
 	return (
 		<>
 			<nav
-				className={cn(s.navbar, inIntro && s.inactive, isClose && s.closed)}
+				className={cn(s.navbar, inIntro && isModal && s.inactive, isClose && s.closed)}
 				key={pathname}
 				onMouseEnter={() => isDesktop && setHoverAbout(true)}
 				onMouseLeave={() => isDesktop && setHoverAbout(false)}
