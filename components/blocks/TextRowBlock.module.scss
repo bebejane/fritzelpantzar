@@ -26,6 +26,9 @@
   p {
     padding-right: calc(1 * var(--outer-margin));
     margin-bottom: 0.8rem;
+    @include mq($from: desktop) {
+      padding-right: calc(5 * var(--outer-margin));
+    }
   }
 
   p:last-of-type {
