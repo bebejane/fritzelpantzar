@@ -11,7 +11,7 @@
     flex-direction: row;
   }
 
-  &>div {
+  & > div {
     @include mq($from: desktop) {
       width: calc(50% - calc(0.5 * var(--outer-margin)));
     }
@@ -23,8 +23,19 @@
     }
   }
 
+  h2 {
+    padding-bottom: 1rem;
+    @include mq($from: desktop) {
+      padding-right: calc(4 * var(--outer-margin));
+    }
+  }
+
   p {
     padding-right: calc(1 * var(--outer-margin));
+    @include mq($from: desktop) {
+      padding-right: calc(5 * var(--outer-margin));
+    }
+    margin-bottom: 0.8rem;
   }
 
   p:last-of-type {
