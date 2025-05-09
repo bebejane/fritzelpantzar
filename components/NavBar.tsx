@@ -23,9 +23,10 @@ export default function NavBar() {
 	const pathname = usePathname();
 	const isHome = pathname === '/';
 	const isDesktop = useIsDesktop();
-	const isClose = !isHome || showAbout;
+
 	const [invert, setInvert] = useState(false);
 	const [isModal, setIsModal] = useState(false);
+	const isClose = !isHome || showAbout;
 
 	const handleClick = () => {
 		if (pathname === '/about' || (!isModal && !isHome)) router.push('/');
@@ -41,7 +42,7 @@ export default function NavBar() {
 
 	useEffect(() => {
 		const checkModal = async () => {
-			const m = await awaitElement('#modal', 300);
+			const m = await awaitElement('#modal', 500);
 			setIsModal(m ? true : false);
 		};
 		checkModal();
@@ -69,7 +70,7 @@ export default function NavBar() {
 						className={cn(s.icon, s.menu)}
 					/>
 				</button>
-				<button onClick={handleClick} className={cn(inIntro && s.intro)}>
+				<button onClick={handleClick} className={cn(inIntro && isHome && s.intro)}>
 					<img
 						key={`${invert}`}
 						src={`/images/close${invert ? '-white' : ''}.svg`}
