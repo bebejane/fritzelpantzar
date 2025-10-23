@@ -7,18 +7,24 @@ import { Image } from 'react-datocms';
 
 export type LayoutProps = { data: ImageAndTextRowBlockRecord };
 
-export default function ImageAndTextRowBlock({
-	data: { image, id, imageRight, text },
-}: LayoutProps) {
+export default function ImageAndTextRowBlock({ data: { image, id, imageRight, text } }: LayoutProps) {
 	return (
 		<section className={s.imageAndTextRow}>
 			<div className={s.left}>
 				<div className={cn(s.desc, 'big')}>
-					{imageRight ? <Content content={text} /> : <Image data={image.responsiveImage} />}
+					{imageRight ? (
+						<Content content={text} />
+					) : image.responsiveImage ? (
+						<Image data={image.responsiveImage} />
+					) : null}
 				</div>
 			</div>
 			<div className={cn(s.right, 'big')}>
-				{!imageRight ? <Content content={text} /> : <Image data={image.responsiveImage} />}
+				{!imageRight ? (
+					<Content content={text} />
+				) : image.responsiveImage ? (
+					<Image data={image.responsiveImage} />
+				) : null}
 			</div>
 		</section>
 	);

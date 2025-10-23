@@ -32,11 +32,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
 	const vitems = items.concat(items).concat(items);
 
 	useEffect(() => {
-		const id = ['left', 'right'].includes(position)
-			? position === 'left'
-				? 'right'
-				: 'left'
-			: 'center';
+		const id = ['left', 'right'].includes(position) ? (position === 'left' ? 'right' : 'left') : 'center';
 		oppositeRef.current = document.getElementById(`projects-${id}`) as HTMLUListElement;
 		ref.current.scrollTop = ref.current.scrollHeight / 3;
 	}, []);
@@ -63,8 +59,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
 
 		if (lastScrollRef.current === null) lastScrollRef.current = scrollTop;
 		else {
-			oppositeRef.current.scrollTop =
-				oppositeRef.current.scrollTop - (scrollTop - lastScrollRef.current);
+			oppositeRef.current.scrollTop = oppositeRef.current.scrollTop - (scrollTop - lastScrollRef.current);
 			lastScrollRef.current = bottom || top ? target.scrollTop : scrollTop;
 		}
 	};
