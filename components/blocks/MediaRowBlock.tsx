@@ -13,14 +13,10 @@ export default function MediaRowBlock({ data: { mediaAsset } }: LayoutProps) {
 			{mediaAsset.map((asset, i) =>
 				asset.responsiveImage ? (
 					<figure key={i} className={mediaAsset.length > 1 ? s.multi : s.single}>
-						<Image data={asset.responsiveImage} intersectionMargin='0px 0px 2000px 0px' />
+						<Image data={asset.responsiveImage} intersectionMargin='0px 0px 200% 0px' intersectionThreshold={0} />
 					</figure>
 				) : asset.video ? (
-					<VideoPlayer
-						key={i}
-						data={asset as FileField}
-						className={mediaAsset.length > 1 ? s.multi : s.single}
-					/>
+					<VideoPlayer key={i} data={asset as FileField} className={mediaAsset.length > 1 ? s.multi : s.single} />
 				) : null
 			)}
 		</section>

@@ -96,6 +96,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
 									usePlaceholder={false}
 									priority={true}
 									intersectionMargin='0px 0px 200% 0px'
+									intersectionThreshold={0}
 								/>
 							) : block.image.mimeType.includes('video') ? (
 								<VideoPlayer data={block.image as FileField} className={s.video} />

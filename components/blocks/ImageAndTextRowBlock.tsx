@@ -15,7 +15,7 @@ export default function ImageAndTextRowBlock({ data: { image, id, imageRight, te
 					{imageRight ? (
 						<Content content={text} />
 					) : image.responsiveImage ? (
-						<Image data={image.responsiveImage} />
+						<Image data={image.responsiveImage} intersectionMargin='0px 0px 200% 0px' intersectionThreshold={0} />
 					) : null}
 				</div>
 			</div>
@@ -23,7 +23,7 @@ export default function ImageAndTextRowBlock({ data: { image, id, imageRight, te
 				{!imageRight ? (
 					<Content content={text} />
 				) : image.responsiveImage ? (
-					<Image data={image.responsiveImage} />
+					<Image data={image.responsiveImage} intersectionMargin='0px 0px 200% 0px' intersectionThreshold={0} />
 				) : null}
 			</div>
 		</section>

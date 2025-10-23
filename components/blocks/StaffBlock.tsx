@@ -11,7 +11,9 @@ export default function StaffBlock({ data: { people } }: LayoutProps) {
 			{people.map(({ id, image, firstName, lastName, phone, email, title }) => (
 				<li key={id}>
 					<figure>
-						{image?.responsiveImage && <Image data={image?.responsiveImage} intersectionMargin='0px 0px 200% 0px' />}
+						{image?.responsiveImage && (
+							<Image data={image?.responsiveImage} intersectionMargin='0px 0px 200% 0px' intersectionThreshold={0} />
+						)}
 					</figure>
 					{firstName} {lastName}
 					<br />
