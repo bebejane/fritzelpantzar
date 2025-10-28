@@ -13,33 +13,20 @@ import Content from '@components/Content';
 import React from 'react';
 
 export type Props = {
-	params: { project: string };
+	params: Promise<{ project: string }>;
 	modal: boolean;
 };
 
 export default async function Page(props: Props) {
-	const { project, draftUrl } = await apiQuery<ProjectQuery, ProjectQueryVariables>(
-		ProjectDocument,
-		{
-			variables: { slug: props.params.project },
-		}
-	);
+	const slug = (await props.params).project;
+	const { project, draftUrl } = await apiQuery(ProjectDocument, {
+		variables: { slug },
+	});
 
 	if (!project) return notFound();
 
-	const {
-		id,
-		title,
-		summary,
-		description,
-		gallery,
-		commisioner,
-		year,
-		size,
-		projectStatus,
-		program,
-		credits,
-	} = project;
+	const { id, title, summary, description, gallery, commisioner, year, size, projectStatus, program, credits } =
+		project;
 
 	return (
 		<>
@@ -139,19 +126,14 @@ export default async function Page(props: Props) {
 }
 
 export async function generateStaticParams() {
-	const { allProjects } = await apiQuery<AllProjectsQuery, AllProjectsQueryVariables>(
-		AllProjectsDocument,
-		{
-			all: true,
-			tags: ['project'],
-		}
-	);
+	const { allProjects } = await apiQuery(AllProjectsDocument, { all: true });
 	return allProjects.map(({ slug: project }) => ({ project }));
 }
 
-export async function generateMetadata({ params }) {
-	const { project } = await apiQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, {
-		variables: { slug: params.project },
+export async function generateMetadata({ params }): Promise<Metadata> {
+	const slug = (await params).project;
+	const { project } = await apiQuery(ProjectDocument, {
+		variables: { slug },
 	});
 
 	if (!project) return notFound();

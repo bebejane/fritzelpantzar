@@ -1,4 +1,4 @@
-query AllProjects($first: IntType = 100, $skip: IntType = 0) {
+query AllProjects($first: IntType = 500, $skip: IntType = 0) {
 	allProjects(first: $first, skip: $skip) {
 		...ProjectFragment
 	}
@@ -63,4 +63,5 @@ fragment ProjectFragment on ProjectRecord {
 			}
 		}
 	}
+	_updatedAt
 }

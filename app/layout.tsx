@@ -16,7 +16,7 @@ export type LayoutProps = {
 export const dynamic = 'force-static';
 
 export default async function RootLayout({ children, modal }: LayoutProps) {
-	const { about, draftUrl } = await apiQuery<AboutQuery, AboutQueryVariables>(AboutDocument);
+	const { about } = await apiQuery(AboutDocument);
 
 	return (
 		<html lang={'sv'}>
@@ -31,12 +31,10 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
 	);
 }
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
 	const {
 		site: { globalSeo, faviconMetaTags },
-	} = await apiQuery<GlobalQuery, GlobalQueryVariables>(GlobalDocument, {
-		tags: ['site'],
-	});
+	} = await apiQuery(GlobalDocument);
 
 	return {
 		metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL as string),

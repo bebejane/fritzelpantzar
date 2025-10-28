@@ -1,5 +1,4 @@
-
-import s from './page.module.scss'
+import s from './page.module.scss';
 import { apiQuery } from 'next-dato-utils/api';
 import { DraftMode } from 'next-dato-utils/components';
 import { OverviewDocument } from '../graphql';
@@ -7,18 +6,15 @@ import Overview from '@components/Overview';
 import Intro from '@components/Intro';
 
 export default async function Start() {
+	const { overview, draftUrl } = await apiQuery(OverviewDocument);
 
-  const { overview, draftUrl } = await apiQuery<OverviewQuery, OverviewQueryVariables>(OverviewDocument, {
-    tags: ['project', 'overview']
-  });
-
-  return (
-    <>
-      <article className={s.article}>
-        <Intro />
-        <Overview overview={overview} />
-      </article>
-      <DraftMode url={draftUrl} tag={overview.id} />
-    </>
-  )
+	return (
+		<>
+			<article className={s.article}>
+				<Intro />
+				<Overview overview={overview} />
+			</article>
+			<DraftMode url={draftUrl} path='/' />
+		</>
+	);
 }
