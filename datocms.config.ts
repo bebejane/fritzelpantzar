@@ -9,7 +9,7 @@ export default {
 		project: async (item) => [`/projects/${item.slug}`],
 		person: async (item) => ['/about', '/'],
 		about: async (item) => ['/about', '/'],
-		upload: async (record, locale) => getUploadReferenceRoutes(record),
+		upload: async ({ id }) => getUploadReferenceRoutes(id),
 	},
 	sitemap: async () => {
 		const { allProjects } = await apiQuery(AllProjectsDocument, { all: true });
