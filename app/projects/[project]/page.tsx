@@ -13,12 +13,12 @@ import Content from '@components/Content';
 import React from 'react';
 
 export type Props = {
-	params: Promise<{ project: string }>;
+	params: PageProps<'/projects/[project]'>['params'];
 	modal: boolean;
 };
 
-export default async function Page(props: Props) {
-	const slug = (await props.params).project;
+export default async function Page({ params, modal }: Props) {
+	const slug = (await params).project;
 	const { project, draftUrl } = await apiQuery(ProjectDocument, {
 		variables: { slug },
 	});
@@ -30,7 +30,7 @@ export default async function Page(props: Props) {
 
 	return (
 		<>
-			<article className={cn(s.project, props.modal && s.modal)}>
+			<article className={cn(s.project, modal && s.modal)}>
 				<h1>{title}</h1>
 				{gallery.map((block, index) => (
 					<React.Fragment key={index}>

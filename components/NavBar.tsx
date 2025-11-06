@@ -9,16 +9,14 @@ import useIsDesktop from '@lib/hooks/useIsDesktop';
 import { awaitElement } from '@/lib/utils';
 
 export default function NavBar() {
-	const [showAbout, setShowAbout, setHoverAbout, hoverAbout, inOverview, inIntro] = useStore(
-		(state) => [
-			state.showAbout,
-			state.setShowAbout,
-			state.setHoverAbout,
-			state.hoverAbout,
-			state.inOverview,
-			state.inIntro,
-		]
-	);
+	const [showAbout, setShowAbout, setHoverAbout, hoverAbout, inOverview, inIntro] = useStore((state) => [
+		state.showAbout,
+		state.setShowAbout,
+		state.setHoverAbout,
+		state.hoverAbout,
+		state.inOverview,
+		state.inIntro,
+	]);
 	const router = useRouter();
 	const pathname = usePathname();
 	const isHome = pathname === '/';
@@ -29,9 +27,10 @@ export default function NavBar() {
 	const isClose = !isHome || showAbout;
 
 	const handleClick = () => {
-		if (pathname === '/about' || (!isModal && !isHome)) router.push('/');
-		else if (!isHome) router.back();
-		else setShowAbout(!showAbout);
+		if (pathname === '/about' || (!isModal && !isHome)) router.back();
+		else if (!isHome) {
+			router.back();
+		} else setShowAbout(!showAbout);
 	};
 
 	useEffect(() => {
@@ -57,18 +56,8 @@ export default function NavBar() {
 				onMouseLeave={() => isDesktop && setHoverAbout(false)}
 			>
 				<button onClick={handleClick} id='menu' className={cn(inIntro && s.intro)}>
-					<img
-						id='menu-f'
-						src='/images/logo-f-blue.svg'
-						alt='Menu'
-						className={cn(s.icon, s.menu)}
-					/>
-					<img
-						id='menu-p'
-						src='/images/logo-p-blue.svg'
-						alt='Menu'
-						className={cn(s.icon, s.menu)}
-					/>
+					<img id='menu-f' src='/images/logo-f-blue.svg' alt='Menu' className={cn(s.icon, s.menu)} />
+					<img id='menu-p' src='/images/logo-p-blue.svg' alt='Menu' className={cn(s.icon, s.menu)} />
 				</button>
 				<button onClick={handleClick} className={cn(inIntro && isHome && s.intro)}>
 					<img

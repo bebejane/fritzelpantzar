@@ -3,10 +3,10 @@ import cn from 'classnames';
 import ProjectPage from '@app/projects/[project]/page';
 import { Suspense } from 'react';
 
-export default function Page({ params }: { params: { project: string } }) {
+export default async function Page({ params }: PageProps<'/projects/[project]'>) {
 	return (
 		<>
-			<div id='modal' className={cn(s.modal, s.show)} key={params?.project}>
+			<div id='modal' className={cn(s.modal, s.show)}>
 				<Suspense fallback={<div className={s.loading}></div>}>
 					<ProjectPage params={params} modal={true} />
 				</Suspense>
