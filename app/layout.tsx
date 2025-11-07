@@ -16,11 +16,10 @@ export default async function RootLayout({ children, modal }: LayoutProps<'/'>) 
 	return (
 		<html lang={'sv'}>
 			<body id='root'>
-				{modal}
 				<NavBar />
 				<About data={about} modal={true} />
 				<Cursor />
-				<main>{children}</main>
+				<main>{modal ?? children}</main>
 			</body>
 		</html>
 	);

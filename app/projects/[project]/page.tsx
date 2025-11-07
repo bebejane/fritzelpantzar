@@ -17,6 +17,7 @@ export default async function Page({ params }: PageProps<'/projects/[project]'>)
 	const { project, draftUrl } = await apiQuery(ProjectDocument, {
 		variables: { slug },
 	});
+	console.log('page', project?.id);
 
 	if (!project) return notFound();
 
@@ -25,7 +26,7 @@ export default async function Page({ params }: PageProps<'/projects/[project]'>)
 
 	return (
 		<>
-			<article className={cn(s.project, s.modal)}>
+			<article className={cn(s.project)}>
 				<h1>{title}</h1>
 				{gallery.map((block, index) => (
 					<React.Fragment key={index}>

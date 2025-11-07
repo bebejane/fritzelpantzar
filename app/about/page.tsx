@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import About from '@components/About';
 
-export default async function AboutPage() {
+export default async function AboutPage(props: PageProps<'/about'>) {
 	const { about, draftUrl } = await apiQuery(AboutDocument);
 
 	if (!about) return notFound();

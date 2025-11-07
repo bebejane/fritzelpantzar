@@ -88,7 +88,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
 						className={cn(!active && s.unfocused)}
 						onMouseEnter={() => isDesktop && onHover(block.project as ProjectRecord, position)}
 					>
-						<Link href={`/projects/${block.project.slug}`} scroll={false} prefetch={true}>
+						<Link href={`/projects/${block.project.slug}`} scroll={false}>
 							{block.image.responsiveImage ? (
 								<Image
 									data={block.image.responsiveImage}
