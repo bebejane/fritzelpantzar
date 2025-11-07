@@ -12,12 +12,7 @@ import * as Blocks from '@components/blocks';
 import Content from '@components/Content';
 import React from 'react';
 
-export type Props = {
-	params: PageProps<'/projects/[project]'>['params'];
-	modal: boolean;
-};
-
-export default async function Page({ params, modal }: Props) {
+export default async function Page({ params }: PageProps<'/projects/[project]'>) {
 	const slug = (await params).project;
 	const { project, draftUrl } = await apiQuery(ProjectDocument, {
 		variables: { slug },
@@ -30,7 +25,7 @@ export default async function Page({ params, modal }: Props) {
 
 	return (
 		<>
-			<article className={cn(s.project, modal && s.modal)}>
+			<article className={cn(s.project, s.modal)}>
 				<h1>{title}</h1>
 				{gallery.map((block, index) => (
 					<React.Fragment key={index}>

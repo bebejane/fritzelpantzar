@@ -8,14 +8,9 @@ import NavBar from '@components/NavBar';
 import About from '@components/About';
 import Cursor from '@components/Cursor';
 
-export type LayoutProps = {
-	children: React.ReactNode;
-	modal?: React.ReactNode;
-};
-
 export const dynamic = 'force-static';
 
-export default async function RootLayout({ children, modal }: LayoutProps) {
+export default async function RootLayout({ children, modal }: LayoutProps<'/'>) {
 	const { about } = await apiQuery(AboutDocument);
 
 	return (
