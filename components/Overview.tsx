@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useScrollInfo } from 'next-dato-utils/hooks';
 import { awaitElement } from 'next-dato-utils/utils';
 import ProjectList from './ProjectList';
-import { useStore } from '../lib/store';
+import { useStore, useShallow } from '@/lib/store';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
 import { useWindowSize } from 'react-use';
 
@@ -19,14 +19,14 @@ export default function Overview({ overview }: Props) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const [showAbout, setShowAbout, hoverAbout, inOverview, setInOverview, setInIntro] = useStore(
-		(state) => [
+		useShallow((state) => [
 			state.showAbout,
 			state.setShowAbout,
 			state.hoverAbout,
 			state.inOverview,
 			state.setInOverview,
 			state.setInIntro,
-		]
+		])
 	);
 	const { scrolledPosition, viewportHeight, isScrolling } = useScrollInfo();
 	const { width, height } = useWindowSize();
@@ -60,8 +60,7 @@ export default function Overview({ overview }: Props) {
 	}, [showAbout, scrolledPosition, viewportHeight, isScrolling, width, height]);
 
 	useEffect(() => {
-		const ready =
-			scrolledPosition && scrolledPosition >= viewportHeight && !showAbout ? true : false;
+		const ready = scrolledPosition && scrolledPosition >= viewportHeight && !showAbout ? true : false;
 		setInOverview(ready);
 	}, [showAbout, scrolledPosition, viewportHeight, pathname, isScrolling, width, height]);
 
@@ -138,7 +137,7 @@ export default function Overview({ overview }: Props) {
 						project={project}
 					/>
 				)}
-				{!endRatio && <div className={cn(s.overlay, !isHome && s.active)} />}
+				{!endRatio && <div className={cn(s.overlay)} />}
 			</div>
 		</>
 	);

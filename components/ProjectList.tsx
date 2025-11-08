@@ -2,12 +2,13 @@
 
 import s from './ProjectList.module.scss';
 import cn from 'classnames';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
-import { useStore } from '../lib/store';
-import { Image } from 'react-datocms';
+import { useStore, useShallow } from '@/lib/store';
+import { Image, SRCImage } from 'react-datocms';
 import Link from 'next/link';
 import { VideoPlayer } from 'next-dato-utils/components';
+import { set } from 'zod';
 
 export type Props = {
 	items: OverviewQuery['overview']['leftColumn'] | OverviewQuery['overview']['rightColumn'];
@@ -21,13 +22,13 @@ export default function ProjectList({ items, position, project, onHover, ready =
 	const ref = useRef<HTMLUListElement>(null);
 	const oppositeRef = useRef<HTMLUListElement>(null);
 	const lastScrollRef = useRef<number>(null);
-	const [showAbout, inIntro, hoverPosition, setHoverPosition] = useStore((state) => [
-		state.showAbout,
-		state.inIntro,
-		state.hoverPosition,
-		state.setHoverPosition,
-	]);
+	const lastScrollTimeRef = useRef<number>(new Date().getTime());
+	const scrollTimeIntervalRef = useRef<NodeJS.Timeout | null>(null);
+	const [showAbout, inIntro, hoverPosition, setHoverPosition] = useStore(
+		useShallow((state) => [state.showAbout, state.inIntro, state.hoverPosition, state.setHoverPosition])
+	);
 	const isDesktop = useIsDesktop();
+	const [isScrolling, setIsScrolling] = useState<boolean>(false);
 	const isHovering = hoverPosition === position;
 	const vitems = items.concat(items).concat(items);
 
@@ -45,27 +46,45 @@ export default function ProjectList({ items, position, project, onHover, ready =
 		return () => container?.removeEventListener('scroll', handleScroll);
 	}, [inIntro, isHovering, isDesktop]);
 
-	const handleScroll = (e: React.WheelEvent<HTMLUListElement> | Event) => {
+	const handleScroll = (e: Event) => {
 		const target = ref.current;
 		const { scrollTop, scrollHeight } = target;
 		const originalScrollHeight = scrollHeight / 3;
-		const top = scrollTop < originalScrollHeight;
-		const bottom = scrollTop - originalScrollHeight * 2 >= 0;
 
-		if (bottom) target.scrollTop = scrollTop - originalScrollHeight;
-		else if (top) target.scrollTop = scrollTop + originalScrollHeight;
+		if (scrollTop < originalScrollHeight) {
+			target.scrollTop = scrollTop + originalScrollHeight;
+		} else if (scrollTop >= originalScrollHeight * 2) {
+			target.scrollTop = scrollTop - originalScrollHeight;
+		}
 
-		if (!isHovering) return;
+		if (isHovering && oppositeRef.current) {
+			const delta = scrollTop - (lastScrollRef.current || scrollTop);
+			lastScrollRef.current = scrollTop;
 
-		if (lastScrollRef.current === null) lastScrollRef.current = scrollTop;
-		else {
-			oppositeRef.current.scrollTop = oppositeRef.current.scrollTop - (scrollTop - lastScrollRef.current);
-			lastScrollRef.current = bottom || top ? target.scrollTop : scrollTop;
+			requestAnimationFrame(() => {
+				oppositeRef.current.scrollTop -= delta;
+			});
+		}
+
+		clearTimeout(scrollTimeIntervalRef.current);
+		setIsScrolling(true);
+		scrollTimeIntervalRef.current = setTimeout(() => {
+			setIsScrolling(false);
+		}, 100);
+	};
+
+	const handleMouseLeave = () => !isScrolling && setHoverPosition(null);
+	const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
+		const target = e.target as HTMLElement;
+		if (isDesktop && !isScrolling) {
+			const index = parseInt(target.dataset.blockIndex);
+			if (isNaN(index)) return;
+			onHover(vitems[index].project as ProjectRecord, position);
 		}
 	};
 
 	const handleMouseOver = (e: React.MouseEvent<HTMLUListElement>) => {
-		if (!isDesktop || !ready) return;
+		if (!isDesktop || !ready || isScrolling) return;
 		setHoverPosition(position);
 	};
 
@@ -76,7 +95,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
 			onMouseEnter={handleMouseOver}
 			onMouseMove={handleMouseOver}
 			onWheel={handleMouseOver}
-			onMouseLeave={() => setHoverPosition(null)}
+			onMouseLeave={handleMouseLeave}
 			ref={ref}
 		>
 			{vitems.map((block, index) => {
@@ -86,18 +105,12 @@ export default function ProjectList({ items, position, project, onHover, ready =
 						id={`${position}_${index - items.length}`}
 						key={index}
 						className={cn(!active && s.unfocused)}
-						onMouseEnter={() => isDesktop && onHover(block.project as ProjectRecord, position)}
+						data-block-index={index}
+						onMouseEnter={handleMouseEnter}
 					>
 						<Link href={`/projects/${block.project.slug}`} scroll={false} prefetch={true}>
 							{block.image.responsiveImage ? (
-								<Image
-									data={block.image.responsiveImage}
-									fadeInDuration={0}
-									usePlaceholder={false}
-									priority={true}
-									intersectionMargin='0px 0px 200% 0px'
-									intersectionThreshold={0}
-								/>
+								<SRCImage data={block.image.responsiveImage} />
 							) : block.image.mimeType.includes('video') ? (
 								<VideoPlayer data={block.image as FileField} className={s.video} />
 							) : null}

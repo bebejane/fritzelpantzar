@@ -18,8 +18,9 @@
 	--z-about: 250;
 	--z-symbols: 299;
 	--z-navbar: 300;
-
 	--z-logo: 1000;
+
+	--about-slide-transition: transform 0.3s linear;
 
 	@include mq($until: desktop) {
 		--about-width: 100vw;
@@ -47,7 +48,7 @@ body {
 	background-color: var(--background);
 	font-family: $body-font;
 	-webkit-font-smoothing: antialiased;
-	font-feature-settings: "liga", "kern";
+	font-feature-settings: 'liga', 'kern';
 }
 
 * {
@@ -59,7 +60,7 @@ body {
 main {
 	position: relative;
 	min-height: 100vh;
-	transition: transform 0.3s ease-in-out;
+	transition: var(--about-slide-transition);
 
 	&.slided {
 		transform: translateX(calc(-1 * var(--about-width)));

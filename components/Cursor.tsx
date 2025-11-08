@@ -3,42 +3,50 @@ import cn from 'classnames';
 import s from './Cursor.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { useWindowSize } from 'react-use';
-import { useStore } from '../lib/store';
+import { useStore, useShallow } from '@/lib/store';
 import { usePathname } from 'next/navigation';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
 
 const leftDotPercentage = 0.14;
 const cursorSizeDivider = 45;
-const transitionTime = 0.4;
+const transitionTime = 400;
 
 type CursorStyle = {
-	top?: number;
-	left?: number;
-	width?: number;
-	height?: number;
-	transitionTime?: string;
+	top: number;
+	left: number;
+	width: number;
+	height: number;
+	transitionDuration: number;
 };
 
-const defaultCursorStyle: CursorStyle = {
+const cursorStyle: CursorStyle = {
 	top: -16,
 	left: -16,
 	width: 16,
 	height: 16,
-	transitionTime: `${transitionTime}s`,
+	transitionDuration: transitionTime,
 };
 
-export default function Footer() {
+export default function Cursor() {
 	const { width, height } = useWindowSize();
-	const [style, setStyle] = useState<CursorStyle>(defaultCursorStyle);
 	const [init, setInit] = useState<boolean>(false);
 	const [hidden, setHidden] = useState<boolean>(false);
 	const [ready, setReady] = useState<boolean>(false);
-	const [showAbout, inIntro] = useStore((state) => [state.showAbout, state.inIntro]);
+	const [showAbout, inIntro] = useStore(useShallow((state) => [state.showAbout, state.inIntro]));
 	const [cursorColor, setCursorColor] = useState<'white' | 'blue'>('white');
 	const pathname = usePathname();
 	const isHome = pathname === '/';
 	const ref = useRef<HTMLImageElement>(null);
+	const timeout = useRef<NodeJS.Timeout | null>(null);
 	const isDesktop = useIsDesktop();
+
+	const setStyle = (style: CursorStyle) => {
+		ref.current?.style.setProperty('top', `${style.top}px`);
+		ref.current?.style.setProperty('left', `${style.left}px`);
+		ref.current?.style.setProperty('width', `${style.width}px`);
+		ref.current?.style.setProperty('height', `${style.height}px`);
+		ref.current?.style.setProperty('transition-duration', `${style.transitionDuration}ms`);
+	};
 
 	const initStyle = () => {
 		setInit(false);
@@ -54,11 +62,11 @@ export default function Footer() {
 			return;
 		}
 
-		setStyle((s) => ({
-			...s,
+		setStyle({
+			...cursorStyle,
 			top: bounds.top - 2,
 			left: bounds.left + bounds.width * leftDotPercentage,
-		}));
+		});
 
 		setTimeout(() => setInit(true), 100);
 	};
@@ -66,14 +74,18 @@ export default function Footer() {
 	const handleMouseLeave = () => setHidden(true);
 	const handleMouseEnter = () => setHidden(false);
 	const handleMouse = (e: MouseEvent) => {
-		setStyle((s) => ({
-			...s,
-			top: e.clientY - s.height / 2,
-			left: e.clientX - s.width / 2,
-		}));
-		setHidden(false);
+		setStyle({
+			...cursorStyle,
+			top: e.clientY - cursorStyle.height / 2,
+			left: e.clientX - cursorStyle.width / 2,
+		});
 
-		if (init && !ready) return setTimeout(() => setReady(true), transitionTime * 1000);
+		if (hidden) setHidden(false);
+
+		if (init && !ready) {
+			clearTimeout(timeout.current);
+			timeout.current = setTimeout(() => setReady(true), transitionTime);
+		}
 	};
 
 	useEffect(() => {
@@ -95,25 +107,22 @@ export default function Footer() {
 		const bounds = logo?.getBoundingClientRect();
 		const size = bounds ? bounds.width / cursorSizeDivider : 16;
 
-		setStyle((s) => ({
-			...s,
+		setStyle({
+			...cursorStyle,
 			width: size,
 			height: size,
-		}));
+		});
 	}, [width, height, init, ready]);
 
 	useEffect(() => {
-		setCursorColor((showAbout || inIntro || pathname === '/about') && isHome ? 'white' : 'blue');
+		setCursorColor(showAbout || inIntro || pathname === '/about' ? 'white' : 'blue');
 	}, [pathname, showAbout, inIntro]);
-
-	if (!isDesktop) return null;
 
 	return (
 		<img
 			ref={ref}
 			className={cn(s.cursor, init && s.init, ready && s.ready, hidden && s.hidden)}
 			src={`/images/cursor-${cursorColor}.svg`}
-			style={style}
 		/>
 	);
 }

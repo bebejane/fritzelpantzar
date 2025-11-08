@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import { useWindowSize } from 'react-use';
 import { useScrollInfo } from 'next-dato-utils/hooks';
-import { useStore } from '../lib/store';
+import { useStore, useShallow } from '@/lib/store';
 import { usePathname } from 'next/navigation';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
 
@@ -38,7 +38,7 @@ export default function Intro() {
 	const p = useRef<HTMLImageElement>(null);
 
 	const pathname = usePathname();
-	const [inIntro] = useStore((state) => [state.inIntro]);
+	const [inIntro] = useStore(useShallow((state) => [state.inIntro]));
 	const [logoFStyle, setLogoFStyle] = useState<any | null>(null);
 	const [logoPStyle, setLogoPStyle] = useState<any | null>(null);
 	const { width, height } = useWindowSize();
@@ -52,13 +52,16 @@ export default function Intro() {
 		const logoF = f.current;
 		const logoP = p.current;
 
-		if (!logo || !logoF || !logoP) return console.error('Logo not found');
+		if (!logo || !logoF || !logoP) return console.warn('Logo not found');
+
+		const menuF = document.getElementById('menu-f');
+		const menuP = document.getElementById('menu-p');
+
+		if (!menuF || !menuP) return console.warn('Menu not found');
 
 		const logoFBounds = logoF.getBoundingClientRect();
 		const logoPBounds = logoP.getBoundingClientRect();
-		const menu = document.getElementById('menu');
-		const menuF = document.getElementById('menu-f');
-		const menuP = document.getElementById('menu-p');
+
 		const menuFBounds = menuF.getBoundingClientRect();
 		const menuPBounds = menuP.getBoundingClientRect();
 		const menuFTop = menuFBounds.top;
@@ -79,10 +82,8 @@ export default function Intro() {
 		const padLeft = isDesktop ? 0 : 6;
 		const logoFTop = bounds.top + (menuFTop - bounds.top + padTop) * ratio;
 		const logoPTop = bounds.top + (menuPTop - bounds.top + padTop) * ratio;
-		const logoFLeft =
-			(logoFLeftEnd - bounds.left * fLeftPerc + padLeft) * ratio + bounds.left * fLeftPerc;
-		const logoPLeft =
-			(logoPLeftEnd - bounds.left * pLeftPerc + padLeft) * ratio + bounds.left * pLeftPerc;
+		const logoFLeft = (logoFLeftEnd - bounds.left * fLeftPerc + padLeft) * ratio + bounds.left * fLeftPerc;
+		const logoPLeft = (logoPLeftEnd - bounds.left * pLeftPerc + padLeft) * ratio + bounds.left * pLeftPerc;
 
 		const baseStyle = {
 			transform: `rotate(${ratio * 360}deg) scale(${scale})`,
@@ -108,18 +109,14 @@ export default function Intro() {
 		updateStyles();
 	}, [isDesktop, scrolledPosition, viewportHeight, width, height, inIntro, pathname, isScrolling]);
 
-	const handleClick = () =>
-		document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' });
+	const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' });
 
 	return (
 		<>
 			<div className={s.intro} onClick={handleClick}>
 				<img
 					id='logo'
-					className={cn(
-						s.logo,
-						((!logoFStyle && isDesktop) || !inIntro || !logoPStyle) && s.hidden
-					)}
+					className={cn(s.logo, ((!logoFStyle && isDesktop) || !inIntro || !logoPStyle) && s.hidden)}
 					onLoad={updateStyles}
 					src={isDesktop ? '/images/logo-stripped.svg' : '/images/logo-stripped-mobile.svg'}
 					alt='Logo'

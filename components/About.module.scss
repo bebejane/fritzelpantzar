@@ -1,73 +1,73 @@
 .about {
-  color: var(--white);
-  background-color: var(--blue);
-  padding: var(--outer-margin);
-  padding-bottom: 10rem;
+	color: var(--white);
+	background-color: var(--blue);
+	padding: var(--outer-margin);
+	padding-bottom: 10rem;
+	transition: var(--about-slide-transition);
 
-  @include mq($from: desktop) {
-    padding-left: calc(2 * var(--outer-margin));
-    padding-right: calc(2 * var(--outer-margin));
-    padding-bottom: 4rem;
-  }
+	@include mq($from: desktop) {
+		padding-left: calc(2 * var(--outer-margin));
+		padding-right: calc(2 * var(--outer-margin));
+		padding-bottom: 4rem;
+	}
 
-  &.modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: var(--z-about);
-    height: 100vh;
-    overflow-y: scroll;
-    width: var(--about-width);
-    transform: translateX(100%);
-    transition: all 0.3s ease-in-out;
-  }
+	&.modal {
+		position: fixed;
+		top: 0;
+		right: 0;
+		z-index: var(--z-about);
+		height: 100vh;
+		overflow-y: scroll;
+		width: var(--about-width);
+		transform: translateX(100%);
+	}
 
-  .content {
-    width: 100%;
+	.content {
+		width: 100%;
 
-    .logo {
-      max-width: 100%;
-      height: var(--logo-size);
-      margin-bottom: var(--outer-margin);
-    }
+		.logo {
+			max-width: 100%;
+			height: var(--logo-size);
+			margin-bottom: var(--outer-margin);
+		}
 
-    .address {
-      padding-bottom: var(--outer-margin);
-    }
+		.address {
+			padding-bottom: var(--outer-margin);
+		}
 
-    figure {
-      margin-bottom: var(--outer-margin);
-    }
+		figure {
+			margin-bottom: var(--outer-margin);
+		}
 
-    p {
-      color: var(--white);
+		p {
+			color: var(--white);
 
-      @include mq($from: desktop) {
-        width: 75%;
-      }
-    }
+			@include mq($from: desktop) {
+				width: 75%;
+			}
+		}
 
-    h3 {
-      padding-top: 2rem;
-    }
+		h3 {
+			padding-top: 2rem;
+		}
 
-    h3 + p {
-      text-indent: 0 !important;
-    }
+		h3 + p {
+			text-indent: 0 !important;
+		}
 
-    p {
-      text-indent: 2rem;
-      margin-bottom: 0;
-      @include mq($from: desktop) {
-        text-indent: 3rem;
-      }
-      &:first-of-type {
-        text-indent: 0;
-      }
-    }
-  }
+		p {
+			text-indent: 2rem;
+			margin-bottom: 0;
+			@include mq($from: desktop) {
+				text-indent: 3rem;
+			}
+			&:first-of-type {
+				text-indent: 0;
+			}
+		}
+	}
 
-  &.open {
-    transform: translateX(0);
-  }
+	&.open {
+		transform: translateX(0);
+	}
 }
