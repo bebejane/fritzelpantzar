@@ -2,7 +2,7 @@
 
 import s from './ImageAndTextRowBlock.module.scss';
 import cn from 'classnames';
-import Content from '@components/Content';
+import Content from '@/components/Content';
 import { Image } from 'react-datocms';
 
 export type LayoutProps = { data: ImageAndTextRowBlockRecord };

@@ -1,132 +1,121 @@
 .project {
-  position: relative;
-  background-color: var(--white);
-  padding-bottom: calc(2 * var(--outer-margin));
+	position: relative;
+	background-color: var(--white);
+	padding-bottom: calc(2 * var(--outer-margin));
 
-  h1 {
-    position: absolute;
-    left: var(--nav-margin);
-    line-height: 1;
-    display: flex;
-    //justify-content: center;
-    //width: 100%;
-    //color: var(--black);
-    z-index: var(--z-title);
-    top: 1.5rem;
+	h1 {
+		position: absolute;
+		left: var(--nav-margin);
+		line-height: 1;
+		display: flex;
+		z-index: var(--z-title);
+		top: 1.5rem;
 
-    @include mq($from: desktop) {
-      top: 2.5rem;
-    }
-  }
+		@include mq($from: desktop) {
+			top: 2.5rem;
+		}
+	}
 
-  section.text {
-    padding: var(--outer-margin);
-    padding-top: calc(2 * var(--outer-margin));
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    //color: var(--black);
+	section.text {
+		padding: var(--outer-margin);
+		padding-top: calc(2 * var(--outer-margin));
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		position: relative;
 
-    p {
-      //color: var(--black);
-    }
+		p.intro {
+			color: var(--blue);
+		}
 
-    p.intro {
-      color: var(--blue);
-    }
+		@include mq($from: desktop) {
+			flex-direction: row;
+		}
 
-    @include mq($from: desktop) {
-      flex-direction: row;
-    }
+		.left,
+		.right {
+			@include mq($from: desktop) {
+				width: calc(50% - (0.5 * var(--outer-margin)));
+			}
+		}
 
-    .left,
-    .right {
-      @include mq($from: desktop) {
-        width: calc(50% - (0.5 * var(--outer-margin)));
-      }
-    }
+		.left p {
+			margin-top: -0.4em;
+			position: sticky;
+			top: var(--outer-margin);
+			color: var(--blue);
 
-    .left p {
-      margin-top: -0.4em;
-      position: sticky;
-      top: var(--outer-margin);
-      color: var(--blue);
+			@include mq($from: desktop) {
+				width: 90%;
+				padding-left: var(--outer-margin);
+			}
+		}
 
-      @include mq($from: desktop) {
-        width: 90%;
-        padding-left: var(--outer-margin);
-      }
-    }
+		.right p {
+			@include mq($from: desktop) {
+				padding-right: calc(2 * var(--outer-margin));
+			}
+		}
 
-    .right p {
-      @include mq($from: desktop) {
-        padding-right: calc(2 * var(--outer-margin));
-      }
-    }
+		.desc {
+			@include mq($until: desktop) {
+				order: -1;
+			}
 
-    .desc {
-      @include mq($until: desktop) {
-        order: -1;
-      }
+			@include mq($from: desktop) {
+				width: 90%;
+			}
 
-      @include mq($from: desktop) {
-        width: 90%;
-      }
+			h3 {
+				padding-top: 1rem;
+			}
 
-      h3 {
-        padding-top: 1rem;
-      }
+			h3 + p {
+				text-indent: 0 !important;
+			}
 
-      h3 + p {
-        text-indent: 0 !important;
-      }
+			p {
+				text-indent: 1rem;
+				margin-bottom: 0.5em;
 
-      p {
-        text-indent: 1rem;
-        margin-bottom: 0.5em;
+				@include mq($from: desktop) {
+					text-indent: 0rem;
+				}
 
-        @include mq($from: desktop) {
-          text-indent: 0rem;
-        }
-
-        &:first-of-type {
-          text-indent: 0;
-        }
-      }
-    }
-
-    .credits {
-    }
-  }
+				&:first-of-type {
+					text-indent: 0;
+				}
+			}
+		}
+	}
 }
 
 .meta {
-  margin-left: calc(1 * var(--outer-margin));
-  padding-bottom: var(--outer-margin);
-  margin-top: calc(1 * var(--outer-margin));
+	margin-left: calc(1 * var(--outer-margin));
+	padding-bottom: var(--outer-margin);
+	margin-top: calc(1 * var(--outer-margin));
 
-  display: block;
+	display: block;
 
-  td {
-    width: auto;
-    padding-right: 1em;
-    padding-bottom: 0.4em;
-    line-height: var(--line-height);
+	td {
+		width: auto;
+		padding-right: 1em;
+		padding-bottom: 0.4em;
+		line-height: var(--line-height);
 
-    @include mq($until: desktop) {
-      padding-bottom: 0.5em;
-    }
-  }
+		@include mq($until: desktop) {
+			padding-bottom: 0.5em;
+		}
+	}
 
-  @include mq($until: desktop) {
-    padding-top: 0;
-    flex-direction: column;
-  }
+	@include mq($until: desktop) {
+		padding-top: 0;
+		flex-direction: column;
+	}
 
-  @include mq($from: desktop) {
-    margin-top: calc(2 * var(--outer-margin));
-    column-count: 2;
-    width: calc(50% - (2 * var(--outer-margin)));
-  }
+	@include mq($from: desktop) {
+		margin-top: calc(2 * var(--outer-margin));
+		column-count: 2;
+		width: calc(50% - (2 * var(--outer-margin)));
+	}
 }

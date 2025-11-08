@@ -74,8 +74,8 @@ export default function ProjectList({ items, position, project, onHover, ready =
 	};
 
 	const handleMouseLeave = () => !isScrolling && setHoverPosition(null);
-	const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
-		const target = e.target as HTMLElement;
+	const handleMouseOnItem = (e: React.MouseEvent<HTMLElement>) => {
+		const target = e.currentTarget as HTMLElement;
 		if (isDesktop && !isScrolling) {
 			const index = parseInt(target.dataset.blockIndex);
 			if (isNaN(index)) return;
@@ -106,7 +106,8 @@ export default function ProjectList({ items, position, project, onHover, ready =
 						key={index}
 						className={cn(!active && s.unfocused)}
 						data-block-index={index}
-						onMouseEnter={handleMouseEnter}
+						onMouseEnter={handleMouseOnItem}
+						onMouseMove={handleMouseOnItem}
 					>
 						<Link href={`/projects/${block.project.slug}`} scroll={false} prefetch={true}>
 							{block.image.responsiveImage ? (

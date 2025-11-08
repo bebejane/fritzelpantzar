@@ -1,3 +1,5 @@
+@use '@/styles/mediaqueries' as *;
+
 :root {
 	--black: #212121;
 	--white: #fffceb;
@@ -5,6 +7,11 @@
 	--blue: #0026ff;
 	--background: var(--blue);
 	--foreground: var(--white);
+
+	--body-font: 'Maison', Helvetica, Sans-Serif;
+	--headline-font: 'Maison', Helvetica, Sans-Serif;
+	--nav-font: 'GCourier', Times, Serif;
+	--mono-font: 'Mono', Helvetica, Sans-Serif;
 
 	--line-height: 1.25;
 	--outer-margin: 2rem;
@@ -46,7 +53,7 @@ body {
 	line-height: 1em;
 	color: var(--blue);
 	background-color: var(--background);
-	font-family: $body-font;
+	font-family: var(--body-font);
 	-webkit-font-smoothing: antialiased;
 	font-feature-settings: 'liga', 'kern';
 }
@@ -112,7 +119,7 @@ select {
 	margin-bottom: 1rem;
 	padding: 0.5em;
 	padding-left: 0.75em;
-	font-family: $nav-font;
+	font-family: var(--nav-font);
 	background-color: var(--background);
 
 	&:focus {

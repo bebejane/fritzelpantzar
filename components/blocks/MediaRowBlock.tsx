@@ -14,7 +14,12 @@ export default function MediaRowBlock({ data: { mediaAsset } }: LayoutProps) {
 				asset.responsiveImage ? (
 					<figure key={i} className={mediaAsset.length > 1 ? s.multi : s.single}>
 						{asset.responsiveImage && (
-							<Image data={asset.responsiveImage} intersectionMargin='0px 0px 200% 0px' intersectionThreshold={0} />
+							<Image
+								data={asset.responsiveImage}
+								intersectionMargin='0px 0px 200% 0px'
+								intersectionThreshold={0}
+								fadeInDuration={0}
+							/>
 						)}
 					</figure>
 				) : asset.video ? (

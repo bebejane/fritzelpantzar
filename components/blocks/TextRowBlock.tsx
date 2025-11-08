@@ -2,7 +2,7 @@
 
 import s from './TextRowBlock.module.scss';
 import cn from 'classnames';
-import Content from '@components/Content';
+import Content from '@/components/Content';
 
 export type LayoutProps = { data: TextRowBlockRecord };
 

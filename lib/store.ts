@@ -24,7 +24,7 @@ const useStore = create<StoreState>((set) => ({
 	showAbout: false,
 	hoverAbout: false,
 	inOverview: false,
-	inIntro: true,
+	inIntro: false,
 	hoverPosition: null,
 	setInIntro: (inIntro: boolean) => {
 		set((state) => ({ inIntro }));

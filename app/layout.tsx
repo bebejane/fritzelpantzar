@@ -1,17 +1,40 @@
-import '@styles/index.scss';
+import '@/styles/index.scss';
 import { apiQuery } from 'next-dato-utils/api';
-import { GlobalDocument } from '@graphql';
+import { GlobalDocument } from '@/graphql';
 import { Metadata } from 'next/types';
 import { Icon } from 'next/dist/lib/metadata/types/metadata-types';
-import React from 'react';
-import NavBar from '@components/NavBar';
-import Cursor from '@components/Cursor';
+import NavBar from '@/components/NavBar';
+import Cursor from '@/components/Cursor';
+import localFont from 'next/font/local';
+
+const Maison = localFont({
+	fallback: ['Helvetica', 'Sans-Serif'],
+	src: [
+		{
+			path: '../public/fonts/MaisonNeueWEB-Bold.woff2',
+			weight: '700',
+			style: 'normal',
+		},
+		{
+			path: '../public/fonts/MaisonNeueWEB-Medium.woff2',
+			weight: '400',
+			style: 'normal',
+		},
+	],
+});
+
+const Mono = localFont({
+	fallback: ['Helvetica', 'Sans-Serif'],
+	src: '../public/fonts/MaisonNeueWEB-Bold.woff2',
+	weight: '400',
+	style: 'normal',
+});
 
 export const dynamic = 'force-static';
 
 export default async function RootLayout({ children, project, about }: LayoutProps<'/'>) {
 	return (
-		<html lang={'sv-SE'}>
+		<html lang={'sv-SE'} className={`${Maison.className} ${Mono.className}`}>
 			<body id='root'>
 				<NavBar />
 				{project}

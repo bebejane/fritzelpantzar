@@ -93,3 +93,15 @@
 		opacity: 1;
 	}
 }
+
+.hidden {
+	display: none;
+}
+.status {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: pink;
+	z-index: 100000;
+	color: var(--black);
+}

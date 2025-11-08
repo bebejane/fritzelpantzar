@@ -38,7 +38,7 @@ export default function Intro() {
 	const p = useRef<HTMLImageElement>(null);
 
 	const pathname = usePathname();
-	const [inIntro] = useStore(useShallow((state) => [state.inIntro]));
+	const [inIntro, setInIntro] = useStore(useShallow((state) => [state.inIntro, state.setInIntro]));
 	const [logoFStyle, setLogoFStyle] = useState<any | null>(null);
 	const [logoPStyle, setLogoPStyle] = useState<any | null>(null);
 	const { width, height } = useWindowSize();
@@ -108,6 +108,10 @@ export default function Intro() {
 	useEffect(() => {
 		updateStyles();
 	}, [isDesktop, scrolledPosition, viewportHeight, width, height, inIntro, pathname, isScrolling]);
+
+	useEffect(() => {
+		setInIntro(true);
+	}, []);
 
 	const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' });
 

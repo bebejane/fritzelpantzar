@@ -1,4 +1,6 @@
 .cursor {
+	--transition-time: 200ms;
+	--transition-easin: cubic-bezier(0.25, 1.13, 1, 0.64);
 	position: fixed;
 	top: -100;
 	left: -100;
@@ -11,13 +13,15 @@
 
 	&.init {
 		transition:
-			left 0.3s ease-out,
-			top 0.3s ease-out;
+			left var(--transition-time) var(--transition-easing),
+			top var(--transition-time) var(--transition-easing);
+		transition-duration: var(--transition-time);
 		opacity: 1;
 	}
 
 	&.ready {
-		transition: none;
+		transition: none !important;
+		transition-duration: 0 !important;
 		opacity: 1;
 	}
 

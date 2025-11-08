@@ -1,16 +1,16 @@
 import s from './page.module.scss';
 import cn from 'classnames';
-import { AllProjectsDocument, ProjectDocument } from '@graphql';
+import { AllProjectsDocument, ProjectDocument } from '@/graphql';
 import { apiQuery } from 'next-dato-utils/api';
 import { DraftMode } from 'next-dato-utils/components';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { Block } from 'next-dato-utils/components';
-import * as Blocks from '@components/blocks';
-import Content from '@components/Content';
+import * as Blocks from '@/components/blocks';
+import Content from '@/components/Content';
 import React from 'react';
 
-export type Props = {
+type Props = {
 	params: PageProps<'/projects/[project]'>['params'];
 	modal: boolean;
 };
