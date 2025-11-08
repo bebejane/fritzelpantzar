@@ -12,7 +12,7 @@ export type Props = {
 	modal: boolean;
 };
 
-export default function About({ data: { image, address, content }, modal }: Props) {
+export default function About({ data, modal }: Props) {
 	const [showAbout] = useStore(useShallow((state) => [state.showAbout]));
 	const ref = useRef<HTMLDivElement>(null);
 
@@ -21,9 +21,14 @@ export default function About({ data: { image, address, content }, modal }: Prop
 	}, [modal]);
 
 	useEffect(() => {
-		document.querySelector('main').classList.toggle('slided', modal && showAbout);
-		if (modal) ref.current.scrollTop = 0;
+		const main = document.querySelector('main');
+		main?.classList.toggle('slided', modal && showAbout);
+		if (modal && ref.current) ref.current.scrollTop = 0;
 	}, [modal, showAbout]);
+
+	if (!data) return null;
+
+	const { image, address, content } = data;
 
 	return (
 		<div

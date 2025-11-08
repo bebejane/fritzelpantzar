@@ -9,28 +9,10 @@ import { useStore, useShallow } from '@/lib/store';
 import { usePathname } from 'next/navigation';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
 
-const symbolSpace = '2vw';
-const symbolSpaceMobile = '2.55vw';
 const logoFLeftPerc = 1.062;
 const logoPLeftPerc = 1.995;
 const logoFLeftPercMobile = 1.128;
 const logoPLeftPercMobile = 3.04;
-
-const logoPWidthMobileOrg = 0.0247;
-const logoFWidthMobileOrg = 0.0215;
-const logoPWidthOrg = 0.026;
-const logoFWidthOrg = 0.0255;
-
-function getOffset(el: any) {
-	var _x = 0;
-	var _y = 0;
-	while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
-		_x += el.offsetLeft - el.scrollLeft;
-		_y += el.offsetTop - el.scrollTop;
-		el = el.offsetParent;
-	}
-	return { top: _y, left: _x };
-}
 
 export default function Intro() {
 	const ref = useRef<HTMLImageElement>(null);

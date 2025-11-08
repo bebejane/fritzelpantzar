@@ -5,13 +5,12 @@ import cn from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
 import { useStore, useShallow } from '@/lib/store';
-import { Image, SRCImage } from 'react-datocms';
+import { SRCImage } from 'react-datocms';
 import Link from 'next/link';
 import { VideoPlayer } from 'next-dato-utils/components';
-import { set } from 'zod';
 
 export type Props = {
-	items: OverviewQuery['overview']['leftColumn'] | OverviewQuery['overview']['rightColumn'];
+	items: NonNullable<OverviewQuery['overview']>['leftColumn'] | NonNullable<OverviewQuery['overview']>['rightColumn'];
 	position: 'left' | 'right' | 'center';
 	onHover: (project: ProjectRecord, position: 'left' | 'right' | 'center') => void;
 	ready: boolean;
@@ -22,8 +21,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
 	const ref = useRef<HTMLUListElement>(null);
 	const oppositeRef = useRef<HTMLUListElement>(null);
 	const lastScrollRef = useRef<number>(null);
-	const lastScrollTimeRef = useRef<number>(new Date().getTime());
-	const scrollTimeIntervalRef = useRef<NodeJS.Timeout | null>(null);
+	const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 	const [showAbout, inIntro, hoverPosition, setHoverPosition] = useStore(
 		useShallow((state) => [state.showAbout, state.inIntro, state.hoverPosition, state.setHoverPosition])
 	);
@@ -35,19 +33,21 @@ export default function ProjectList({ items, position, project, onHover, ready =
 	useEffect(() => {
 		const id = ['left', 'right'].includes(position) ? (position === 'left' ? 'right' : 'left') : 'center';
 		oppositeRef.current = document.getElementById(`projects-${id}`) as HTMLUListElement;
-		ref.current.scrollTop = ref.current.scrollHeight / 3;
+		if (ref.current) ref.current.scrollTop = ref.current.scrollHeight / 3;
 	}, []);
 
 	useEffect(() => {
 		if (inIntro) return;
 
 		const container = ref.current;
+		if (!container) return;
 		container.addEventListener('scroll', handleScroll);
 		return () => container?.removeEventListener('scroll', handleScroll);
 	}, [inIntro, isHovering, isDesktop]);
 
 	const handleScroll = (e: Event) => {
 		const target = ref.current;
+		if (!target) return;
 		const { scrollTop, scrollHeight } = target;
 		const originalScrollHeight = scrollHeight / 3;
 
@@ -62,13 +62,17 @@ export default function ProjectList({ items, position, project, onHover, ready =
 			lastScrollRef.current = scrollTop;
 
 			requestAnimationFrame(() => {
+				if (!oppositeRef.current) return;
 				oppositeRef.current.scrollTop -= delta;
 			});
 		}
+		if (!scrollTimeoutRef.current) return;
 
-		clearTimeout(scrollTimeIntervalRef.current);
+		clearTimeout(scrollTimeoutRef.current);
+
 		setIsScrolling(true);
-		scrollTimeIntervalRef.current = setTimeout(() => {
+
+		scrollTimeoutRef.current = setTimeout(() => {
 			setIsScrolling(false);
 		}, 100);
 	};
@@ -77,6 +81,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
 	const handleMouseOnItem = (e: React.MouseEvent<HTMLElement>) => {
 		const target = e.currentTarget as HTMLElement;
 		if (isDesktop && !isScrolling) {
+			if (!target.dataset.blockIndex) return;
 			const index = parseInt(target.dataset.blockIndex);
 			if (isNaN(index)) return;
 			onHover(vitems[index].project as ProjectRecord, position);
@@ -100,6 +105,7 @@ export default function ProjectList({ items, position, project, onHover, ready =
 		>
 			{vitems.map((block, index) => {
 				const active = project && block.project?.id === project?.id && isHovering;
+				if (!block?.project) return null;
 				return (
 					<li
 						id={`${position}_${index - items.length}`}
@@ -110,9 +116,9 @@ export default function ProjectList({ items, position, project, onHover, ready =
 						onMouseMove={handleMouseOnItem}
 					>
 						<Link href={`/projects/${block.project.slug}`} scroll={false} prefetch={true}>
-							{block.image.responsiveImage ? (
+							{block.image?.responsiveImage ? (
 								<SRCImage data={block.image.responsiveImage} />
-							) : block.image.mimeType.includes('video') ? (
+							) : block.image?.mimeType.includes('video') ? (
 								<VideoPlayer data={block.image as FileField} className={s.video} />
 							) : null}
 							<h2 className={cn(s.title, active && s.show)}>{block.project.title}</h2>

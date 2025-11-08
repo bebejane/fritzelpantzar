@@ -53,8 +53,6 @@ export default function Cursor() {
 		setReady(false);
 
 		const logo = document.getElementById('logo');
-		const bounds = logo?.getBoundingClientRect();
-
 		if (!logo) {
 			setInit(true);
 			setReady(true);
@@ -62,6 +60,7 @@ export default function Cursor() {
 			return;
 		}
 
+		const bounds = logo.getBoundingClientRect();
 		setStyle({
 			top: bounds.top - 2,
 			left: bounds.left + bounds.width * leftDotPercentage,

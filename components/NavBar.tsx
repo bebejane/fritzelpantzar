@@ -2,13 +2,12 @@
 
 import s from './NavBar.module.scss';
 import cn from 'classnames';
-import { useRouter, usePathname, useSelectedLayoutSegments, useSelectedLayoutSegment } from 'next/navigation';
+import { useRouter, usePathname, useSelectedLayoutSegments } from 'next/navigation';
 import { useStore, useShallow } from '@/lib/store';
 import { useEffect, useState } from 'react';
 import useIsDesktop from '@/lib/hooks/useIsDesktop';
 import Link from 'next/link';
 import { sleep } from 'next-dato-utils/utils';
-import { Modal } from 'next-dato-utils/components';
 
 export default function NavBar() {
 	const [showAbout, setShowAbout, setHoverAbout, hoverAbout, inOverview, inIntro] = useStore(
@@ -45,7 +44,6 @@ export default function NavBar() {
 	};
 
 	useEffect(() => {
-		console.log({ projectSegments, aboutSegments, aboutSegment, projectSegment, pathname });
 		setModal(projectSegments.includes('(.)projects') ? 'project' : aboutSegments.includes('(.)about') ? 'about' : null);
 	}, [projectSegments, aboutSegments, aboutSegment, projectSegment, pathname]);
 

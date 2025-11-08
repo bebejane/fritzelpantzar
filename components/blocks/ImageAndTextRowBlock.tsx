@@ -14,7 +14,7 @@ export default function ImageAndTextRowBlock({ data: { image, id, imageRight, te
 				<div className={cn(s.desc, 'big')}>
 					{imageRight ? (
 						<Content content={text} />
-					) : image.responsiveImage ? (
+					) : image?.responsiveImage ? (
 						<Image data={image.responsiveImage} intersectionMargin='0px 0px 200% 0px' intersectionThreshold={0} />
 					) : null}
 				</div>

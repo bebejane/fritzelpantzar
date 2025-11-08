@@ -69,7 +69,7 @@ export default function Overview({ overview }: Props) {
 
 		let modal: HTMLDivElement | null;
 
-		const handleScroll = (e: WheelEvent) => {
+		const handleScroll = (e: Event) => {
 			const target = e.target as HTMLDivElement;
 			const bottom = target.scrollTop + target.clientHeight > target.scrollHeight - 100;
 			const end = target.scrollHeight - (target.scrollTop + target.clientHeight) - viewportHeight;
@@ -100,6 +100,8 @@ export default function Overview({ overview }: Props) {
 	useEffect(() => {
 		setInOverview(!showAbout);
 	}, [showAbout]);
+
+	if (!overview) return null;
 
 	return (
 		<>
