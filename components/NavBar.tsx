@@ -23,18 +23,15 @@ export default function NavBar() {
 	const router = useRouter();
 	const pathname = usePathname();
 	const isHome = pathname === '/';
-	const projectSegments = useSelectedLayoutSegments('project');
-	const aboutSegments = useSelectedLayoutSegments('about');
-	const projectSegment = useSelectedLayoutSegments('project');
-	const aboutSegment = useSelectedLayoutSegments('about');
-
+	const segments = useSelectedLayoutSegments('modals');
+	const modal = segments.includes('(.)about') ? 'about' : segments.includes('(.)project') ? 'project' : null;
 	const isDesktop = useIsDesktop();
 	const [invert, setInvert] = useState(false);
-	const [modal, setModal] = useState<'about' | 'project' | null>(null);
 	const isClose = !isHome || showAbout;
 
 	const handleClose = async (e?: React.MouseEvent<HTMLAnchorElement>) => {
 		if (!modal) return;
+
 		if (modal === 'about') {
 			e?.preventDefault();
 			setShowAbout(false);
@@ -43,9 +40,9 @@ export default function NavBar() {
 		router.back();
 	};
 
-	useEffect(() => {
-		setModal(projectSegments.includes('(.)projects') ? 'project' : aboutSegments.includes('(.)about') ? 'about' : null);
-	}, [projectSegments, aboutSegments, aboutSegment, projectSegment, pathname]);
+	// useEffect(() => {
+	// 	setModal(projectSegments.includes('(.)projects') ? 'project' : aboutSegments.includes('(.)about') ? 'about' : null);
+	// }, [projectSegments, aboutSegments, aboutSegment, projectSegment, pathname]);
 
 	useEffect(() => {
 		setInvert(pathname === '/about');
@@ -58,7 +55,7 @@ export default function NavBar() {
 		}
 		document.addEventListener('keydown', handleKeyDown);
 		return () => document.removeEventListener('keydown', handleKeyDown);
-	}, [modal]);
+	}, [segments]);
 
 	return (
 		<>
@@ -75,7 +72,13 @@ export default function NavBar() {
 					</button>
 				</Link>
 
-				<Link href='/' scroll={true} onClick={handleClose} className={cn(!modal && !isClose && s.hidden)}>
+				<Link
+					href='/'
+					scroll={false}
+					replace={true}
+					onClick={handleClose}
+					className={cn(!modal && !isClose && s.hidden)}
+				>
 					<button className={cn(s.button, inIntro && isHome && s.intro)}>
 						<img
 							key={`${invert}`}
@@ -89,7 +92,6 @@ export default function NavBar() {
 			<div className={cn(s.tooltip, hoverAbout && !showAbout && isHome && s.show)}>
 				<h2>Info & Kontakt</h2>
 			</div>
-			{/* <div className={s.status}>{modal ? modal : 'none'}</div> */}
 		</>
 	);
 }

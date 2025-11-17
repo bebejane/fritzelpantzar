@@ -32,13 +32,12 @@ const Mono = localFont({
 
 export const dynamic = 'force-static';
 
-export default async function RootLayout({ children, project, about }: LayoutProps<'/'>) {
+export default async function RootLayout({ children, modals }: LayoutProps<'/'>) {
 	return (
 		<html lang={'sv-SE'} className={`${Maison.className} ${Mono.className}`}>
 			<body id='root'>
 				<NavBar />
-				{project}
-				{about}
+				{modals}
 				<Cursor />
 				<main>{children}</main>
 			</body>
