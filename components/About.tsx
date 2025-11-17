@@ -22,7 +22,6 @@ export default function About({ data, modal }: Props) {
 
 	useEffect(() => {
 		const main = document.querySelector('main');
-		console.log(modal, showAbout);
 		main?.classList.toggle('slided', modal && showAbout);
 		if (modal && ref.current) ref.current.scrollTop = 0;
 	}, [modal, showAbout]);

@@ -40,10 +40,6 @@ export default function NavBar() {
 		router.back();
 	};
 
-	// useEffect(() => {
-	// 	setModal(projectSegments.includes('(.)projects') ? 'project' : aboutSegments.includes('(.)about') ? 'about' : null);
-	// }, [projectSegments, aboutSegments, aboutSegment, projectSegment, pathname]);
-
 	useEffect(() => {
 		setInvert(pathname === '/about');
 		setShowAbout(pathname === '/about');
@@ -51,11 +47,14 @@ export default function NavBar() {
 
 	useEffect(() => {
 		function handleKeyDown(e: KeyboardEvent) {
-			e.key === 'Escape' && handleClose();
+			if (e.key === 'Escape' && pathname !== '/') {
+				if (modal) handleClose();
+				else router.replace('/');
+			}
 		}
 		document.addEventListener('keydown', handleKeyDown);
 		return () => document.removeEventListener('keydown', handleKeyDown);
-	}, [segments]);
+	}, [segments, modal]);
 
 	return (
 		<>
