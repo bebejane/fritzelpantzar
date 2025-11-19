@@ -6,9 +6,9 @@ import { MetadataRoute } from 'next';
 export default {
 	routes: {
 		overview: async () => ['/'],
-		project: async ({ slug }) => [`/projects/${slug}`, `/(.)projects/${slug}/`],
-		person: async () => ['/about', '/', `/(.)about`],
-		about: async () => ['/about', '/', `/(.)about`],
+		project: async ({ slug }) => [`/projects/${slug}`],
+		person: async () => ['/about', '/'],
+		about: async () => ['/about', '/'],
 		upload: async ({ id }) => getUploadReferenceRoutes(id),
 	},
 	sitemap: async () => {
