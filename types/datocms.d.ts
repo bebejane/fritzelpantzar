@@ -2949,6 +2949,7 @@ type UploadFilter = {
   mimeType?: InputMaybe<UploadMimeTypeFilter>;
   notes?: InputMaybe<UploadNotesFilter>;
   orientation?: InputMaybe<OrientationFilter>;
+  path?: InputMaybe<UploadPathFilter>;
   resolution?: InputMaybe<ResolutionFilter>;
   size?: InputMaybe<UploadSizeFilter>;
   smartTags?: InputMaybe<UploadTagsFilter>;
@@ -3062,6 +3063,18 @@ enum UploadOrientation {
   portrait = 'portrait',
   square = 'square'
 }
+
+/** Specifies how to filter by path */
+type UploadPathFilter = {
+  /** Search the asset with the specified path */
+  eq?: InputMaybe<Scalars['String']['input']>;
+  /** Search assets with the specified paths */
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Exclude the asset with the specified path */
+  neq?: InputMaybe<Scalars['String']['input']>;
+  /** Search assets that do not have the specified paths */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
 
 /** Specifies how to filter by size */
 type UploadSizeFilter = {
