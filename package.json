@@ -20,7 +20,7 @@
 		"classnames": "^2.5.1",
 		"datocms-structured-text-utils": "^5.1.6",
 		"graphql": "^16.11.0",
-		"next": "15.5.6",
+		"next": "16.0.3",
 		"next-dato-utils": "github:bebejane/next-dato-utils#v2.0.82",
 		"postmark": "^4.0.5",
 		"react": "^19.2.0",
