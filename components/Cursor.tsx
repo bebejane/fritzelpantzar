@@ -109,7 +109,7 @@ export default function Cursor() {
 			width: size,
 			height: size,
 		});
-	}, [width, height, init, ready]);
+	}, [width, height, init, ready, pathname]);
 
 	useEffect(() => {
 		setCursorColor(showAbout || inIntro || pathname === '/about' ? 'white' : 'blue');
