@@ -22,15 +22,16 @@ export default function NavBar() {
 	);
 	const router = useRouter();
 	const pathname = usePathname();
-	const isHome = pathname === '/';
+
 	const segments = useSelectedLayoutSegments('modals');
 	const modal = segments.includes('(.)about') ? 'about' : segments.includes('(.)project') ? 'project' : null;
+	const isHome = pathname === '/' && !modal;
 	const isDesktop = useIsDesktop();
 	const [invert, setInvert] = useState(false);
 	const isClose = !isHome || showAbout;
 
 	const handleClose = async (e?: React.MouseEvent<HTMLAnchorElement>) => {
-		if (!modal) return;
+		if (!modal) return true;
 
 		if (modal === 'about') {
 			e?.preventDefault();
@@ -56,7 +57,6 @@ export default function NavBar() {
 		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, [segments, modal]);
 
-	console.log({ hoverAbout, showAbout, isHome, modal });
 	return (
 		<>
 			<nav
