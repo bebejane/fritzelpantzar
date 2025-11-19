@@ -56,6 +56,7 @@ export default function NavBar() {
 		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, [segments, modal]);
 
+	console.log({ pathname, isHome });
 	return (
 		<>
 			<nav
