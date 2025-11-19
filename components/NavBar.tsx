@@ -22,7 +22,6 @@ export default function NavBar() {
 	);
 	const router = useRouter();
 	const pathname = usePathname();
-
 	const segments = useSelectedLayoutSegments('modals');
 	const modal = segments.includes('(.)about') ? 'about' : segments.includes('(.)project') ? 'project' : null;
 	const isHome = pathname === '/' && !modal;
@@ -56,6 +55,8 @@ export default function NavBar() {
 		document.addEventListener('keydown', handleKeyDown);
 		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, [segments, modal]);
+
+	console.log({ isClose, pathname, modal, segments });
 
 	return (
 		<>
