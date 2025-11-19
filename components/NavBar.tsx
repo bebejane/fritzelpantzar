@@ -24,7 +24,7 @@ export default function NavBar() {
 	const pathname = usePathname();
 	const segments = useSelectedLayoutSegments('modals');
 	const modal = segments.includes('(.)about') ? 'about' : segments.includes('(.)project') ? 'project' : null;
-	const isHome = pathname === '/' && !modal;
+	const isHome = ['/', '/index'].includes(pathname) && !modal;
 	const isDesktop = useIsDesktop();
 	const [invert, setInvert] = useState(false);
 	const isClose = !isHome || showAbout;
