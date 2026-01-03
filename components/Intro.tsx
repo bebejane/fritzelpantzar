@@ -64,8 +64,10 @@ export default function Intro() {
 		const padLeft = isDesktop ? 0 : 6;
 		const logoFTop = bounds.top + (menuFTop - bounds.top + padTop) * ratio;
 		const logoPTop = bounds.top + (menuPTop - bounds.top + padTop) * ratio;
-		const logoFLeft = (logoFLeftEnd - bounds.left * fLeftPerc + padLeft) * ratio + bounds.left * fLeftPerc;
-		const logoPLeft = (logoPLeftEnd - bounds.left * pLeftPerc + padLeft) * ratio + bounds.left * pLeftPerc;
+		const logoFLeft =
+			(logoFLeftEnd - bounds.left * fLeftPerc + padLeft) * ratio + bounds.left * fLeftPerc;
+		const logoPLeft =
+			(logoPLeftEnd - bounds.left * pLeftPerc + padLeft) * ratio + bounds.left * pLeftPerc;
 
 		const baseStyle = {
 			transform: `rotate(${ratio * 360}deg) scale(${scale})`,
@@ -95,14 +97,18 @@ export default function Intro() {
 		setInIntro(true);
 	}, []);
 
-	const handleClick = () => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' });
+	const handleClick = () =>
+		document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' });
 
 	return (
 		<>
 			<div className={s.intro} onClick={handleClick}>
 				<img
 					id='logo'
-					className={cn(s.logo, ((!logoFStyle && isDesktop) || !inIntro || !logoPStyle) && s.hidden)}
+					className={cn(
+						s.logo,
+						((!logoFStyle && isDesktop) || !inIntro || !logoPStyle) && s.hidden
+					)}
 					onLoad={updateStyles}
 					src={isDesktop ? '/images/logo-stripped.svg' : '/images/logo-stripped-mobile.svg'}
 					alt='Logo'
